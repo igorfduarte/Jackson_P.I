@@ -12,7 +12,8 @@ public class EnemyBulletMoveFoward : MonoBehaviour {
    // public int damagePerShot = 20;
     void Start()
 	{
-      //  enemy = FindObjectOfType<Enemy>();
+        //  enemy = FindObjectOfType<Enemy>();
+        Destroy(gameObject,6);
     
     }
 	void Update () {
@@ -44,6 +45,11 @@ public class EnemyBulletMoveFoward : MonoBehaviour {
         
 
         if (other.gameObject.tag == "Player")
+        {
+            Destroy(this.gameObject, 0f);
+
+        }
+        if (other.gameObject.tag == "Wall")
         {
             Destroy(this.gameObject, 0f);
 

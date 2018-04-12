@@ -9,13 +9,17 @@ public class ScoreManager : MonoBehaviour
 
     Text text;
     GameObject jogador;
+    Shop shop;
+    GameObject shopObject;
     //public string pistolText;
     Weapon weapon;
+    [SerializeField] bool IcePotionCount;
 
 
     void Awake ()
     {
-
+        shopObject = GameObject.FindGameObjectWithTag("Shop");
+        shop = shopObject.GetComponent<Shop>();
         text = GetComponent <Text> ();
         score = 0;
         
@@ -24,10 +28,20 @@ public class ScoreManager : MonoBehaviour
 
     void Update ()
     {
-        jogador = GameObject.FindGameObjectWithTag("Weapon");
-        weapon = jogador.GetComponent<Weapon>();
+        if (IcePotionCount )
+        {
+            score = shop.iceCount;
+            text.text = "" + score;
+        }
+        else
+        {
 
-        UpdateAmmoHUD();
+            jogador = GameObject.FindGameObjectWithTag("Weapon");
+            weapon = jogador.GetComponent<Weapon>();
+
+            UpdateAmmoHUD();
+        }
+
 
     }
 

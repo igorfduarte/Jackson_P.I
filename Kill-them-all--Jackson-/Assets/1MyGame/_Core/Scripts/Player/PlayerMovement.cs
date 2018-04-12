@@ -85,8 +85,8 @@ public class PlayerMovement : MonoBehaviour {
             estaDandoDash = true;
             velocidadeAtual = velocidadeDash;
             Invoke("StopDash", tempoDash);
-            playerAudio.clip = dashClip;
-            playerAudio.Play();
+            playerAudio.PlayOneShot(dashClip,0.5f);
+            //playerAudio.Play();
             currentStamina = 0;
             this.gameObject.layer = 15;
             

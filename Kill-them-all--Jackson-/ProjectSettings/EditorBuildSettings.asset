@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/1MyGame/Scene/420Intro.unity
     guid: 55c944376f72c8b4981d26e0b47b651d
-  - enabled: 0
+  - enabled: 1
     path: Assets/1MyGame/Scene/PointKillerIntro.unity
     guid: fa51c0debbabae648af7c4205845f829
-  - enabled: 0
+  - enabled: 1
     path: Assets/1MyGame/Scene/Menu.unity
     guid: cdf4fb7f9e5cc1948b07ca0573c57fb9
   - enabled: 1

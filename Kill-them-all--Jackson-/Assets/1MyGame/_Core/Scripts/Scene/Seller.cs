@@ -7,6 +7,7 @@ public class Seller : MonoBehaviour {
     [SerializeField] bool consuShop;
     GameObject pauseMenuObject;
     PauseMenu pauseMenu;
+    public GameObject text;
 
     // Use this for initialization
     void Start () {
@@ -23,12 +24,14 @@ public class Seller : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player" && equipShop)
         {
+            text.SetActive(true);
              pauseMenu.shopEquip = true;
              pauseMenu.shopConsu = false;
         }
         if (other.gameObject.tag == "Player" && consuShop)
         {
-             pauseMenu.shopEquip = false;
+            text.SetActive(true);
+            pauseMenu.shopEquip = false;
              pauseMenu.shopConsu = true;
         }
     }
@@ -36,12 +39,14 @@ public class Seller : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player" && equipShop)
         {
-             pauseMenu.shopEquip = false;
+            text.SetActive(false);
+            pauseMenu.shopEquip = false;
             pauseMenu.shopConsu = false;
         }
         if (other.gameObject.tag == "Player" && consuShop)
         {
-             pauseMenu.shopConsu = false;
+            text.SetActive(false);
+            pauseMenu.shopConsu = false;
             pauseMenu.shopEquip = false;
         }
 

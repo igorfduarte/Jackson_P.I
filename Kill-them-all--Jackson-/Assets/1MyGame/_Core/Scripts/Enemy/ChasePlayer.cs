@@ -9,6 +9,7 @@ public class ChasePlayer : MonoBehaviour {
     Animator anim;
     Color originalColor;
     public bool isSlow;
+    float dis;
     
 
 
@@ -46,12 +47,19 @@ public class ChasePlayer : MonoBehaviour {
         }
 
 
-        Move();
+        
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         direction = target.transform.position - transform.position;
+        dis = Vector3.Distance(target.transform.position, transform.position);
         direction.Normalize();
+        if (dis <= 95)
+        {
+            Move();
+            AnimateMoviment(direction);
+        }
+        
 
-        AnimateMoviment(direction);
+        
 
        // transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
        // anim.SetFloat("Vertical", rigid.velocity.y);

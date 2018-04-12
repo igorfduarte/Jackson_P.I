@@ -49,8 +49,10 @@ public class Shop : MonoBehaviour {
         item = shield.GetComponent<Item>();
         if (goldAtual >= item.itemCost && !hasShield)
         {
-            hasShield = true;
+            playerHealth.ActivateShield();
             goldAtual = goldAtual - item.itemCost;
+            hasShield = true;
+            
         }
     }
 
@@ -59,6 +61,7 @@ public class Shop : MonoBehaviour {
         item = steelBoots.GetComponent<Item>();
         if (goldAtual >= item.itemCost && !hasSteelBoots)
         {
+            hasSteelBoots = true;
             playerHealth.hasSteelBoots = true;
             goldAtual = goldAtual - item.itemCost;
         }

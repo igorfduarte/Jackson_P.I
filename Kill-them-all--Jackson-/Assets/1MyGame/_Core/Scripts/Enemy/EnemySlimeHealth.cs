@@ -69,22 +69,7 @@ public class EnemySlimeHealth : MonoBehaviour
 
 
     }
-   public void GenerateAllNumber()
-    {
-        generateAllNumber = Random.Range(0, 3);
-    }
-    void GenerateHealBoxNumber()
-    {
-        spawnHealBox = Random.Range(0, 4);
-    }
-    void GenerateAmmoBoxNumber()
-    {
-        spawnAmmoBox = Random.Range(0, 4);
-    }
-    void GenerateEnergyBoxNumber()
-    {
-        spawnEnergyBox = Random.Range(0, 6);
-    }
+   
 
 
     void Update()
@@ -96,47 +81,15 @@ public class EnemySlimeHealth : MonoBehaviour
 
         if (healthPoints <= 0 && !isDead )
         {
-            
+            Death();
             slimeExplode.GoingToExplode();
             deathPos = transform.position;
-            GenerateAllNumber();
+            
             experience.expAtual += experiencePoints;
 
 
 
-            if (generateAllNumber == 0)
-            {
-
-                GenerateHealBoxNumber();
-                if (spawnHealBox == 2)
-                {
-
-                    Instantiate(healBox, deathPos, Quaternion.identity);
-                }
-            }
-            if (generateAllNumber == 1)
-            {
-                GenerateAmmoBoxNumber();
-
-                if (spawnAmmoBox == 2)
-                {
-
-                    Instantiate(ammoBox, deathPos, Quaternion.identity);
-                }
-            }
-            if (generateAllNumber == 2)
-            {
-
-                GenerateEnergyBoxNumber();
-                if (spawnEnergyBox == 3)
-                {
-
-                    enemyAudio.clip = spawnEnergyClip;
-                    enemyAudio.Play();
-                    Instantiate(energyBox, deathPos, Quaternion.identity);
-                }
-
-            }
+            
             //TODO Fix DeathSound Click Bug
         }
     }

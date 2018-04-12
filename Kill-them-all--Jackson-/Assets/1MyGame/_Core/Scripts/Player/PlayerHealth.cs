@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     public bool hasSteelBoots;
+
     public float currentEnergy = 0;
     float timer;
     public float maxHealth;
-
+    public int shieldCooldown;
+    public GameObject shield;
 
     public float startingHealth = 100;
     public float currentHealth;
@@ -39,6 +41,8 @@ public class PlayerHealth : MonoBehaviour
     Weapon weapon;
     GameObject player;
     Experience experience;
+    GameObject shopObject;
+    Shop shop;
     
     
     
@@ -46,11 +50,14 @@ public class PlayerHealth : MonoBehaviour
     //PlayerShooting playerShooting;
     bool isDead;
     bool damaged;
+    public bool hasShield;
     
 
     public bool damageable;
     void Awake ()
     {
+        shopObject = GameObject.FindGameObjectWithTag("Shop");
+        shop = shopObject.GetComponent<Shop>();
         experience = GetComponent<Experience>();
         player = GameObject.FindGameObjectWithTag("Weapon");
         weapon = player.GetComponentInChildren<Weapon>();
@@ -82,31 +89,51 @@ public class PlayerHealth : MonoBehaviour
 
     void Update ()
     {
+        
 
         timer += Time.deltaTime;
         MaxEnergy();
         MaxHealth();
-        healthSlider.value = Mathf.Lerp(healthSlider.value, currentHealth, Time.deltaTime *5);
-        
-        
-   
+        healthSlider.value = Mathf.Lerp(healthSlider.value, currentHealth, Time.deltaTime * 5);
+
+
+
         if (damaged)
         {
             damageImage.color = flashColour;
         }
         else
         {
-            damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
-            
-            
+            damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
+
+
         }
         damaged = false;
+    }
+
+    public void ActivateShield()
+    {
+        
+            shield.SetActive(true);
+        
+    }
+
+    IEnumerator SpawnShield()
+    {
+        yield return new WaitForSeconds(shieldCooldown);
+        hasShield = true;
+        ActivateShield();
     }
 
 
     public void TakeDamage (int amount)
     {
-        if (damageable == true) {
+        if (hasShield)
+        {
+            shield.SetActive(false);
+            StartCoroutine(SpawnShield());
+        }
+        if (damageable == true && !hasShield) {
             damaged = true;
 
             currentHealth -= amount;

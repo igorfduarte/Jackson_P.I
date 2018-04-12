@@ -250,8 +250,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRadius: 0.6
-  chaseRadius: 50
-  originalSpeed: 3
+  chaseRadius: 95
+  originalSpeed: 4
   damageCaused: 0
   maxSpeed: 0
   enemiesInRange: []

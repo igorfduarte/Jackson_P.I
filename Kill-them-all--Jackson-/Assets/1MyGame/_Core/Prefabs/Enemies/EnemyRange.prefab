@@ -100,26 +100,26 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1964624727085366}
-  m_LocalRotation: {x: 0, y: 0, z: 0.10669794, w: 0.99429154}
+  m_LocalRotation: {x: 0, y: 0, z: 0.13917309, w: 0.9902681}
   m_LocalPosition: {x: -0.25, y: 0.374, z: 0}
   m_LocalScale: {x: 1.000001, y: 0.99999934, z: 1}
   m_Children: []
   m_Father: {fileID: 4906697591611470}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 12.25}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 16}
 --- !u!4 &4445041400925088
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1798423689800832}
-  m_LocalRotation: {x: 0, y: 0, z: -0.10669785, w: 0.99429154}
+  m_LocalRotation: {x: 0, y: 0, z: -0.13917309, w: 0.9902681}
   m_LocalPosition: {x: 0.25, y: 0.39400005, z: 0}
   m_LocalScale: {x: 1.000001, y: 0.99999934, z: 1}
   m_Children: []
   m_Father: {fileID: 4906697591611470}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -12.25}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -16}
 --- !u!4 &4906697591611470
 Transform:
   m_ObjectHideFlags: 1
@@ -127,7 +127,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1458658682698796}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.027555, y: 14.063286, z: 0.01953125}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.146828, y: 1.6704965, z: 1}
   m_Children:
   - {fileID: 4062773567389732}
@@ -190,10 +190,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.024880528, y: 0.028454572}
+  m_Offset: {x: 0.0018179119, y: -0.21853697}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -204,7 +204,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1496637, y: 1.1496637}
+  m_Size: {x: 1.7492969, y: 1.8588996}
   m_EdgeRadius: 0
 --- !u!82 &82381652276996970
 AudioSource:
@@ -328,10 +328,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRadius: 0.6
   chaseRadius: 50
-  originalSpeed: 0.5
+  originalSpeed: 2.5
   damageCaused: 0
   maxSpeed: 0
   enemiesInRange: []
+  isSlime: 0
 --- !u!114 &114283348711939484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -351,8 +352,8 @@ MonoBehaviour:
   - {fileID: 4062773567389732}
   - {fileID: 4445041400925088}
   - {fileID: 4249508459400664}
-  intervaloDeTiro: 0.7
-  spawnProjectileCountTime: 5
+  intervaloDeTiro: 0.6
+  spawnProjectileCountTime: 3
   shootClip: {fileID: 8300000, guid: 27cf91ff2ae784f9699062dd282e4fb2, type: 3}
   deathClip: {fileID: 0}
   attackPos: {fileID: 0}
@@ -368,18 +369,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9b9d14572410594cb85d40eedfb150c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 0
-  healthPoints: 6
+  fatEnemy: 1
+  normalEnemy: 0
+  startingHealth: 22
+  enemyPoints: 30
+  experiencePoints: 30
+  isSlime: 0
+  healthPoints: 22
   scoreValue: 10
   slimeDeathClip: {fileID: 0}
   bloodPos: {fileID: 0}
   slimeHit: {fileID: 0}
-  bloodHit: {fileID: 0}
-  bloodDeath: {fileID: 0}
+  gold1: {fileID: 1166974576317146, guid: 11765f98e81d9354ba011fccd68a5aeb, type: 2}
+  gold2: {fileID: 1107997000616012, guid: f285451e9a8adbd44818f488f74ee908, type: 2}
+  gold3: {fileID: 1501854158555212, guid: 2b0029405723c2847844fc6704a84c7a, type: 2}
+  bloodHit: {fileID: 1474237127939832, guid: c01ff74f1945fe54ebb71a58b3f77022, type: 2}
+  bloodDeath: {fileID: 1870796827231292, guid: 9dff21a41aaa8f44d83fafde265c29be, type: 2}
   healBox: {fileID: 1278014027906054, guid: 309354fecbd863e4e81fc1582983f21e, type: 2}
   ammoBox: {fileID: 1687477400002572, guid: 76d6a4fd2a51bb84e96214fabed63e10, type: 2}
   energyBox: {fileID: 1643952785980516, guid: 2cecb97e545ad0c49a3ff743c139d46e, type: 2}
   deathPos: {x: 0, y: 0, z: 0}
+  hitParticles: {fileID: 1754806563021502, guid: 5093b696c4fe4c94fa25ebb76aff3863,
+    type: 2}
   isDead: 0
   cameraShake: {fileID: 0}
   slimeFloorPrefab: {fileID: 0}

@@ -11,6 +11,9 @@ public class UpdateText : MonoBehaviour {
     [SerializeField] GameObject shieldPrefab;
     [SerializeField] GameObject steelBootsPrefab;
     [SerializeField] GameObject glassesPrefab;
+    [SerializeField] GameObject icePotionPrefab;
+    [SerializeField] GameObject healthPrefab;
+    [SerializeField] GameObject ammoPrefab;
     Shop shop;
     [SerializeField] string texto;
      Item itemcost;
@@ -19,6 +22,9 @@ public class UpdateText : MonoBehaviour {
     [SerializeField] bool shield;
     [SerializeField] bool steelBoots;
     [SerializeField] bool glasses;
+    [SerializeField] bool icePotion;
+    [SerializeField] bool health;
+    [SerializeField] bool ammo;
 
 
     void Start()
@@ -40,6 +46,27 @@ public class UpdateText : MonoBehaviour {
         {
 
             itemcost = glassesPrefab.GetComponent<Item>();
+            value = itemcost.itemCost;
+
+        }
+        if (icePotion)
+        {
+
+            itemcost = icePotionPrefab.GetComponent<Item>();
+            value = itemcost.itemCost;
+
+        }
+        if (health)
+        {
+
+            itemcost = healthPrefab.GetComponent<Item>();
+            value = itemcost.itemCost;
+
+        }
+        if (ammo)
+        {
+
+            itemcost = ammoPrefab.GetComponent<Item>();
             value = itemcost.itemCost;
 
         }

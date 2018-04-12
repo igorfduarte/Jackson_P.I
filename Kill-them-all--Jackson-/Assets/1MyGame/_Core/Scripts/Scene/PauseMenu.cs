@@ -26,12 +26,14 @@ public class PauseMenu : MonoBehaviour {
     PlayerMovement playerMovement;
     public bool shopConsu;
     public bool shopEquip;
+    AudioSource audioSource;
    
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-       
+        audioSource = player.GetComponent<AudioSource>();
+
         playerHealth = player.GetComponent<PlayerHealth>();
         experience = player.GetComponent<Experience>();
         playerMovement = player.GetComponent<PlayerMovement>();
@@ -53,6 +55,7 @@ public class PauseMenu : MonoBehaviour {
             {
                 hudCanvas.SetActive(true);
                 skillPanel.SetActive(false);
+                audioSource.mute = false;
                 Time.timeScale = 1f;
                 GameIsPaused = false;
                 playerWeapon = GameObject.FindGameObjectWithTag("Weapon");
@@ -70,6 +73,7 @@ public class PauseMenu : MonoBehaviour {
             {
                 hudCanvas.SetActive(false);
                 skillPanel.SetActive(true);
+                audioSource.mute = true;
                 Time.timeScale = 0f;
                 GameIsPaused = true;
 
@@ -80,6 +84,7 @@ public class PauseMenu : MonoBehaviour {
             skillPanel.SetActive(true);
             Debug.Log("painel de skill");
             isInPanel = true;
+            audioSource.mute = true;
             Time.timeScale = 0f;
         }
         /*
@@ -120,14 +125,15 @@ public class PauseMenu : MonoBehaviour {
 
     private void ShopCanvas()
     {
-        if (Input.GetKeyDown(KeyCode.P) && !isInShop && shopConsu)
+        if (Input.GetKeyDown(KeyCode.F) && !isInShop && shopConsu)
         {
+            audioSource.mute = true;
             shopConsuCanvas.SetActive(true);
             isInShop = true;
             Time.timeScale = 0f;
         }
 
-        if (Input.GetKeyDown(KeyCode.P) && !inOptions && shopConsu)
+        if (Input.GetKeyDown(KeyCode.F) && !inOptions && shopConsu)
         {
             if (GameIsPaused)
             {
@@ -135,6 +141,7 @@ public class PauseMenu : MonoBehaviour {
 
                 shopConsuCanvas.SetActive(false);
                 Time.timeScale = 1f;
+                audioSource.mute = false;
                 GameIsPaused = false;
 
 
@@ -148,24 +155,27 @@ public class PauseMenu : MonoBehaviour {
                 hudCanvas.SetActive(false);
                 shopConsuCanvas.SetActive(true);
                 Time.timeScale = 0f;
+                audioSource.mute = true;
                 GameIsPaused = true;
 
             }
         }
-        if (Input.GetKeyDown(KeyCode.P) && !isInShop && shopEquip)
+        if (Input.GetKeyDown(KeyCode.F) && !isInShop && shopEquip)
         {
             shopCanvas.SetActive(true);
             isInShop = true;
+            audioSource.mute = true;
             Time.timeScale = 0f;
         }
 
-        if (Input.GetKeyDown(KeyCode.P) && !inOptions && shopEquip)
+        if (Input.GetKeyDown(KeyCode.F) && !inOptions && shopEquip)
         {
             if (GameIsPaused)
             {
                 hudCanvas.SetActive(true);
 
                 shopCanvas.SetActive(false);
+                audioSource.mute = false;
                 Time.timeScale = 1f;
                 GameIsPaused = false;
 
@@ -179,6 +189,7 @@ public class PauseMenu : MonoBehaviour {
             {
                 hudCanvas.SetActive(false);
                 shopCanvas.SetActive(true);
+                audioSource.mute = false;
                 Time.timeScale = 0f;
                 GameIsPaused = true;
 
@@ -206,7 +217,8 @@ public class PauseMenu : MonoBehaviour {
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
-        GameIsPaused = true;       
+        GameIsPaused = true;   
+        
     }
 
     public void LoadMenu()

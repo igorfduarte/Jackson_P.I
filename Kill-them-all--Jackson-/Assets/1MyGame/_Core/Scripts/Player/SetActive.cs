@@ -24,9 +24,12 @@ public class SetActive : MonoBehaviour {
             
             poison.SetActive(true);
             CancelInvoke("StopPoisonEffect");
-            Invoke("StopPoisonEffect", 2.5f);
+            
         }
-
+        if (!playerMove.isSlow)
+        {
+            StopPoisonEffect();
+        }
 		
 	}
 

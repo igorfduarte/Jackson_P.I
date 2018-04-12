@@ -9,6 +9,7 @@ public class Teleport : MonoBehaviour {
     [SerializeField] bool isShop;
     public bool isInWaveTeleport;
     public bool isInShopTeleport;
+    public GameObject text;
 
 
 
@@ -25,16 +26,24 @@ public class Teleport : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player" && isWave)
         {
-            
+            text.SetActive(true);
             isInWaveTeleport = true;
         }
 
         if (other.gameObject.tag == "Player" && isShop)
         {
-            
+            text.SetActive(true);
             isInShopTeleport = true;
         }
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            text.SetActive(false);
+            
+        }
+    }
 
-   
+
 }

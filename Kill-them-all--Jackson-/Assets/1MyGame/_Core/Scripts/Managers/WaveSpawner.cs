@@ -28,15 +28,14 @@ public class WaveSpawner : MonoBehaviour {
      }
      */
     Wave wave;
-    public Transform enemy;
-    public Transform fatEnemy;
-    public Transform slimeEnemy;
+    
     //[SerializeField] int waitingTime;
     public int timeBetweenWaves;
     [SerializeField] GameObject teleport;
     [SerializeField] int countMultiplier;
-    [SerializeField] float damageMultiplier;
-    [SerializeField] float lifeMultiplier;
+    [SerializeField] int rangeCountMultiplier;
+    //[SerializeField] float damageMultiplier;
+    //[SerializeField] float lifeMultiplier;
 
     [SerializeField] GameObject akPrefab;
     [SerializeField] GameObject rayGunPrefab;
@@ -140,6 +139,7 @@ public class WaveSpawner : MonoBehaviour {
         {
             if (vectorCount == 1)
             {
+                rangeCountMultiplier = 2;
                 Instantiate(vectorPrefab, weaponStartPos.transform.position, weaponStartPos.transform.rotation);
                 vectorCount++;
             }
@@ -160,7 +160,7 @@ public class WaveSpawner : MonoBehaviour {
                 Instantiate(rayGunPrefab, weaponStartPos.transform.position, weaponStartPos.transform.rotation);
                 rayCount++;
             }
-            DisplayCuidado();
+            
            
             
 
@@ -208,7 +208,7 @@ public class WaveSpawner : MonoBehaviour {
         {
             teleport.SetActive(true);
             waveCountDown -= Time.deltaTime;
-            waveCount.text = "Next Wave in   " + Mathf.Floor(waveCountDown);
+            waveCount.text = "Next Wave in   " + Mathf.Floor(waveCountDown)+  "seg  or press N to continue ";
 
         }
     }
@@ -286,6 +286,13 @@ public class WaveSpawner : MonoBehaviour {
             yield return new WaitForSeconds(1f / wave.rate);
 
         }
+        for (int i = 0; i < wave.rangeCount; i++)
+        {
+            SpawnEnemy(wave.rangeEnemy);
+
+            yield return new WaitForSeconds(1f / wave.rate);
+
+        }
         for (int i = 0; i < wave.fatEnemyCount; i++)
         {
             SpawnEnemy(wave.fatEnemy);
@@ -321,6 +328,13 @@ public class WaveSpawner : MonoBehaviour {
             yield return new WaitForSeconds(1f / _wave.rate);
 
         }
+        for (int i = 0; i < _wave.rangeCount; i++)
+        {
+            SpawnEnemy(_wave.rangeEnemy);
+
+            yield return new WaitForSeconds(1f / _wave.rate);
+
+        }
         for (int i = 0; i < _wave.fatEnemyCount; i++)
         {
             SpawnEnemy(_wave.fatEnemy);
@@ -347,6 +361,7 @@ public class WaveSpawner : MonoBehaviour {
         wave.count += (countMultiplier * 2);
         wave.fatEnemyCount += countMultiplier;
         wave.slimeEnemyCount += countMultiplier;
+        wave.rangeCount += rangeCountMultiplier;
     }
 
     void SpawnEnemy(Transform _enemy)
