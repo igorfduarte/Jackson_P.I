@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+guid: fdd674eddd2322d4e88fa387cffb661d
+timeCreated: 1516505643
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - rayShoot: {fileID: 1983681134549488, guid: 11873acf72788e44bb7efa006eab9380, type: 2}
+  - bulletPistol: {instanceID: 0}
+  - bulletAK: {instanceID: 0}
+  - ultimateBomb: {instanceID: 0}
+  - slowSpell: {instanceID: 0}
+  - startPos: {instanceID: 0}
+  - ultPos: {instanceID: 0}
+  - rayGunClip: {instanceID: 0}
+  - gunClip: {instanceID: 0}
+  - pistolClip: {instanceID: 0}
+  - explosionClip: {instanceID: 0}
+  - damageImage: {instanceID: 0}
+  - audioSource: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

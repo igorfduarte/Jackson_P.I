@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Enemy
+  - Bullet
+  - HealBox
+  - AmmoBox
+  - EnergyBox
+  - Ultimate
+  - Slow
+  - Poison
+  - Slime
+  - AK47
+  - RayGun
+  - EnemyChase
+  - Wall
+  - HUDWeapon
+  - WeaponHolder
+  - Spike
+  - Weapon
+  - Score
+  - BulletAK
+  - BulletEnemy
+  - Shop
+  - PauseCanvas
+  - WaveTeleport
+  - ShopTeleport
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Walkable
+  - Enemy
+  - Item
+  - Shootable
+  - Slime
+  - Wall
+  - Raygun
+  - Dash
+  - Player
+  - Bullet
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

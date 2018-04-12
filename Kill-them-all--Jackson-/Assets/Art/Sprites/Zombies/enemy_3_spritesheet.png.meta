@@ -1,0 +1,565 @@
+fileFormatVersion: 2
+guid: 03bfa3342975901419f69c230bd31a04
+timeCreated: 1516174431
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: enemy_3_spritesheet_0
+    21300002: enemy_3_spritesheet_1
+    21300004: enemy_3_spritesheet_2
+    21300006: enemy_3_spritesheet_3
+    21300008: enemy_3_spritesheet_4
+    21300010: enemy_3_spritesheet_5
+    21300012: enemy_3_spritesheet_6
+    21300014: enemy_3_spritesheet_7
+    21300016: enemy_3_spritesheet_8
+    21300018: enemy_3_spritesheet_9
+    21300020: enemy_3_spritesheet_10
+    21300022: enemy_3_spritesheet_11
+    21300024: enemy_3_spritesheet_12
+    21300026: enemy_3_spritesheet_13
+    21300028: enemy_3_spritesheet_14
+    21300030: enemy_3_spritesheet_15
+    21300032: enemy_3_spritesheet_16
+    21300034: enemy_3_spritesheet_17
+    21300036: enemy_3_spritesheet_18
+    21300038: enemy_3_spritesheet_19
+    21300040: enemy_3_spritesheet_20
+    21300042: enemy_3_spritesheet_21
+    21300044: enemy_3_spritesheet_22
+    21300046: enemy_3_spritesheet_23
+    21300048: enemy_3_spritesheet_24
+    21300050: enemy_3_spritesheet_25
+    21300052: enemy_3_spritesheet_26
+    21300054: enemy_3_spritesheet_27
+    21300056: enemy_3_spritesheet_28
+    21300058: enemy_3_spritesheet_29
+    21300060: enemy_3_spritesheet_30
+    21300062: enemy_3_spritesheet_31
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 404
+        width: 154
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 404
+        width: 155
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 404
+        width: 155
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 404
+        width: 157
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 1354
+        y: 404
+        width: 158
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 1674
+        y: 404
+        width: 160
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 1991
+        y: 404
+        width: 163
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 2309
+        y: 404
+        width: 165
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 2629
+        y: 404
+        width: 165
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 2951
+        y: 404
+        width: 163
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 3274
+        y: 404
+        width: 160
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 3594
+        y: 404
+        width: 158
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 3914
+        y: 404
+        width: 157
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 4236
+        y: 404
+        width: 155
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 4556
+        y: 404
+        width: 155
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 4876
+        y: 404
+        width: 154
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 76
+        width: 154
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 71
+        width: 163
+        height: 169
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 64
+        width: 185
+        height: 185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_19
+      rect:
+        serializedVersion: 2
+        x: 1011
+        y: 54
+        width: 203
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_20
+      rect:
+        serializedVersion: 2
+        x: 1329
+        y: 54
+        width: 205
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_21
+      rect:
+        serializedVersion: 2
+        x: 1654
+        y: 59
+        width: 197
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_22
+      rect:
+        serializedVersion: 2
+        x: 1969
+        y: 56
+        width: 205
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_23
+      rect:
+        serializedVersion: 2
+        x: 2289
+        y: 56
+        width: 205
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_24
+      rect:
+        serializedVersion: 2
+        x: 2614
+        y: 59
+        width: 197
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_25
+      rect:
+        serializedVersion: 2
+        x: 2929
+        y: 56
+        width: 205
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_26
+      rect:
+        serializedVersion: 2
+        x: 3249
+        y: 56
+        width: 205
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_27
+      rect:
+        serializedVersion: 2
+        x: 3574
+        y: 59
+        width: 197
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_28
+      rect:
+        serializedVersion: 2
+        x: 3899
+        y: 64
+        width: 191
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_29
+      rect:
+        serializedVersion: 2
+        x: 4226
+        y: 69
+        width: 175
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_30
+      rect:
+        serializedVersion: 2
+        x: 4554
+        y: 74
+        width: 157
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: enemy_3_spritesheet_31
+      rect:
+        serializedVersion: 2
+        x: 4876
+        y: 76
+        width: 153
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
