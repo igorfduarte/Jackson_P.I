@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour {
     Animator anim;
     AudioSource playerAudio;
     public AudioClip dashClip;
+    public AudioClip portalClip;
     public GameObject poisonEffect;
     public GameObject steelBootsEffect;
     public Slider staminaSlider;
@@ -39,6 +40,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField]GameObject teleportToWave;
     [SerializeField]GameObject teleportToShop;
     Teleport teleport;
+    public Image damageImage;
 
 
 
@@ -100,19 +102,16 @@ public class PlayerMovement : MonoBehaviour {
             
             if (isInWaveTeleport)
             {
-                transform.position = shopPosition.transform.position;
-                isInWaveTeleport = false;
-                
+                TeleportToShop();
 
             }
             if (isInShopTeleport)
             {
-                transform.position = wavePosition.transform.position;
-                isInShopTeleport = false;
-                
+                TeleportToWave();
+
             }
-            
-            
+
+
         }
         
 
@@ -129,24 +128,25 @@ public class PlayerMovement : MonoBehaviour {
         rigid.velocity = new Vector2(moveX * velocidadeAtual, moveY * velocidadeAtual);
         rigid.velocity.Normalize();
 
-        /*
-        if (moveX != 0)
-        {
-            anim.SetFloat(("Horizontal"), Mathf.Abs(moveX));
-        }
-        else if (moveX == 0)
-        {
-            anim.SetFloat(("Horizontal"),0);
-        }
-        if (moveY != 0)
-        {
-            anim.SetFloat(("Vertical"), Mathf.Abs(moveY));
-        }
-        else if (moveY == 0)
-        {
-            anim.SetFloat(("Vertical"),0);
-        }
-        */
+       
+    }
+
+    private void TeleportToWave()
+    {
+        playerAudio.PlayOneShot(portalClip, 0.5f);
+        damageImage.color = Color.white;
+        damageImage.color = Color.Lerp(damageImage.color, Color.clear, 16 * Time.deltaTime);
+        transform.position = wavePosition.transform.position;
+        isInShopTeleport = false;
+    }
+
+    private void TeleportToShop()
+    {
+        playerAudio.PlayOneShot(portalClip, 0.5f);
+        damageImage.color = Color.white;
+        damageImage.color = Color.Lerp(damageImage.color, Color.clear, 16 * Time.deltaTime);
+        transform.position = shopPosition.transform.position;
+        isInWaveTeleport = false;
     }
 
     public void Velocidade()
