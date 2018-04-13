@@ -143,4 +143,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   bulletDistance: 4
+  wallHitPrefab: {fileID: 1261507528051704, guid: dc34f576810eab74dae4e508a468d43b,
+    type: 2}
   damage: 0

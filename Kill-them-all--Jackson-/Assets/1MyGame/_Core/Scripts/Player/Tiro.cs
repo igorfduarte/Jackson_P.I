@@ -158,9 +158,10 @@ public class Tiro : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-
+        timer += Time.deltaTime;
         jogador = GameObject.FindGameObjectWithTag("Weapon");
         weapon = jogador.GetComponent<Weapon>();
+       
         if (timer >= weapon.fireRate && Input.GetMouseButton(0) && weapon.currentAmmo > 0 && weapon.maxAmmo >0 && !isUlting && weapon.fixPos && !isReloading)
         {
 
@@ -180,11 +181,13 @@ public class Tiro : MonoBehaviour {
             isReloading = true;
             StartCoroutine("Reload");
             anim.Play("Reload");
+            
         }
 
-        if (Input.GetMouseButtonDown(0) && weapon.currentAmmo<= 0 || Input.GetMouseButtonDown(0) && weapon.maxAmmo <= 0)
+        if (Input.GetMouseButton(0) && weapon.currentAmmo<= 0 && timer > 0.5f && !isReloading || Input.GetMouseButton(0) && weapon.maxAmmo <= 0 && timer>0.5f && !isReloading)
         {
-            gunAudio.PlayOneShot(emptyClip, 0.35f);
+            gunAudio.PlayOneShot(emptyClip, 0.5f);
+            timer = 0;
         }
 
 
@@ -202,7 +205,7 @@ public class Tiro : MonoBehaviour {
             gunAudio.mute = false;
         }
 
-        timer += Time.deltaTime;
+        
         //TiroControle();
 
         if (timer >= timeBetweenAttacks && Input.GetKeyDown(KeyCode.E) && shopClass.iceCount > 0)

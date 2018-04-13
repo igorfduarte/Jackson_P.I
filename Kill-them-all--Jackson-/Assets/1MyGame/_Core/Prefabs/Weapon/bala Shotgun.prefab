@@ -76,7 +76,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00000071525574, y: -0.047224402}
+  m_Offset: {x: -0.00000090897083, y: -0.16809022}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -87,7 +87,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0307167, y: 1.197386}
+  m_Size: {x: 0.68578255, y: 0.9556544}
   m_EdgeRadius: 0
 --- !u!108 &108264088809230572
 Light:
@@ -138,6 +138,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 37.5
   bulletDistance: 3
+  wallHitPrefab: {fileID: 1261507528051704, guid: dc34f576810eab74dae4e508a468d43b,
+    type: 2}
   damage: 0
 --- !u!212 &212609937724819986
 SpriteRenderer:

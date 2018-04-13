@@ -28,6 +28,7 @@ TagManager:
   - PauseCanvas
   - WaveTeleport
   - ShopTeleport
+  - WallParticle
   layers:
   - Default
   - TransparentFX
