@@ -28,11 +28,7 @@ public class AudioSpell : MonoBehaviour {
 
     void PlayAudio()
     {
-        if (tiro.playKame == true)
-        {
-            playSpell.clip = kamehameha;
-            playSpell.Play();
-        }
+
         if (tiro.playAk == true)
         {
             playSpell.clip = bulletAk;

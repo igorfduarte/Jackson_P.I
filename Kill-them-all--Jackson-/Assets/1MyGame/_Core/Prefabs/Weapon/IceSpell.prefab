@@ -141,7 +141,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1446877265249410}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.725, y: -5.786, z: 0}
+  m_LocalPosition: {x: -1.57, y: 1.83, z: 0}
   m_LocalScale: {x: 2.2647147, y: 1.8496754, z: 1}
   m_Children:
   - {fileID: 4866275771739504}
@@ -347,9 +347,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df121c8650aeccb488df41e6b5cea216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFire: 0
+  isIce: 1
   speed: 45
   radius: 7
-  delay: 1.5
+  effectDuration: 2
+  delay: 2
   explosionEffect: {fileID: 1242046600477118, guid: f4b7b3fd0f5fd6941922113a726521d7,
     type: 2}
   enemiesInRange: []
@@ -385,8 +388,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df121c8650aeccb488df41e6b5cea216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFire: 0
+  isIce: 0
   speed: 4
   radius: 7
+  effectDuration: 0
   delay: 2.5
   explosionEffect: {fileID: 1242046600477118, guid: f4b7b3fd0f5fd6941922113a726521d7,
     type: 2}
@@ -13681,7 +13687,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -13885,7 +13891,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: b73d6875e529afe45b61be801462f245, type: 3}
   m_Color: {r: 0.57742214, g: 0.7561747, b: 0.88235295, a: 1}
   m_FlipX: 0

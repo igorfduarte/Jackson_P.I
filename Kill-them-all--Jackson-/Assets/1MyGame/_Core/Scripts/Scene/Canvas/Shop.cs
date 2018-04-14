@@ -8,6 +8,7 @@ public class Shop : MonoBehaviour {
     public GameObject cameraIncrease;
     public GameObject shield;
     public GameObject buyIce;
+    public GameObject buyMolotov;
     public GameObject buyHealth;
     public GameObject buyAmmo;
 
@@ -17,6 +18,7 @@ public class Shop : MonoBehaviour {
 
     public int goldAtual;
     public int iceCount;
+    public int molotovCount;
 
     Item item;
 
@@ -43,6 +45,16 @@ public class Shop : MonoBehaviour {
 		
 
 	}
+    public void BuyMolotov()
+    {
+        item = buyMolotov.GetComponent<Item>();
+
+        if (goldAtual >= item.itemCost)
+        {
+            molotovCount++;
+            goldAtual = goldAtual - item.itemCost;
+        }
+    }
 
     public void BuyShield()
     {

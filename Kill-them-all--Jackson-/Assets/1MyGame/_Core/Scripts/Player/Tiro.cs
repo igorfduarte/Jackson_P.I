@@ -7,99 +7,70 @@ public class Tiro : MonoBehaviour {
     // VARIAVEIS
     #region
     //[SerializeField] Transform startPosistion;
-    Weapon weapon;
-
-
-
 
     [SerializeField] GameObject balaPrefab;
-    public float cooldown = 0.5f;
+    [SerializeField] float timeBetweenAttacks;
+    [SerializeField] AudioClip reloadClip;   
+    
     //float timerPool;
-
     public Pooling poolAk;
     public Pooling poolShotgun;
     public Pooling poolVector;
     public Pooling poolPistol;
 
-    bool isReloading;
-
-
-
-
-
+    public float cooldown = 0.5f;
     public int ammoRaygun = 100;
     public int ammoAK;
-    public CameraFollow cameraShake;
-
-    float timer;
-    public float spellSpeed;
-    public GameObject rayShoot;
-    
+    public GameObject arm;
+    public GameObject rayShoot;   
     public GameObject bulletPistol;
     public GameObject bulletAK;
     public GameObject bulletGL;
     public GameObject shotgunBulletPrefab;
     public GameObject ultimateBomb;
     public GameObject slowSpell;
+    public GameObject molotov;
     public GameObject startPos;
+    public GameObject ultPos;
+    public GameObject audioSource;
+
+    public CameraFollow cameraShake;
     public Transform[] shotgunStartPos;
     public Transform[] vectorStartPos;
-    public GameObject ultPos;
-    [SerializeField] float timeBetweenAttacks;
-    float timeBetweenAttacksUlt = 3.4f;
     public Transform[] spawnPoints;
-    Transform trans;
-    
-    
-    
-    
-    public AudioClip[] noManaClip;
     public AudioClip emptyClip;
-    AudioSource gunAudio;
-    public bool isParticle;
-    public float tempoUlt = 2.5f;
-
-    public bool playKame;
-    public bool playAk;
-    public bool playIce;
-    bool isUlt;
-    bool isUlting;
-
-    public float pistolDamage = 2f;
-    public float akDamage = 1.75f;
-    public float rayGunDamage = 3.5f;
-    public float shotgunDamage = 5;
-
-    [SerializeField]AudioClip reloadClip;
-    
-
-    ParticleSystem gunParticles;
-
-    Animator anim;
-
-
-    public float flashSpeed = 5f;
     public Color ultimateFlashColor;
     public Color iceSlowFlashColor;
     public Image damageImage;
 
-    
+    Weapon weapon;
+    Shop shopClass;
     PlayerHealth playerHealth;
     Player player;
-    
-    //ChangeWeapon weapon;
 
+    Transform trans;
+    AudioSource gunAudio;
+    ParticleSystem gunParticles;
+    Animator anim;
     GameObject jogador;
-
-    int shakePercent;
-
-    public GameObject audioSource;
     GameObject playerVida;
-
     GameObject shop;
-    Shop shopClass;
+   
 
-#endregion
+    public bool isParticle;
+    public bool playAk;
+    public bool playIce;
+    public float flashSpeed = 5f;
+
+    float timer;
+    public float spellSpeed;
+    bool isUlt;
+    bool isUlting;
+    bool isReloading;
+    int shakePercent;
+    float timeBetweenAttacksUlt = 3.4f;
+
+    #endregion
 
     void AtirarNormalWeapon()
     {
@@ -145,7 +116,7 @@ public class Tiro : MonoBehaviour {
         shopClass = shop.GetComponent<Shop>();
 		//spawnPoints = GetComponent<Transform> ();
         player = GetComponent<Player>();
-        trans = GetComponent<Transform>();
+        trans = arm.GetComponent<Transform>();
         gunAudio = GetComponent<AudioSource>();                     
         isUlt = false;
         anim = GetComponent<Animator>();
@@ -158,6 +129,8 @@ public class Tiro : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        playerVida = GameObject.FindGameObjectWithTag("Player");
+        playerHealth = playerVida.GetComponent<PlayerHealth>();
         timer += Time.deltaTime;
         jogador = GameObject.FindGameObjectWithTag("Weapon");
         weapon = jogador.GetComponent<Weapon>();
@@ -188,12 +161,27 @@ public class Tiro : MonoBehaviour {
         {
             gunAudio.PlayOneShot(emptyClip, 0.5f);
             timer = 0;
+        }      
+
+
+        if (timer >= 0.35 && Input.GetKeyDown(KeyCode.E) && shopClass.iceCount > 0)
+        {
+            timer = 0;
+            playIce = true;
+            IceSlow();
         }
 
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            playIce = false;
+        }
 
-        
-        playerVida = GameObject.FindGameObjectWithTag("Player");
-        playerHealth = playerVida.GetComponent<PlayerHealth>();
+        if (timer >= 0.35 && Input.GetKeyDown(KeyCode.Q) && shopClass.molotovCount > 0)
+        {
+            playIce = true;
+            Molotov();
+            timer = 0;
+        }
 
 
         if (playerHealth.currentHealth <= 0)
@@ -205,18 +193,12 @@ public class Tiro : MonoBehaviour {
             gunAudio.mute = false;
         }
 
-        
-        //TiroControle();
-
-        if (timer >= timeBetweenAttacks && Input.GetKeyDown(KeyCode.E) && shopClass.iceCount > 0)
-        {
-            playIce = true;
-            IceSlow();
-        }
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            playIce = false;
-        }
+    }
+    void Molotov()
+    {
+        int spawnPointIndex = Random.Range(0, weapon.startPos.Length);
+        GameObject newMolly = (GameObject)Instantiate(molotov, ultPos.transform.position, trans.rotation);
+        shopClass.molotovCount--;
 
     }
 
@@ -429,7 +411,7 @@ public class Tiro : MonoBehaviour {
         playerHealth.currentEnergy = 0;
         playerHealth.energySlider.value = playerHealth.currentEnergy;
         GameObject ultimate = (GameObject)Instantiate(ultimateBomb, ultPos.transform.position, trans.rotation);
-        Invoke("StopUltimate", tempoUlt);
+        //Invoke("StopUltimate", tempoUlt);
 
         Destroy(ultimate, 6);
     }

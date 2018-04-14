@@ -9,6 +9,7 @@ public class ShopButton : MonoBehaviour {
     [SerializeField] bool isIce;
     [SerializeField] bool isHealth;
     [SerializeField] bool isAmmo;
+    [SerializeField] bool isMolotov;
     Shop shop;
     GameObject shopObject;
     GameObject player;
@@ -68,6 +69,10 @@ public class ShopButton : MonoBehaviour {
             scoreClass.UpdateAmmoHUD();
             
             // buy glasses function
+        }
+        if (isMolotov)
+        {
+            shop.BuyMolotov();
         }
 
 

@@ -33,7 +33,7 @@ public class ChasePlayer : MonoBehaviour {
         
         anim = GetComponent<Animator>();
         originalColor = this.gameObject.GetComponent<SpriteRenderer>().color;
-
+    
 
         originalSpeed = speed;
     }
@@ -45,9 +45,13 @@ public class ChasePlayer : MonoBehaviour {
         {
             Invoke("ColorChangeBack", 3f);
         }
+        if (this.gameObject.GetComponent<SpriteRenderer>().color == Color.red)
+        {
+            Invoke("ColorChangeBack", 5);
+        }
 
 
-        
+
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         direction = target.transform.position - transform.position;
         dis = Vector3.Distance(target.transform.position, transform.position);
@@ -92,6 +96,13 @@ public class ChasePlayer : MonoBehaviour {
     {
         print("trocou de cor?");
         this.gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+
+
+    }
+    public void ColorChangeToRed()
+    {
+        print("trocou de cor?");
+        this.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
 
 
     }

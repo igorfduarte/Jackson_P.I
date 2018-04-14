@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class EnemySlimeHealth : MonoBehaviour
 {
@@ -6,7 +7,7 @@ public class EnemySlimeHealth : MonoBehaviour
     int startingHealth = 100;
 
     public float healthPoints;
-
+    public int burnTime = 5;
     public int scoreValue = 10;
     public AudioClip slimeDeathClip;
     public AudioClip spawnEnergyClip;
@@ -14,7 +15,7 @@ public class EnemySlimeHealth : MonoBehaviour
     Collider2D col;
     SpriteRenderer sprite;
     SlimeExplode slimeExplode;
-
+    BulletMoveFoward bullet;
 
 
 
@@ -35,9 +36,10 @@ public class EnemySlimeHealth : MonoBehaviour
     //CapsuleCollider capsuleCollider;
     public bool isDead;
     bool isSinking;
+    public bool isOnFire;
 
     PlayerHealth playerHealth;
-    EnemyMovement move;
+    ChasePlayer move;
     GameObject player;
     Tiro tiro;
 
@@ -60,7 +62,7 @@ public class EnemySlimeHealth : MonoBehaviour
         //col.GetComponent<Collider2D>();
         playerHealth = player.GetComponent<PlayerHealth>();
         sprite = GetComponent<SpriteRenderer>();
-        move = GetComponent<EnemyMovement>();
+        move = GetComponent<ChasePlayer>();
         isDead = false;
         tiro = player.GetComponent<Tiro>();
 
@@ -94,23 +96,7 @@ public class EnemySlimeHealth : MonoBehaviour
         }
     }
 
-    /*
-    public void TakeDamage (int amount, Vector3 hitPoint)
-    {
-        //if(isDead)
-          //  return;
-
-       // enemyAudio.Play ();
-
-        currentHealth -= amount;
-            
-        //hitParticles.transform.position = hitPoint;
-       // hitParticles.Play();
-
-        
-    }
-    */
-
+ 
     void Death()
     {
 
@@ -126,118 +112,51 @@ public class EnemySlimeHealth : MonoBehaviour
 
 
     }
-
-
-    /*
-    void OnTriggerEnter2D(Collider2D other)
+    public IEnumerator FireDamage()
     {
-        
+        if (!isOnFire)
+        { 
+            move.StartCoroutine("ColorChangeToRed");
+            isOnFire = true;
+            for (int i = 0; i < burnTime; i++)
+            {
+                TakeDamage(1.5f);
+                yield return new WaitForSeconds(1);
+            }
+            isOnFire = false;
 
-       
-        
-        if (other.gameObject.tag == "BulletAK" && this.gameObject.tag == "EnemyChase")
-        {
-            
-            enemyAudio.Play();
-
-            healthPoints -= tiro.akDamage;
-            anim.SetTrigger("Hit");
-
-        }
-
-        if (other.gameObject.tag == "Bullet" && this.gameObject.tag == "EnemyChase")
-        {
-            
-            enemyAudio.Play();
-
-            healthPoints -= tiro.pistolDamage;
-            anim.SetTrigger("Hit");
 
         }
 
-        if (other.gameObject.tag == "RayGun" && this.gameObject.tag == "EnemyChase")
-        {
-            
-            enemyAudio.Play();
-
-            healthPoints -= tiro.rayGunDamage;
-            anim.SetTrigger("Hit");
-
-        }
-
-        if (other.gameObject.tag == "Ultimate")
-        {
-            enemyAudio.Play();
-
-            healthPoints -= 50f;
-
-        }
-
-    
 
     }
-    */
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Ultimate")
-        {
-            print("colidiu com enemy");
-            enemyAudio.Play();
 
-            healthPoints -= 50f;
-
-        }
-
-        if (other.gameObject.tag == "Slow")
-        {
-            sprite.color = Color.blue;
-            move.SlowEffect(0.5f);
-
-            print("ficou Slow");
-
-
-        }
-
-        if (other.gameObject.tag == "BulletAK" && this.gameObject.tag == "EnemyChase")
-        {
-
-            enemyAudio.Play();
-
-            healthPoints -= tiro.akDamage;
-            anim.SetTrigger("Hit");
-
-        }
-
-        if (other.gameObject.tag == "Bullet" && this.gameObject.tag == "EnemyChase")
-        {
-
-            enemyAudio.Play();
-
-            healthPoints -= tiro.pistolDamage;
-            anim.SetTrigger("Hit");
-
-        }
-
-        if (other.gameObject.tag == "RayGun" && this.gameObject.tag == "EnemyChase")
-        {
-
-            enemyAudio.Play();
-
-            healthPoints -= tiro.rayGunDamage;
-            anim.SetTrigger("Hit");
-
-        }
-
-        if (other.gameObject.tag == "Ultimate")
+        if (other.gameObject.tag == "Bullet")
         {
             enemyAudio.Play();
+            bullet = other.gameObject.GetComponent<BulletMoveFoward>();
+            TakeDamage(bullet.damage);
+            
+            //anim.SetTrigger("Hit");
 
-            healthPoints -= 50f;
-
-        }
+        }       
 
 
     }
+    public void TakeDamage(float amount)
+    {
+        if (isDead)
+            return;
+
+        //anim.SetTrigger("Hit");
+        healthPoints -= amount;
+
+    }
+
+   
+
 
 
 }

@@ -52,8 +52,9 @@ public class EnemyMovement : MonoBehaviour {
             Invoke("ColorChangeBack", 3f);
         }
 
-        
-            dis = Vector3.Distance(player.transform.position, transform.position);
+
+
+        dis = Vector3.Distance(player.transform.position, transform.position);
 		Vector3 pos = transform.position;
 		if (dis <= attackRadius) {
             //TODO attack animation?
@@ -118,6 +119,10 @@ public class EnemyMovement : MonoBehaviour {
     {
         
             this.gameObject.GetComponent<SpriteRenderer>().color = originalColor;
+        if (enemyHealth.isOnFire)
+        {
+            enemyHealth.isOnFire = false;
+        }
         
 
         
@@ -133,5 +138,12 @@ public class EnemyMovement : MonoBehaviour {
 
         print("trocou de cor?");
     }
+    public IEnumerator ColorChangeToRed()
+    {
+        this.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        yield return new WaitForSeconds(enemyHealth.burnTime);
+        this.gameObject.GetComponent<SpriteRenderer>().color = originalColor;
+    }
+    
 
 }

@@ -369,32 +369,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9b9d14572410594cb85d40eedfb150c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthPoints: 10
+  startingHealth: 10
   fatEnemy: 1
   normalEnemy: 0
-  startingHealth: 22
   enemyPoints: 30
   experiencePoints: 30
   isSlime: 0
-  healthPoints: 22
-  scoreValue: 10
-  slimeDeathClip: {fileID: 0}
-  bloodPos: {fileID: 0}
-  slimeHit: {fileID: 0}
   gold1: {fileID: 1166974576317146, guid: 11765f98e81d9354ba011fccd68a5aeb, type: 2}
   gold2: {fileID: 1107997000616012, guid: f285451e9a8adbd44818f488f74ee908, type: 2}
   gold3: {fileID: 1501854158555212, guid: 2b0029405723c2847844fc6704a84c7a, type: 2}
   bloodHit: {fileID: 1474237127939832, guid: c01ff74f1945fe54ebb71a58b3f77022, type: 2}
   bloodDeath: {fileID: 1870796827231292, guid: 9dff21a41aaa8f44d83fafde265c29be, type: 2}
-  healBox: {fileID: 1278014027906054, guid: 309354fecbd863e4e81fc1582983f21e, type: 2}
-  ammoBox: {fileID: 1687477400002572, guid: 76d6a4fd2a51bb84e96214fabed63e10, type: 2}
-  energyBox: {fileID: 1643952785980516, guid: 2cecb97e545ad0c49a3ff743c139d46e, type: 2}
-  deathPos: {x: 0, y: 0, z: 0}
   hitParticles: {fileID: 1754806563021502, guid: 5093b696c4fe4c94fa25ebb76aff3863,
     type: 2}
-  isDead: 0
+  bloodPos: {fileID: 0}
   cameraShake: {fileID: 0}
-  slimeFloorPrefab: {fileID: 0}
   endPos: {fileID: 0}
+  isDead: 0
+  isOnFire: 0
+  burnTime: 0
 --- !u!212 &212536698630887796
 SpriteRenderer:
   m_ObjectHideFlags: 1

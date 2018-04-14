@@ -87,7 +87,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1191147334388496
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +348,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1591152036392506
 GameObject:
   m_ObjectHideFlags: 1
@@ -1075,13 +1075,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1137883787591122}
-  m_LocalRotation: {x: -0, y: -0, z: -0.59777176, w: 0.8016664}
+  m_LocalRotation: {x: -0, y: -0, z: -0.61834776, w: 0.78590465}
   m_LocalPosition: {x: 0.715, y: 1.089, z: 0.1640625}
   m_LocalScale: {x: 3.1691196, y: 6.70447, z: 4.3566995}
   m_Children: []
   m_Father: {fileID: 4486491085010552}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -73.421005}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -76.39101}
 --- !u!4 &4925859391975200
 Transform:
   m_ObjectHideFlags: 1
@@ -1115,7 +1115,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1191147334388496}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.07, y: 2.46, z: 0}
+  m_LocalPosition: {x: 0.46, y: 2.561, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4587657082931866}
@@ -1906,15 +1906,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   balaPrefab: {fileID: 1464577824911342, guid: 1ad38b6ccbe359043be3386c18bb3391, type: 2}
-  cooldown: 0.5
+  timeBetweenAttacks: 0.125
+  reloadClip: {fileID: 8300000, guid: e5198250a6a57408bb36e14bc4a322c4, type: 3}
   poolAk: {fileID: 0}
   poolShotgun: {fileID: 0}
   poolVector: {fileID: 0}
   poolPistol: {fileID: 0}
+  cooldown: 0.5
   ammoRaygun: 100
   ammoAK: 600
-  cameraShake: {fileID: 0}
-  spellSpeed: 75
   rayShoot: {fileID: 1983681134549488, guid: 11873acf72788e44bb7efa006eab9380, type: 2}
   bulletPistol: {fileID: 1695678563546530, guid: fadd888164b7d084eb4069aee7e3dfd3,
     type: 2}
@@ -1925,7 +1925,11 @@ MonoBehaviour:
   ultimateBomb: {fileID: 1637498477782864, guid: b8ac12768de605741b841adf9703ef51,
     type: 2}
   slowSpell: {fileID: 1446877265249410, guid: 3fe5a069f3840a248b39a2518cc3832f, type: 2}
+  molotov: {fileID: 1466452954558542, guid: f7080dbba1b7c114f833641bf169c36e, type: 2}
   startPos: {fileID: 1328045959255604}
+  ultPos: {fileID: 1619893641970906}
+  audioSource: {fileID: 0}
+  cameraShake: {fileID: 0}
   shotgunStartPos:
   - {fileID: 4335556801662606}
   - {fileID: 4492348161137070}
@@ -1939,30 +1943,18 @@ MonoBehaviour:
   - {fileID: 4988641873355834}
   - {fileID: 4676147271662868}
   - {fileID: 4644138294942104}
-  ultPos: {fileID: 1718199643590718}
-  timeBetweenAttacks: 0.125
   spawnPoints:
   - {fileID: 4931586027401884}
   - {fileID: 4900913653713668}
-  noManaClip:
-  - {fileID: 8300000, guid: 7e4804f77ec380b4a97225cffd69f55a, type: 3}
-  - {fileID: 8300000, guid: 48f7ce295a7203f4bb4e84807fd74c59, type: 3}
   emptyClip: {fileID: 8300000, guid: 6b585c5de99e8994ca390fc9b813555a, type: 3}
-  isParticle: 0
-  tempoUlt: 2.5
-  playKame: 0
-  playAk: 0
-  playIce: 0
-  pistolDamage: 1
-  akDamage: 1.25
-  rayGunDamage: 2
-  shotgunDamage: 5
-  reloadClip: {fileID: 8300000, guid: e5198250a6a57408bb36e14bc4a322c4, type: 3}
-  flashSpeed: 3
   ultimateFlashColor: {r: 0, g: 0.7931037, b: 1, a: 0.272}
   iceSlowFlashColor: {r: 0, g: 0.42068958, b: 1, a: 0.322}
   damageImage: {fileID: 0}
-  audioSource: {fileID: 0}
+  isParticle: 0
+  playAk: 0
+  playIce: 0
+  flashSpeed: 3
+  spellSpeed: 75
 --- !u!114 &114658235824052492
 MonoBehaviour:
   m_ObjectHideFlags: 1

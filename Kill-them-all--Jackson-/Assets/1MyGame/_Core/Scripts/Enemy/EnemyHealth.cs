@@ -3,68 +3,53 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+
+    public float healthPoints;
+    [SerializeField] int startingHealth;
     [SerializeField] bool fatEnemy;
     [SerializeField] bool normalEnemy;
-
-    [SerializeField]
-     int startingHealth;
     [SerializeField] int enemyPoints;
     [SerializeField] int experiencePoints;
     [SerializeField] bool isSlime;
-    int goldAmount;
-    public float healthPoints;
+    [SerializeField] GameObject gold1;
+    [SerializeField] GameObject gold2;
+    [SerializeField] GameObject gold3;   
+    [SerializeField] GameObject bloodHit;
+    [SerializeField] GameObject bloodDeath;
+    [SerializeField] GameObject hitParticles;
 
-    public int scoreValue = 10;
-    public AudioClip slimeDeathClip;
-    public Transform bloodPos;
-   
-    public AudioClip slimeHit;
+    public Transform bloodPos;   
+    public CameraFollow cameraShake;
+    public GameObject endPos;
+    public bool isDead;
+    public bool isOnFire;
+    public int burnTime;
+
+    GameObject scoreObject;
+    GameObject goldToSpawn;
+    GameObject player;
+    Vector3 deathPos;
+    Experience experience;
+    BulletMoveFoward bullet;
+    Score scorePoints;
+    Gold gold;
+    PlayerHealth playerHealth;
+    EnemyMovement move;   
+    Tiro tiro;
+    Animator anim;
+    AudioSource enemyAudio;
     Collider2D col;
     SpriteRenderer sprite;
-    SlimeExplode slimeExplode;
 
-
-
-
-
+ 
+    bool isSinking;    
     int goldMax;
     float timer;
     int spawnHealBox;
     int generateAllNumber;
     int spawnAmmoBox;
     int spawnEnergyBox;
-    [SerializeField] GameObject gold1;
-    [SerializeField] GameObject gold2;
-    [SerializeField] GameObject gold3;
-    GameObject goldToSpawn;
-    [SerializeField] GameObject bloodHit;
-    [SerializeField] GameObject bloodDeath;
-    [SerializeField] GameObject healBox;
-    [SerializeField] GameObject ammoBox;
-    [SerializeField] GameObject energyBox;
-    public Vector3 deathPos;
-    Animator anim;
-    AudioSource enemyAudio;
-    [SerializeField]GameObject hitParticles;
-    //CapsuleCollider capsuleCollider;
-    public bool isDead;
-    bool isSinking;
-    public CameraFollow cameraShake;
-    PlayerHealth playerHealth;
-    EnemyMovement move;
-    GameObject player;
-    Tiro tiro;
-
-    public GameObject slimeFloorPrefab;
-    public GameObject endPos;
-    BulletMoveFoward bullet;
-
-    Score scorePoints;
-    GameObject scoreObject;
-
-    Experience experience;
-    Gold gold;
-    
+    int goldAmount;
 
 
 
@@ -83,7 +68,7 @@ public class EnemyHealth : MonoBehaviour
         scoreObject = GameObject.FindGameObjectWithTag("Score");
         scorePoints = scoreObject.GetComponent<Score>();
         healthPoints = startingHealth;
-        slimeExplode = GetComponent<SlimeExplode>();
+        
         player = GameObject.FindGameObjectWithTag("Player");
         experience = player.GetComponent<Experience>();
         anim = GetComponent <Animator> ();
@@ -100,101 +85,35 @@ public class EnemyHealth : MonoBehaviour
 
         cameraShake = Camera.main.transform.parent.GetComponent<CameraFollow>();
 
-
     }
-    void GenerateAllNumber()
-    {
-        generateAllNumber = Random.Range(0, 3);
-    }
-    void GenerateHealBoxNumber()
-    {
-        spawnHealBox = Random.Range(0, 6);
-    }
-    void GenerateAmmoBoxNumber()
-    {
-        spawnAmmoBox = Random.Range(0, 8);
-    }
-    void GenerateEnergyBoxNumber()
-    {
-        spawnEnergyBox = Random.Range(0, 7);
-    }
-
+   
 
     void Update ()
     {
-        timer += Time.deltaTime;
+        timer += Time.deltaTime;    
 
-       
-
-
-            if (healthPoints <= 0 && !isDead )
+       if (healthPoints <= 0 && !isDead )
         {
-            if (isSlime)
-            {
-                slimeExplode.GoingToExplode();
-                Death();
+            
+        //playerHealth.currentEnergy += 5;
+        Death();
 
-                Destroy(this.gameObject, 1.25f);
-                deathPos = transform.position;
-                GenerateAllNumber();
-                //SpawnLoot();
-            }
-            else
-            {
-                //playerHealth.currentEnergy += 5;
-                Death();
-
-                Destroy(this.gameObject, 1.25f);
-                deathPos = transform.position;
-                GenerateAllNumber();
-                //SpawnLoot();
-            }
-            //TODO Fix DeathSound Click Bug
+        Destroy(this.gameObject, 1.25f);
+        deathPos = transform.position;
+                
+                           
+        //TODO Fix DeathSound Click Bug
         }
     }
 
-    private void SpawnLoot()
-    {
-        if (generateAllNumber == 0)
-        {
-
-            GenerateHealBoxNumber();
-            if (spawnHealBox == 2)
-            {
-
-                Instantiate(healBox, deathPos, Quaternion.identity);
-            }
-        }
-        if (generateAllNumber == 1)
-        {
-            GenerateAmmoBoxNumber();
-
-            if (spawnAmmoBox == 2)
-            {
-
-                Instantiate(ammoBox, deathPos, Quaternion.identity);
-            }
-        }
-        if (generateAllNumber == 2)
-        {
-
-            GenerateEnergyBoxNumber();
-            if (spawnEnergyBox == 3)
-            {
-
-
-                Instantiate(energyBox, deathPos, Quaternion.identity);
-            }
-
-        }
-    }
+    
 
     public void TakeDamage (float amount)
     {
         if(isDead)
            return;
 
-        // enemyAudio.Play ();
+         enemyAudio.Play ();
         SpawnBlood();
         healthPoints -= amount;
         cameraShake.ShakeCamera(0.03f, 0.05f);
@@ -204,8 +123,6 @@ public class EnemyHealth : MonoBehaviour
         Destroy(novoParticle, 1f);
         //hitParticles.transform.position = hitPoint;
         // hitParticles.Play();
-
-
     }
     
     IEnumerator SpawnDeathBlood()
@@ -213,7 +130,6 @@ public class EnemyHealth : MonoBehaviour
 
         yield return new WaitForSeconds(0.85f);
         Instantiate(bloodDeath, transform.position, transform.rotation);
-
 
     }
     void Death ()
@@ -234,10 +150,8 @@ public class EnemyHealth : MonoBehaviour
 
         if (goldAmount >0)
         {
-            SpawnGold();
-            
-        }
-             
+            SpawnGold();            
+        }            
     }
 
     void FlashDamage()
@@ -259,51 +173,19 @@ public class EnemyHealth : MonoBehaviour
             {
                 TakeDamage(3f);
                 timer = 0;
-            }
-            
+            }           
         }
     }
 
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Ultimate")
-        {
-            print("colidiu com enemy");
-            enemyAudio.Play();
-
-            healthPoints -= 50f;
-
-        }
-
-        if (other.gameObject.tag == "Slow")
-        {
-            sprite.color = Color.blue;
-            move.SlowEffect(0.5f);
-            
-            print("ficou Slow");
-            
-
-        }
-
-
+        
         if (other.gameObject.tag == "Bullet")
         {
             bullet = other.gameObject.GetComponent<BulletMoveFoward>();
             TakeDamage(bullet.damage);
-
         }
-
-        if (other.gameObject.tag == "Ultimate")
-        {
-            enemyAudio.Play();
-
-            healthPoints -= 50f;
-
-        }
-
-
-
 
     }
 
@@ -313,15 +195,11 @@ public class EnemyHealth : MonoBehaviour
         {
             Instantiate(bloodHit, transform.position, transform.rotation);
             timer = 0;
-        }
-        
+        }       
     }
 
-
     void GenerateGold()
-    {
-        
-        
+    {              
         if (goldAmount >0 && goldAmount < 12)
         {
             goldToSpawn = gold1;
@@ -333,11 +211,8 @@ public class EnemyHealth : MonoBehaviour
         if (goldAmount > 20 && goldAmount <= 30)
         {
             goldToSpawn = gold3;
-        }
-        
+        }      
     }
-
-
 
     void SpawnGold()
     {
@@ -347,7 +222,6 @@ public class EnemyHealth : MonoBehaviour
             gold = newGold.GetComponent<Gold>();
             gold.goldAmount = +goldAmount;
         }
-
         /*
         if (goldToSpawn != null)
         {
@@ -355,12 +229,24 @@ public class EnemyHealth : MonoBehaviour
             gold = newGold.GetComponent<Gold>();
             gold.goldAmount = goldAmount;
         }
-        */
+        */                
+    }
 
+public IEnumerator FireDamage()
+    {
+        if (!isOnFire)
+        {
+            move.StartCoroutine("ColorChangeToRed");
+            isOnFire = true;
+            for (int i = 0; i < burnTime; i++)
+            {
+                TakeDamage(2f);
+                yield return new WaitForSeconds(1);
+            }
+            isOnFire = false;
+            
 
-
-
-
+        }
         
         
     }

@@ -6,48 +6,45 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour {
     [SerializeField] GameObject wavePosition;
     [SerializeField] GameObject shopPosition;
-    bool isInShopTeleport;
-    bool isInWaveTeleport;
-    [SerializeField]float velocidade = 6f;
-    float currentStamina;
+    [SerializeField] float velocidade = 6f;
     [SerializeField] float maxStamina = 100;
     [SerializeField] float timeToFullStamina;
+    [SerializeField] float velocidadeDash;
+    [SerializeField] GameObject teleportToWave;
+    [SerializeField] GameObject teleportToShop;
+
+    Rigidbody2D rigid;
+    Animator anim;
+    AudioSource playerAudio;
+    Teleport teleport;
+    PlayerHealth playerHealth;
+    Experience experience;
+    FaceMouse facemouse;
+    SpriteRenderer playerSprite;
+    public AudioClip dashClip;
+    public AudioClip portalClip;
+    public GameObject arm;
+    public GameObject poisonEffect;
+    public GameObject steelBootsEffect;
+    public Slider staminaSlider;
+    public Image damageImage;
+
+    public bool isSlow;
+
+    bool isInShopTeleport;
+    bool isInWaveTeleport;
+    bool canDash = true;
+    float currentStamina;
     float velocidadeOriginal;
     float velocidadeAtual;
-    [SerializeField] float velocidadeDash;
     float tempoDash = 0.2f;
     bool estaDandoDash;
 	float moveX;
 	float moveY;
-	Rigidbody2D rigid;
-    Animator anim;
-    AudioSource playerAudio;
-    public AudioClip dashClip;
-    public AudioClip portalClip;
-    public GameObject poisonEffect;
-    public GameObject steelBootsEffect;
-    public Slider staminaSlider;
-
-    
-    
-    PlayerHealth playerHealth;
-
-    Experience experience;
-    
-    public bool isSlow;
-    bool canDash = true;
-
-    [SerializeField]GameObject teleportToWave;
-    [SerializeField]GameObject teleportToShop;
-    Teleport teleport;
-    public Image damageImage;
-
-
-
 
     void Start () {
-        
-        
+        playerSprite = GetComponent<SpriteRenderer>();
+        facemouse = arm.GetComponent<FaceMouse>();
         experience = GetComponent<Experience>();
         currentStamina = maxStamina;
         velocidadeOriginal = velocidade;
@@ -127,6 +124,24 @@ public class PlayerMovement : MonoBehaviour {
 
         rigid.velocity = new Vector2(moveX * velocidadeAtual, moveY * velocidadeAtual);
         rigid.velocity.Normalize();
+        
+        if (moveX != 0 || moveY !=0)
+        {
+            anim.SetBool("Run", true);
+        }
+        if (moveX == 0 && moveY == 0)
+        {
+            anim.SetBool("Run", false);
+        }
+        
+        if (moveX < 0 && facemouse.directionX < 0)
+        {
+            playerSprite.flipX = true;
+        }
+        if (moveX > 0 && facemouse.directionX > 0)
+        {
+            playerSprite.flipX = false;
+        }
 
        
     }

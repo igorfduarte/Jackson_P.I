@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class IceSpell : MonoBehaviour
 {
-
+    public bool isFire;
+    public bool isIce;
     [SerializeField] float speed = 10f;
     [SerializeField] float radius;
-
+    public float effectDuration;
     public float delay = 4f;
     float countdown;
     bool hasExploded = false;
@@ -21,12 +22,15 @@ public class IceSpell : MonoBehaviour
     public GameObject[] enemiesInRange;
 
     EnemyMovement move;
+    EnemyHealth enemyHealth;
     ChasePlayer chase;
+    EnemySlimeHealth slimeHealth;
     void Start()
     {
         this.GetComponent<Rigidbody2D>().AddForce(transform.up * speed);
         countdown = delay;
         //  enemy = FindObjectOfType<Enemy>();
+        
 
 
 
@@ -59,6 +63,12 @@ public class IceSpell : MonoBehaviour
             hasExploded = true;
         }
 
+        if (col.gameObject.tag == "EnemyChase" && !hasExploded)
+        {
+            Explode();
+            hasExploded = true;
+        }
+
         if (col.gameObject.tag == "Wall" && !hasExploded)
         {
             Explode();
@@ -69,14 +79,68 @@ public class IceSpell : MonoBehaviour
 
     void Explode()
     {
+        if (isIce)
+        {
+            GameObject novoexplosionEffect = IceEffect();
+            hasExploded = false;
+            Destroy(gameObject);
+            Destroy(novoexplosionEffect, effectDuration);
+        }
+        if (isFire)
+        {
+            GameObject novoexplosionEffect = (GameObject)Instantiate(explosionEffect, transform.position, transform.rotation);
+            //GameObject novoexplosionEffect = FireEffect();
+            hasExploded = false;
+            Destroy(gameObject);
+            Destroy(novoexplosionEffect, effectDuration);
+        }
 
-        GameObject novoexplosionEffect =(GameObject)Instantiate(explosionEffect, transform.position, transform.rotation);
+    }
+    /*GameObject FireEffect()
+    {
+        GameObject novoexplosionEffect = (GameObject)Instantiate(explosionEffect, transform.position, transform.rotation);
         Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, radius, 9 << LayerMask.NameToLayer("Enemy"));
 
         foreach (Collider2D nearbyObject in col)
         {
-            
-            
+
+            if (nearbyObject.transform.tag == "Enemy")
+            {
+                
+                enemyHealth = nearbyObject.GetComponent<EnemyHealth>();
+                move = nearbyObject.GetComponent<EnemyMovement>();               
+                move.ColorChangeToRed();
+                enemyHealth.StartCoroutine("FireDamage");
+                print("ColorChangeToRed");
+
+            }
+
+            if (nearbyObject.transform.tag == "EnemyChase")
+            {
+                slimeHealth = nearbyObject.GetComponent<EnemySlimeHealth>();
+                chase = nearbyObject.GetComponent<ChasePlayer>();
+
+                chase.ColorChangeToRed();
+
+                slimeHealth.StartCoroutine("FireDamage");
+                
+                print("ColorChangeToBlue");
+            }
+
+        }
+
+        return novoexplosionEffect;
+    }
+    */
+     GameObject IceEffect()
+    {
+        GameObject novoexplosionEffect = (GameObject)Instantiate(explosionEffect, transform.position, transform.rotation);
+        Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, radius, 9 << LayerMask.NameToLayer("Enemy"));
+
+        foreach (Collider2D nearbyObject in col)
+        {
+
+
 
             if (nearbyObject.transform.tag == "Enemy")
             {
@@ -104,13 +168,9 @@ public class IceSpell : MonoBehaviour
 
 
         }
-        hasExploded = false;
-        Destroy(gameObject);
-        Destroy(novoexplosionEffect, 2f);
+
+        return novoexplosionEffect;
     }
-
-
-
 
     void OnDrawGizmos()
     {

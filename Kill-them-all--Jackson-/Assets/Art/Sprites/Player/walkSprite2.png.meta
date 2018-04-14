@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 26b7f9b3f63fa8e4ea8d174bffc85d64
-timeCreated: 1523482802
+guid: 39bba86c62c93574fb2882161ab35212
+timeCreated: 1523711261
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: JacksonSprite_0
+    21300000: walkSprite2_0
+    21300002: walkSprite2_1
+    21300004: walkSprite2_2
+    21300006: walkSprite2_3
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -32,7 +35,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -1
     wrapU: 1
@@ -77,29 +80,61 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: JacksonSprite_0
+      name: walkSprite2_1
       rect:
         serializedVersion: 2
-        x: 120
+        x: 134
         y: 0
-        width: 853
-        height: 996
+        width: 318
+        height: 412
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: walkSprite2_2
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 0
+        width: 310
+        height: 412
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: walkSprite2_3
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 0
+        width: 309
+        height: 412
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: walkSprite2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 109
+        height: 190
+      alignment: 9
+      pivot: {x: 0.47966826, y: 0.15785562}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
