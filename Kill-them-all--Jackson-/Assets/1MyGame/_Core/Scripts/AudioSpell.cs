@@ -9,9 +9,11 @@ public class AudioSpell : MonoBehaviour {
     public AudioClip kamehameha;
     public AudioClip iceSlow;
      AudioClip bulletAk;
+   public AudioClip breakClip;
 
     Tiro tiro;
     GameObject player;
+  
 	// Use this for initialization
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -36,9 +38,10 @@ public class AudioSpell : MonoBehaviour {
         }
         if (tiro.playIce == true)
         {
-            playSpell.clip = iceSlow;
-            playSpell.Play();
+           // playSpell.clip = iceSlow;
+            //playSpell.Play();
         }
+
 
     }
 

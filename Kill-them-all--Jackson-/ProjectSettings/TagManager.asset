@@ -29,6 +29,7 @@ TagManager:
   - WaveTeleport
   - ShopTeleport
   - WallParticle
+  - CameraAudio
   layers:
   - Default
   - TransparentFX

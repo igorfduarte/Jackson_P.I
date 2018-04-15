@@ -39,6 +39,7 @@ public class Tiro : MonoBehaviour {
     public Transform[] vectorStartPos;
     public Transform[] spawnPoints;
     public AudioClip emptyClip;
+    public AudioClip throwClip;
     public Color ultimateFlashColor;
     public Color iceSlowFlashColor;
     public Image damageImage;
@@ -62,11 +63,13 @@ public class Tiro : MonoBehaviour {
     public bool playIce;
     public float flashSpeed = 5f;
 
+    int condicao;
+    int ammoLimit;
     float timer;
     public float spellSpeed;
     bool isUlt;
     bool isUlting;
-    bool isReloading;
+   public bool isReloading;
     int shakePercent;
     float timeBetweenAttacksUlt = 3.4f;
 
@@ -135,14 +138,14 @@ public class Tiro : MonoBehaviour {
         jogador = GameObject.FindGameObjectWithTag("Weapon");
         weapon = jogador.GetComponent<Weapon>();
        
-        if (timer >= weapon.fireRate && Input.GetMouseButton(0) && weapon.currentAmmo > 0 && weapon.maxAmmo >0 && !isUlting && weapon.fixPos && !isReloading)
+        if (timer >= weapon.fireRate && Input.GetMouseButton(0) && weapon.currentAmmo > 0  && weapon.fixPos && !isReloading)
         {
 
             AtirarNormalWeapon();
             UpdateAmmoCanvas();
         }
 
-        if (timer >= weapon.fireRate && Input.GetMouseButton(0) && weapon.currentAmmo > 0 && weapon.maxAmmo > 0 && !isUlting && weapon.randomPos && !isReloading)
+        if (timer >= weapon.fireRate && Input.GetMouseButton(0) && weapon.currentAmmo > 0  && weapon.randomPos && !isReloading)
         {
 
             AtirarRandomWeapon();
@@ -166,6 +169,7 @@ public class Tiro : MonoBehaviour {
 
         if (timer >= 0.35 && Input.GetKeyDown(KeyCode.E) && shopClass.iceCount > 0)
         {
+            gunAudio.PlayOneShot(throwClip, 0.13f);
             timer = 0;
             playIce = true;
             IceSlow();
@@ -178,6 +182,7 @@ public class Tiro : MonoBehaviour {
 
         if (timer >= 0.35 && Input.GetKeyDown(KeyCode.Q) && shopClass.molotovCount > 0)
         {
+            gunAudio.PlayOneShot(throwClip, 0.13f);
             playIce = true;
             Molotov();
             timer = 0;
@@ -436,22 +441,89 @@ public class Tiro : MonoBehaviour {
             ScoreManager.score = weapon.currentAmmo;
                
     }
+    /*
     IEnumerator Reload()
     {
-        if (weapon.maxAmmo >= weapon.maxAmmoInHand)
+        if (weapon.maxAmmo >= weapon.currentAmmo)
         {
             gunAudio.PlayOneShot(reloadClip, 0.3f);
+            yield return new WaitForSeconds(weapon.reloadTime);
+            ammoLimit = weapon.maxAmmoInHand - weapon.currentAmmo;
+            if ((weapon.maxAmmo - ammoLimit) < 0)
+            {
+                weapon.currentAmmo += weapon.maxAmmo;
+                weapon.maxAmmo = 0;
+            }
+            else
+            {
+                weapon.currentAmmo += ammoLimit;
+                weapon.maxAmmo -= ammoLimit;
+            }
+            isReloading = false;
+        }
+        
+        if (weapon.maxAmmo >= weapon.maxAmmoInHand)
+        {
+            
             yield return new WaitForSeconds(weapon.reloadTime);
 
 
             weapon.maxAmmo -= (weapon.maxAmmoInHand - weapon.currentAmmo);
             weapon.currentAmmo = weapon.maxAmmoInHand;
-            isReloading = false;
+            
         }
         
+        if (weapon.maxAmmo < weapon.currentAmmo)
+        {
+            ammoLimit = weapon.maxAmmoInHand - weapon.currentAmmo;
+
+            weapon.maxAmmo -= ammoLimit;
+
+            if (weapon.maxAmmo <= 0)
+            {
+                weapon.maxAmmo = 0;
+            }
+            else
+            {
+                weapon.currentAmmo += ammoLimit;
+            }
+            
+
+ 
+         
+           
+
+        }
+        if (weapon.maxAmmo <=0)
+        {
+            isReloading = false;
+        }
        
+    */
+
+    IEnumerator Reload()
+    {
+        yield return new WaitForSeconds(weapon.reloadTime);
+        ammoLimit = weapon.maxAmmoInHand - weapon.currentAmmo;
 
 
+        condicao = weapon.maxAmmo - ammoLimit;
+
+        if (condicao < 0)
+        {
+            weapon.currentAmmo += weapon.maxAmmo;
+            weapon.maxAmmo = 0;
+            isReloading = false;
+        }
+        else
+        {
+            weapon.currentAmmo += ammoLimit;
+            weapon.maxAmmo -= ammoLimit;
+            isReloading = false;
+
+
+        }
+        
 
 
     }

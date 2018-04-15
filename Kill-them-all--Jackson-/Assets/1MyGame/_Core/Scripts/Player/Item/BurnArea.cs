@@ -8,11 +8,14 @@ public class BurnArea : MonoBehaviour {
     
     EnemySlimeHealth slimeHealth;
     ChasePlayer chase;
+    AudioSource audioSource;
 
 
 	// Use this for initialization
 	void Start () {
-		
+        audioSource = GetComponent<AudioSource>();
+        audioSource.Play();
+
 	}
 
     

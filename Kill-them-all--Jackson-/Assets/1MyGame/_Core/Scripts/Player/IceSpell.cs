@@ -9,24 +9,33 @@ public class IceSpell : MonoBehaviour
     public bool isIce;
     [SerializeField] float speed = 10f;
     [SerializeField] float radius;
+    
     public float effectDuration;
     public float delay = 4f;
     float countdown;
     bool hasExploded = false;
     public GameObject explosionEffect;
+    public GameObject fireExplosion;
     
     GameObject enemy;
     float speedSlow = 1f;
-    
+   
+    GameObject player;
+    GameObject cameraAudio;
+    AudioSource audioSource;
 
     public GameObject[] enemiesInRange;
-
+    
+    AudioSpell audioSpell;
     EnemyMovement move;
     EnemyHealth enemyHealth;
     ChasePlayer chase;
     EnemySlimeHealth slimeHealth;
     void Start()
     {
+        cameraAudio = GameObject.FindGameObjectWithTag("CameraAudio");
+        audioSpell = cameraAudio.GetComponent<AudioSpell>();
+        audioSource = cameraAudio.GetComponent<AudioSource>();
         this.GetComponent<Rigidbody2D>().AddForce(transform.up * speed);
         countdown = delay;
         //  enemy = FindObjectOfType<Enemy>();
@@ -49,38 +58,42 @@ public class IceSpell : MonoBehaviour
 
         if (countdown <= 0 && !hasExploded)
         {
-            Explode();
+            StartCoroutine("Explode");
             hasExploded = true;
         }
-
+    
     }
 
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Enemy" && !hasExploded)
         {
-            Explode();
+            StartCoroutine("Explode");
             hasExploded = true;
         }
 
         if (col.gameObject.tag == "EnemyChase" && !hasExploded)
         {
-            Explode();
+            StartCoroutine("Explode");
             hasExploded = true;
         }
 
         if (col.gameObject.tag == "Wall" && !hasExploded)
         {
-            Explode();
+            StartCoroutine("Explode");
             hasExploded = true;
         }
 
     }
 
-    void Explode()
+    IEnumerator Explode()
     {
+        
         if (isIce)
         {
+            audioSource.PlayOneShot(audioSpell.breakClip, 0.25f);
+            yield return new WaitForSeconds(0.3f);
+            audioSource.PlayOneShot(audioSpell.iceSlow, 0.6f);
             GameObject novoexplosionEffect = IceEffect();
             hasExploded = false;
             Destroy(gameObject);
@@ -88,6 +101,13 @@ public class IceSpell : MonoBehaviour
         }
         if (isFire)
         {
+            audioSource.PlayOneShot(audioSpell.breakClip, 0.25f);
+            GameObject novoFireExplosion = (GameObject)Instantiate(fireExplosion, transform.position, transform.rotation);
+            Destroy(novoFireExplosion, 2f);         
+            
+
+            yield return new WaitForSeconds(0.25f);
+            
             GameObject novoexplosionEffect = (GameObject)Instantiate(explosionEffect, transform.position, transform.rotation);
             //GameObject novoexplosionEffect = FireEffect();
             hasExploded = false;
