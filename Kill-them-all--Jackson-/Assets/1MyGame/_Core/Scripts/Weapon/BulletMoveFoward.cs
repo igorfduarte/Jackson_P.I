@@ -7,8 +7,11 @@ public class BulletMoveFoward : MonoBehaviour {
 	[SerializeField] float speed = 10f;
     [SerializeField] float bulletDistance;
     [SerializeField] GameObject wallHitPrefab;
+    [SerializeField] bool isRayGun;
+    float radius = 5;
     public float damage;
     Weapon weapon;
+    EnemyHealth enemyHealth;
     GameObject weaponInHand;
     GameObject player;
     // Enemy enemy;
@@ -60,6 +63,34 @@ public class BulletMoveFoward : MonoBehaviour {
 
     }
 
+    private void Update()
+    {
+        if (isRayGun)
+        {
+            Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, radius, 9 << LayerMask.NameToLayer("Wall"));
+
+            foreach (Collider2D nearbyObject in col)
+            {
+                if (nearbyObject.tag == "Enemy")
+                {
+                    this.GetComponent<Collider2D>().isTrigger = true;
+                }
+               
+               
+               
+            }
+        }
+    }
+
+    IEnumerator SetTrigger()
+    {
+        this.GetComponent<Collider2D>().isTrigger = false;
+        yield return new WaitForSeconds(1f);
+        this.GetComponent<Collider2D>().isTrigger = true;
+
+    }
+
+
     /* void OnTriggerEnter2D(Collider2D col)
      {
          if (col.gameObject.tag == "Enemy")
@@ -72,13 +103,7 @@ public class BulletMoveFoward : MonoBehaviour {
          }
      }*/
     /*
-void OnTriggerEnter2D(Collider2D other)
-{
-  if (other.gameObject.tag == "Enemy")
-  {
-      Destroy(this.gameObject, 0f);
 
-  }
 
 
   if (other.gameObject.tag == "EnemyChase")
@@ -94,12 +119,28 @@ void OnTriggerEnter2D(Collider2D other)
 
 }
 */
+    void OnDrawGizmos()
+    {
+        // Draw attack sphere 
+        Gizmos.color = new Color(255f, 0, 0, .5f);
+        Gizmos.DrawWireSphere(transform.position, radius);
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            Desativa();
+
+        }
+    }
+
+        private void OnCollisionEnter2D(Collision2D collision)
     {
        
 
-        if (collision.gameObject.tag == "Wall")
+        if (collision.gameObject.tag == "Wall" && !isRayGun)
         {
             if ((transform.position.y - player.transform.position.y)>-6 && (transform.position.y - player.transform.position.y) < 0)
             {
@@ -138,6 +179,7 @@ void OnTriggerEnter2D(Collider2D other)
         {
             //Destroy(this.gameObject, 0.025f);
             Desativa();
+            
         }
 
 

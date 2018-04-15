@@ -5,6 +5,7 @@ using UnityEngine;
 public class BurnArea : MonoBehaviour {
     int radius = 7;
     EnemyHealth enemyHealth;
+    PlayerHealth playerHealth;
     
     EnemySlimeHealth slimeHealth;
     ChasePlayer chase;
@@ -21,12 +22,13 @@ public class BurnArea : MonoBehaviour {
     
     void Update () {
         
-        Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, radius, 9 << LayerMask.NameToLayer("Enemy"));
+        Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, radius, 16 << LayerMask.NameToLayer("Player") | 9 << LayerMask.NameToLayer("Enemy"));
 
         foreach (Collider2D nearbyObject in col)
         {
             enemyHealth = nearbyObject.GetComponent<EnemyHealth>();
             slimeHealth = nearbyObject.GetComponent<EnemySlimeHealth>();
+            playerHealth = nearbyObject.GetComponent<PlayerHealth>();
             
 
             if (nearbyObject.transform.tag == "Enemy" && !enemyHealth.isOnFire)
@@ -42,11 +44,20 @@ public class BurnArea : MonoBehaviour {
                 
                 slimeHealth.StartCoroutine("FireDamage");
 
-                print("ColorChangeToBlue");
+                
             }
+            if (nearbyObject.gameObject.tag == "Player" && !playerHealth.isOnFire)
+            {
+                print("player burn");
+                playerHealth.StartCoroutine("FireDamage");
+
+
+            }
+
 
         }
         
+
 
     }
    

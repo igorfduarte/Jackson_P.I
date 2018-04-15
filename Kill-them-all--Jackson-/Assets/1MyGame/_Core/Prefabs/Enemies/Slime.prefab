@@ -287,7 +287,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -452,6 +452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   experiencePoints: 10
   healthPoints: 3.5
+  burnTime: 5
   scoreValue: 10
   slimeDeathClip: {fileID: 8300000, guid: 450a58d758822fd4d8123bdca7bec71c, type: 3}
   spawnEnergyClip: {fileID: 8300000, guid: 9f368e31cf9929140b20a97310a18137, type: 3}
@@ -460,6 +461,7 @@ MonoBehaviour:
   ammoBox: {fileID: 1687477400002572, guid: 76d6a4fd2a51bb84e96214fabed63e10, type: 2}
   energyBox: {fileID: 1643952785980516, guid: 2cecb97e545ad0c49a3ff743c139d46e, type: 2}
   isDead: 0
+  isOnFire: 0
   slimeFloorPrefab: {fileID: 1888490537387932, guid: 23895234370d5de4dbd7352b84529fb9,
     type: 2}
   endPos: {fileID: 1856767428923594}

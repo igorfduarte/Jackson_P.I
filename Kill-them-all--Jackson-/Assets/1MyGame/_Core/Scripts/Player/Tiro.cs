@@ -61,6 +61,8 @@ public class Tiro : MonoBehaviour {
     public bool isParticle;
     public bool playAk;
     public bool playIce;
+    public bool molotovActive;
+    public bool icePotionActive;
     public float flashSpeed = 5f;
 
     int condicao;
@@ -114,7 +116,7 @@ public class Tiro : MonoBehaviour {
     }
  
     void Start () {
-
+        icePotionActive = true;
         shop = GameObject.FindGameObjectWithTag("Shop");
         shopClass = shop.GetComponent<Shop>();
 		//spawnPoints = GetComponent<Transform> ();
@@ -166,7 +168,7 @@ public class Tiro : MonoBehaviour {
             timer = 0;
         }      
 
-
+        /*
         if (timer >= 0.35 && Input.GetKeyDown(KeyCode.E) && shopClass.iceCount > 0)
         {
             gunAudio.PlayOneShot(throwClip, 0.13f);
@@ -186,6 +188,33 @@ public class Tiro : MonoBehaviour {
             playIce = true;
             Molotov();
             timer = 0;
+        }
+        */
+        if ( Input.GetKeyDown(KeyCode.Q))
+        {
+            molotovActive = !molotovActive;
+            icePotionActive = !icePotionActive;
+
+
+        }
+
+        if (timer >= 0.25 && Input.GetKeyDown(KeyCode.E) && shopClass.iceCount > 0)
+        {
+            if (icePotionActive && shopClass.iceCount > 0)
+            {
+                gunAudio.PlayOneShot(throwClip, 0.13f);
+                timer = 0;
+                playIce = true;
+                IceSlow();
+            }
+            if (molotovActive && shopClass.molotovCount >0)
+            {
+                gunAudio.PlayOneShot(throwClip, 0.13f);
+                playIce = true;
+                Molotov();
+                timer = 0;
+            }
+
         }
 
 

@@ -13,6 +13,7 @@ public class Gold : MonoBehaviour {
 	void Start () {
         shopObject = GameObject.FindGameObjectWithTag("Shop");
         shop = shopObject.GetComponent<Shop>();
+        Destroy(gameObject, 60);
 
 	}
 	

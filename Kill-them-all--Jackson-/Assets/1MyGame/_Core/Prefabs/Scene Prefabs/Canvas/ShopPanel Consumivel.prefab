@@ -522,6 +522,7 @@ MonoBehaviour:
   healthPrefab: {fileID: 1021169813533448, guid: b174d780216518e41bf4b534c6646778,
     type: 2}
   ammoPrefab: {fileID: 0}
+  molotovPrefab: {fileID: 0}
   texto: 'Item Cost: '
   shield: 0
   steelBoots: 0
@@ -529,6 +530,7 @@ MonoBehaviour:
   icePotion: 0
   health: 1
   ammo: 0
+  molotov: 0
 --- !u!114 &114068850166113648
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -764,13 +766,16 @@ MonoBehaviour:
   healthPrefab: {fileID: 1021169813533448, guid: b174d780216518e41bf4b534c6646778,
     type: 2}
   ammoPrefab: {fileID: 1798905410375768, guid: a2b2e57789d07cc4f8fac740dc494bc2, type: 2}
+  molotovPrefab: {fileID: 1892548453064102, guid: d8096f6ee81faad408e426fecc4f47e4,
+    type: 2}
   texto: 'Item Cost: '
   shield: 0
   steelBoots: 0
   glasses: 0
-  icePotion: 1
+  icePotion: 0
   health: 0
   ammo: 0
+  molotov: 1
 --- !u!114 &114247907143378158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1309,6 +1314,7 @@ MonoBehaviour:
   healthPrefab: {fileID: 1021169813533448, guid: b174d780216518e41bf4b534c6646778,
     type: 2}
   ammoPrefab: {fileID: 1798905410375768, guid: a2b2e57789d07cc4f8fac740dc494bc2, type: 2}
+  molotovPrefab: {fileID: 0}
   texto: 'Item Cost: '
   shield: 0
   steelBoots: 0
@@ -1316,6 +1322,7 @@ MonoBehaviour:
   icePotion: 1
   health: 0
   ammo: 0
+  molotov: 0
 --- !u!114 &114687400336192996
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1389,6 +1396,7 @@ MonoBehaviour:
   icePotionPrefab: {fileID: 0}
   healthPrefab: {fileID: 0}
   ammoPrefab: {fileID: 1798905410375768, guid: a2b2e57789d07cc4f8fac740dc494bc2, type: 2}
+  molotovPrefab: {fileID: 0}
   texto: 'Item Cost: '
   shield: 0
   steelBoots: 0
@@ -1396,6 +1404,7 @@ MonoBehaviour:
   icePotion: 0
   health: 0
   ammo: 1
+  molotov: 0
 --- !u!114 &114728693727074030
 MonoBehaviour:
   m_ObjectHideFlags: 1

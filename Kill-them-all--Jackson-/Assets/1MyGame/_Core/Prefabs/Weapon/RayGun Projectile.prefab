@@ -299,6 +299,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2586dd0b9a8bfcc459153611a8dded03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 85
-  bulletDistance: 4
+  speed: 10
+  bulletDistance: 10
+  wallHitPrefab: {fileID: 100000, guid: ef39ae7291c751249b296f00bf6fb042, type: 2}
+  isRayGun: 1
   damage: 0

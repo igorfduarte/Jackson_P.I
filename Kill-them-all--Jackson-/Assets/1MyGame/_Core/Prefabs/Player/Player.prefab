@@ -1512,7 +1512,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1884,6 +1884,7 @@ MonoBehaviour:
   - {fileID: 4266268636343804}
   - {fileID: 4531357253952676}
   emptyClip: {fileID: 8300000, guid: 6b585c5de99e8994ca390fc9b813555a, type: 3}
+  throwClip: {fileID: 0}
   ultimateFlashColor: {r: 0, g: 0.7931037, b: 1, a: 0.272}
   iceSlowFlashColor: {r: 0, g: 0.42068958, b: 1, a: 0.322}
   damageImage: {fileID: 0}
@@ -1892,6 +1893,7 @@ MonoBehaviour:
   playIce: 0
   flashSpeed: 3
   spellSpeed: 75
+  isReloading: 0
 --- !u!114 &114157117158831132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2068,6 +2070,8 @@ MonoBehaviour:
   flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: 0.244}
   hasShield: 0
+  burnTime: 0
+  isOnFire: 0
   damageable: 0
 --- !u!114 &114506430825785610
 MonoBehaviour:

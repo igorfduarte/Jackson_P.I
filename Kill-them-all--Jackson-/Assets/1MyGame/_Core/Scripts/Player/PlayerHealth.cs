@@ -48,9 +48,11 @@ public class PlayerHealth : MonoBehaviour
     
     
     //PlayerShooting playerShooting;
-    bool isDead;
+    public bool isDead;
     bool damaged;
     public bool hasShield;
+    public int burnTime;
+    public bool isOnFire;
     
 
     public bool damageable;
@@ -126,7 +128,7 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
-    public void TakeDamage (int amount)
+    public void TakeDamage (float amount)
     {
         if (hasShield)
         {
@@ -156,15 +158,35 @@ public class PlayerHealth : MonoBehaviour
         }
         
     }
+    public IEnumerator FireDamage()
+    {
+        if (!isOnFire)
+        {
+            playerMovement.StartCoroutine("ColorChangeToRed");
+            isOnFire = true;
+            for (int i = 0; i < burnTime; i++)
+            {
+                TakeDamage(1f);
+                yield return new WaitForSeconds(1);
+            }
+            isOnFire = false;
+
+
+        }
+
+
+    }
 
 
     void Death ()
     {
+        damageImage.color = Color.Lerp(Color.clear,flashColour , 0.5f * Time.deltaTime);
+        isDead = true;
         playerCollider.enabled = false;
         playerAudio.Stop();
         playerAudio.clip = deathClip;
         playerAudio.Play();
-        isDead = true;
+        
 
         //playerShooting.DisableEffects ();
         

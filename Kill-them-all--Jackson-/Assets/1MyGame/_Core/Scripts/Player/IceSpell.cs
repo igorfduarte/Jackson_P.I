@@ -92,7 +92,7 @@ public class IceSpell : MonoBehaviour
         if (isIce)
         {
             audioSource.PlayOneShot(audioSpell.breakClip, 0.25f);
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.15f);
             audioSource.PlayOneShot(audioSpell.iceSlow, 0.6f);
             GameObject novoexplosionEffect = IceEffect();
             hasExploded = false;

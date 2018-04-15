@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour {
     public GameObject steelBootsEffect;
     public Slider staminaSlider;
     public Image damageImage;
+    Color originalColor;
 
     public bool isSlow;
 
@@ -54,6 +55,7 @@ public class PlayerMovement : MonoBehaviour {
         
         playerHealth = GetComponent<PlayerHealth>();
         Velocidade();
+        originalColor = this.gameObject.GetComponent<SpriteRenderer>().color;
 
 
 
@@ -181,6 +183,14 @@ public class PlayerMovement : MonoBehaviour {
 
 
     }
+
+    public IEnumerator ColorChangeToRed()
+    {
+        this.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        yield return new WaitForSeconds(playerHealth.burnTime);
+        this.gameObject.GetComponent<SpriteRenderer>().color = originalColor;
+    }
+
     void ReturnToNormal()
     {
         canDash = true;

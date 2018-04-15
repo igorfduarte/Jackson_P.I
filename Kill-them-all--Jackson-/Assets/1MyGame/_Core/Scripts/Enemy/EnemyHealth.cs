@@ -17,6 +17,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] GameObject bloodHit;
     [SerializeField] GameObject bloodDeath;
     [SerializeField] GameObject hitParticles;
+    [SerializeField] GameObject fireParticle;
 
     public Transform bloodPos;   
     public CameraFollow cameraShake;
@@ -40,6 +41,7 @@ public class EnemyHealth : MonoBehaviour
     AudioSource enemyAudio;
     Collider2D col;
     SpriteRenderer sprite;
+
 
  
     bool isSinking;    
@@ -240,6 +242,7 @@ public IEnumerator FireDamage()
             isOnFire = true;
             for (int i = 0; i < burnTime; i++)
             {
+                fireParticle.GetComponent<ParticleSystem>().Play();
                 TakeDamage(2f);
                 yield return new WaitForSeconds(1);
             }
@@ -250,5 +253,7 @@ public IEnumerator FireDamage()
         
         
     }
+
+   
 
 }

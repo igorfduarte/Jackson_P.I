@@ -5,34 +5,49 @@ using System.Collections;
 public class ScoreManager : MonoBehaviour
 {
     public static int score;
-    Player player;
+    
 
     Text text;
+    Tiro tiro;
     GameObject jogador;
+    GameObject player;
     Shop shop;
     GameObject shopObject;
     //public string pistolText;
     Weapon weapon;
-    [SerializeField] bool IcePotionCount;
+    [SerializeField] bool isPotion;
 
 
     void Awake ()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         shopObject = GameObject.FindGameObjectWithTag("Shop");
         shop = shopObject.GetComponent<Shop>();
         text = GetComponent <Text> ();
         score = 0;
-        
+        tiro = player.GetComponent<Tiro>();
+
     }
 
 
     void Update ()
     {
-        if (IcePotionCount )
+        if (isPotion)
         {
-            score = shop.iceCount;
-            text.text = "" + score;
+            if (tiro.molotovActive)
+            {
+                score = shop.molotovCount;
+                text.text = "" + score;
+            }
+
+            if (tiro.icePotionActive)
+            {
+                score = shop.iceCount;
+                text.text = "" + score;
+            }
         }
+       
+       
         else
         {
 

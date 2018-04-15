@@ -10,6 +10,7 @@ public class AudioSpell : MonoBehaviour {
     public AudioClip iceSlow;
      AudioClip bulletAk;
    public AudioClip breakClip;
+   
 
     Tiro tiro;
     GameObject player;
