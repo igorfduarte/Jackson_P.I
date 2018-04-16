@@ -121,7 +121,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1550891567391372}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.56, y: 2.05, z: 0}
+  m_LocalPosition: {x: -78, y: 106.2, z: 0}
   m_LocalScale: {x: 5.295975, y: 4.4724827, z: 1}
   m_Children:
   - {fileID: 4417055750583542}
@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRadius: 0.6
-  chaseRadius: 95
+  chaseRadius: 167.75
   originalSpeed: 5.5
   damageCaused: 0
   maxSpeed: 0
