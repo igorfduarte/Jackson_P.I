@@ -450,7 +450,7 @@ MonoBehaviour:
   shootClip: {fileID: 8300000, guid: 27cf91ff2ae784f9699062dd282e4fb2, type: 3}
   deathClip: {fileID: 0}
   attackPos: {fileID: 0}
-  attackRadius: 300
+  attackRadius: 35
 --- !u!114 &114885373146296884
 MonoBehaviour:
   m_ObjectHideFlags: 1

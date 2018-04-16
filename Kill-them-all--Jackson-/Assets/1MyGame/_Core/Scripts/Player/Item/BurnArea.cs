@@ -10,19 +10,23 @@ public class BurnArea : MonoBehaviour {
     EnemySlimeHealth slimeHealth;
     ChasePlayer chase;
     AudioSource audioSource;
+    private int playerMask ;
+    private int enemyMask;
 
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
+        playerMask = 1 << LayerMask.NameToLayer("Player");
+        enemyMask = 1 << LayerMask.NameToLayer("Enemy");
         audioSource = GetComponent<AudioSource>();
         audioSource.Play();
+
 
 	}
 
     
     void Update () {
-        
-        Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, radius, 16 << LayerMask.NameToLayer("Player") | 9 << LayerMask.NameToLayer("Enemy"));
+
+        Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, radius, playerMask | enemyMask);
 
         foreach (Collider2D nearbyObject in col)
         {
@@ -56,9 +60,8 @@ public class BurnArea : MonoBehaviour {
 
 
         }
-        
 
-
+  
     }
    
 }

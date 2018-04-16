@@ -8,7 +8,7 @@ public class BulletMoveFoward : MonoBehaviour {
     [SerializeField] float bulletDistance;
     [SerializeField] GameObject wallHitPrefab;
     [SerializeField] bool isRayGun;
-    float radius = 5;
+    [SerializeField] float radius;
     public float damage;
     Weapon weapon;
     EnemyHealth enemyHealth;
@@ -31,17 +31,13 @@ public class BulletMoveFoward : MonoBehaviour {
     }
     void OnEnable()
 	{
-        player = GameObject.FindGameObjectWithTag("Player");
-        
+        player = GameObject.FindGameObjectWithTag("Player");      
         this.GetComponent<Rigidbody2D>().velocity = transform.up * speed;
-
-
         weaponInHand = GameObject.FindGameObjectWithTag("Weapon");
         weapon = weaponInHand.GetComponent<Weapon>();
         damage = weapon.damage;
 
 
-        //  enemy = FindObjectOfType<Enemy>();
         Invoke("Desativa", bulletDistance);
 
         
@@ -67,13 +63,13 @@ public class BulletMoveFoward : MonoBehaviour {
     {
         if (isRayGun)
         {
-            Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, radius, 9 << LayerMask.NameToLayer("Wall"));
+            Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, radius, 13 << LayerMask.NameToLayer("Wall"));
 
             foreach (Collider2D nearbyObject in col)
             {
-                if (nearbyObject.tag == "Enemy")
+                if (nearbyObject.tag == "Wall")
                 {
-                    this.GetComponent<Collider2D>().isTrigger = true;
+                    StartCoroutine("SetTrigger");
                 }
                
                
@@ -85,40 +81,12 @@ public class BulletMoveFoward : MonoBehaviour {
     IEnumerator SetTrigger()
     {
         this.GetComponent<Collider2D>().isTrigger = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
         this.GetComponent<Collider2D>().isTrigger = true;
 
     }
 
-
-    /* void OnTriggerEnter2D(Collider2D col)
-     {
-         if (col.gameObject.tag == "Enemy")
-         {
-             Destroy(this.gameObject, 0f);
-
-             print("bullet script");
-
-             Debug.Log("colidiu");
-         }
-     }*/
-    /*
-
-
-
-  if (other.gameObject.tag == "EnemyChase")
-  {
-      Destroy(this.gameObject, 0f);
-
-  }
-  if (other.gameObject.tag == "Boss")
-  {
-      Destroy(this.gameObject, 0f);
-
-  }
-
-}
-*/
+  
     void OnDrawGizmos()
     {
         // Draw attack sphere 

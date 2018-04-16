@@ -17,7 +17,7 @@ public class ShopButton : MonoBehaviour {
     [SerializeField] GameObject score;
     ScoreManager scoreClass;
     bool hasBoots;
-    bool hasShield = false;
+    bool hasShield;
 
 	// Use this for initialization
 	void Start () {
@@ -35,10 +35,12 @@ public class ShopButton : MonoBehaviour {
 
     public void OnClick()
     {
-        if (isShield )
+        if (isShield && !hasShield)
         {
             
             shop.BuyShield();
+            hasShield = true;
+
         }
         if (isBoots && !hasBoots)
         {

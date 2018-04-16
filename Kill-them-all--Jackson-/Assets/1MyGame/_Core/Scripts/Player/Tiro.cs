@@ -532,6 +532,7 @@ public class Tiro : MonoBehaviour {
 
     IEnumerator Reload()
     {
+        gunAudio.PlayOneShot(reloadClip, 0.3f);
         yield return new WaitForSeconds(weapon.reloadTime);
         ammoLimit = weapon.maxAmmoInHand - weapon.currentAmmo;
 

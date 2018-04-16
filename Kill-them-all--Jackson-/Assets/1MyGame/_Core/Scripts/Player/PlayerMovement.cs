@@ -187,7 +187,7 @@ public class PlayerMovement : MonoBehaviour {
     public IEnumerator ColorChangeToRed()
     {
         this.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-        yield return new WaitForSeconds(playerHealth.burnTime);
+        yield return new WaitForSeconds(playerHealth.burnTime+3);
         this.gameObject.GetComponent<SpriteRenderer>().color = originalColor;
     }
 

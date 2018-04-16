@@ -25,7 +25,7 @@ public class EnemyAttackRange : MonoBehaviour
     [SerializeField]GameObject attackPos;
 
      float dis;
-    [SerializeField] float attackRadius = 20;
+    [SerializeField] float attackRadius;
     float spawnTimer = 0;
 
 
@@ -140,18 +140,15 @@ public class EnemyAttackRange : MonoBehaviour
 
         }
 
-        
-        
-
-
-
-
-
-
-
-
 
 
     }
+    void OnDrawGizmos()
+    {
+        // Draw attack sphere 
+        Gizmos.color = new Color(255f, 0, 0, .5f);
+        Gizmos.DrawWireSphere(transform.position, attackRadius);
 
     }
+
+}

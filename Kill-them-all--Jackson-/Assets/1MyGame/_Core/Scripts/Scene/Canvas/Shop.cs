@@ -61,9 +61,10 @@ public class Shop : MonoBehaviour {
         item = shield.GetComponent<Item>();
         if (goldAtual >= item.itemCost && !hasShield)
         {
+            print("era pra ter ativado escudo");
             playerHealth.ActivateShield();
             goldAtual = goldAtual - item.itemCost;
-            hasShield = true;
+            
             
         }
     }

@@ -27,6 +27,7 @@ public class PlayerHealth : MonoBehaviour
 
     public AudioClip ammoClip;
     public AudioClip healthClip;
+    [SerializeField] GameObject fireParticle;
     public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
@@ -76,7 +77,6 @@ public class PlayerHealth : MonoBehaviour
         Energy();
 
 
-
     }
 
     void Energy()
@@ -92,9 +92,8 @@ public class PlayerHealth : MonoBehaviour
     void Update ()
     {
         
-
         timer += Time.deltaTime;
-        MaxEnergy();
+        
         MaxHealth();
         healthSlider.value = Mathf.Lerp(healthSlider.value, currentHealth, Time.deltaTime * 5);
 
@@ -108,7 +107,6 @@ public class PlayerHealth : MonoBehaviour
         {
             damageImage.color = Color.Lerp(damageImage.color, Color.clear, 0.5f * Time.deltaTime);
 
-
         }
         damaged = false;
     }
@@ -116,25 +114,30 @@ public class PlayerHealth : MonoBehaviour
     public void ActivateShield()
     {
         
-            shield.SetActive(true);
+        shield.SetActive(true);
+        hasShield = true;
         
+
+    }
+
+    public void DisableShield()
+    {
+        hasShield = false;
+        shield.SetActive(false);
+        StartCoroutine(SpawnShield());
     }
 
     IEnumerator SpawnShield()
     {
         yield return new WaitForSeconds(shieldCooldown);
-        hasShield = true;
+        
         ActivateShield();
     }
 
 
     public void TakeDamage (float amount)
     {
-        if (hasShield)
-        {
-            shield.SetActive(false);
-            StartCoroutine(SpawnShield());
-        }
+        
         if (damageable == true && !hasShield) {
             damaged = true;
 
@@ -166,14 +169,13 @@ public class PlayerHealth : MonoBehaviour
             isOnFire = true;
             for (int i = 0; i < burnTime; i++)
             {
+                fireParticle.GetComponent<ParticleSystem>().Play();
                 TakeDamage(1f);
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(3.5f);
             }
             isOnFire = false;
 
-
         }
-
 
     }
 
@@ -187,13 +189,7 @@ public class PlayerHealth : MonoBehaviour
         playerAudio.clip = deathClip;
         playerAudio.Play();
         
-
-        //playerShooting.DisableEffects ();
-        
         anim.SetBool("IsDead", true);
-
-
-
 
         playerMovement.enabled = false;
         //playerShooting.enabled = false;
@@ -207,19 +203,9 @@ public class PlayerHealth : MonoBehaviour
             {
                 TakeDamage(15);
                 timer = 0;
-            }
-
-            
+            }          
         }
-            if (other.gameObject.tag == "HealBox")
-        {
 
-            playerAudio.clip = healthClip;
-            playerAudio.Play();
-            currentHealth += 25;
-            healthSlider.value = currentHealth;
-
-        }
         if (other.gameObject.tag == "BulletEnemy")        
         {
             damaged = true;
@@ -229,31 +215,6 @@ public class PlayerHealth : MonoBehaviour
             currentHealth -= 10;
             healthSlider.value = currentHealth;
         }
-
-        if (other.gameObject.tag == "AmmoBox")
-        {
-            playerAudio.clip = ammoClip;
-            playerAudio.Play();
-            weapon.maxAmmo += 100;
-            
-            
-
-
-            //TODO update Canvas de ammo de acordo com a arma
-            
-        }
-
-        if (other.gameObject.tag == "EnergyBox")
-        {
-
-            playerAudio.clip = energyClip;
-            playerAudio.Play();
-            currentEnergy += 25;
-            energySlider.value = currentEnergy;
-
-        }
-
-       
 
     }
 
@@ -265,12 +226,6 @@ public class PlayerHealth : MonoBehaviour
         healthSlider.value = currentHealth;
     }
 
-
-
-    void MaxEnergy()
-    {
-        if (currentEnergy > 100) { currentEnergy = 100; }
-    }
     void MaxHealth()
     {
         if (currentHealth > maxHealth) { currentHealth = maxHealth; }
