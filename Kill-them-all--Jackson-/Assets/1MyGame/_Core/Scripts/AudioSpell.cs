@@ -32,17 +32,6 @@ public class AudioSpell : MonoBehaviour {
     void PlayAudio()
     {
 
-        if (tiro.playAk == true)
-        {
-            playSpell.clip = bulletAk;
-            playSpell.Play();
-        }
-        if (tiro.playIce == true)
-        {
-           // playSpell.clip = iceSlow;
-            //playSpell.Play();
-        }
-
 
     }
 

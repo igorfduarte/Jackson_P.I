@@ -8,7 +8,7 @@ public class Tiro : MonoBehaviour {
     #region
     //[SerializeField] Transform startPosistion;
 
-    [SerializeField] GameObject balaPrefab;
+    
     [SerializeField] float timeBetweenAttacks;
     [SerializeField] AudioClip reloadClip;   
     
@@ -16,28 +16,16 @@ public class Tiro : MonoBehaviour {
     public Pooling poolAk;
     public Pooling poolShotgun;
     public Pooling poolVector;
-    public Pooling poolPistol;
+    public Pooling poolPistol;  
 
-    public float cooldown = 0.5f;
-    public int ammoRaygun = 100;
-    public int ammoAK;
     public GameObject arm;
-    public GameObject rayShoot;   
-    public GameObject bulletPistol;
-    public GameObject bulletAK;
-    public GameObject bulletGL;
-    public GameObject shotgunBulletPrefab;
-    public GameObject ultimateBomb;
     public GameObject slowSpell;
     public GameObject molotov;
-    public GameObject startPos;
     public GameObject ultPos;
     public GameObject audioSource;
 
     public CameraFollow cameraShake;
-    public Transform[] shotgunStartPos;
-    public Transform[] vectorStartPos;
-    public Transform[] spawnPoints;
+
     public AudioClip emptyClip;
     public AudioClip throwClip;
     public Color ultimateFlashColor;
@@ -57,21 +45,13 @@ public class Tiro : MonoBehaviour {
     GameObject playerVida;
     GameObject shop;
    
-
-    public bool isParticle;
-    public bool playAk;
-    public bool playIce;
     public bool molotovActive;
     public bool icePotionActive;
-    public float flashSpeed = 5f;
+    public bool isReloading;
 
     int condicao;
     int ammoLimit;
-    float timer;
-    public float spellSpeed;
-    bool isUlt;
-    bool isUlting;
-   public bool isReloading;
+    float timer; 
     int shakePercent;
     float timeBetweenAttacksUlt = 3.4f;
 
@@ -123,7 +103,7 @@ public class Tiro : MonoBehaviour {
         player = GetComponent<Player>();
         trans = arm.GetComponent<Transform>();
         gunAudio = GetComponent<AudioSource>();                     
-        isUlt = false;
+        
         anim = GetComponent<Animator>();
         gunParticles = GetComponent<ParticleSystem>();
 
@@ -168,28 +148,7 @@ public class Tiro : MonoBehaviour {
             timer = 0;
         }      
 
-        /*
-        if (timer >= 0.35 && Input.GetKeyDown(KeyCode.E) && shopClass.iceCount > 0)
-        {
-            gunAudio.PlayOneShot(throwClip, 0.13f);
-            timer = 0;
-            playIce = true;
-            IceSlow();
-        }
-
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            playIce = false;
-        }
-
-        if (timer >= 0.35 && Input.GetKeyDown(KeyCode.Q) && shopClass.molotovCount > 0)
-        {
-            gunAudio.PlayOneShot(throwClip, 0.13f);
-            playIce = true;
-            Molotov();
-            timer = 0;
-        }
-        */
+       
         if ( Input.GetKeyDown(KeyCode.Q))
         {
             molotovActive = !molotovActive;
@@ -204,13 +163,13 @@ public class Tiro : MonoBehaviour {
             {
                 gunAudio.PlayOneShot(throwClip, 0.13f);
                 timer = 0;
-                playIce = true;
+                
                 IceSlow();
             }
             if (molotovActive && shopClass.molotovCount >0)
             {
                 gunAudio.PlayOneShot(throwClip, 0.13f);
-                playIce = true;
+                
                 Molotov();
                 timer = 0;
             }
@@ -416,16 +375,7 @@ public class Tiro : MonoBehaviour {
     */
     // MAGIAS
     #region
-    void UltimateFlash()
-    {
-        damageImage.color = ultimateFlashColor;
-    }
-
-    void IceSlowFlash()
-    {
-        damageImage.color = iceSlowFlashColor;
-        //damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
-    }
+    
 
     void IceSlow()
     {
@@ -437,29 +387,7 @@ public class Tiro : MonoBehaviour {
 
     }
 
-    void Ultimate()
-    {
-        InvokeRepeating("UltimateFlash", 0f, 0.1f);
-        damageImage.color = ultimateFlashColor;
-        isUlt = true;
-        playerHealth.currentEnergy = 0;
-        playerHealth.energySlider.value = playerHealth.currentEnergy;
-        GameObject ultimate = (GameObject)Instantiate(ultimateBomb, ultPos.transform.position, trans.rotation);
-        //Invoke("StopUltimate", tempoUlt);
-
-        Destroy(ultimate, 6);
-    }
-
-    void StopUltimate()
-    {
-        isUlting = false;
-        damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
-        gunParticles.Stop();
-
-        isUlt = false;
-        CancelInvoke("UltimateFlash");
-
-    }
+   
 #endregion
 
 
@@ -470,65 +398,7 @@ public class Tiro : MonoBehaviour {
             ScoreManager.score = weapon.currentAmmo;
                
     }
-    /*
-    IEnumerator Reload()
-    {
-        if (weapon.maxAmmo >= weapon.currentAmmo)
-        {
-            gunAudio.PlayOneShot(reloadClip, 0.3f);
-            yield return new WaitForSeconds(weapon.reloadTime);
-            ammoLimit = weapon.maxAmmoInHand - weapon.currentAmmo;
-            if ((weapon.maxAmmo - ammoLimit) < 0)
-            {
-                weapon.currentAmmo += weapon.maxAmmo;
-                weapon.maxAmmo = 0;
-            }
-            else
-            {
-                weapon.currentAmmo += ammoLimit;
-                weapon.maxAmmo -= ammoLimit;
-            }
-            isReloading = false;
-        }
-        
-        if (weapon.maxAmmo >= weapon.maxAmmoInHand)
-        {
-            
-            yield return new WaitForSeconds(weapon.reloadTime);
-
-
-            weapon.maxAmmo -= (weapon.maxAmmoInHand - weapon.currentAmmo);
-            weapon.currentAmmo = weapon.maxAmmoInHand;
-            
-        }
-        
-        if (weapon.maxAmmo < weapon.currentAmmo)
-        {
-            ammoLimit = weapon.maxAmmoInHand - weapon.currentAmmo;
-
-            weapon.maxAmmo -= ammoLimit;
-
-            if (weapon.maxAmmo <= 0)
-            {
-                weapon.maxAmmo = 0;
-            }
-            else
-            {
-                weapon.currentAmmo += ammoLimit;
-            }
-            
-
- 
-         
-           
-
-        }
-        if (weapon.maxAmmo <=0)
-        {
-            isReloading = false;
-        }
-       
-    */
+    
 
     IEnumerator Reload()
     {

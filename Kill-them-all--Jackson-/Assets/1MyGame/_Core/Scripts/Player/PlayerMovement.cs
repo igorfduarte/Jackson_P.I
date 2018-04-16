@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public bool isSlow;
 
-    bool isInShopTeleport;
+    public bool isInShopTeleport;
     bool isInWaveTeleport;
     bool canDash = true;
     float currentStamina;
@@ -214,20 +214,19 @@ public class PlayerMovement : MonoBehaviour {
             isInWaveTeleport = true;
         }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Spike" && playerHealth.hasSteelBoots)
         {
             steelBootsEffect.SetActive(false);
         }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "ShopTeleport")
+
+        if (collision.gameObject.tag == "ShopTeleport")
         {
             isInShopTeleport = false;
         }
-        if (other.gameObject.tag == "WaveTeleport")
+        if (collision.gameObject.tag == "WaveTeleport")
         {
             isInWaveTeleport = false;
         }
