@@ -170,8 +170,8 @@ public class PlayerHealth : MonoBehaviour
             for (int i = 0; i < burnTime; i++)
             {
                 fireParticle.GetComponent<ParticleSystem>().Play();
-                TakeDamage(1f);
-                yield return new WaitForSeconds(3.5f);
+                TakeDamage(3f);
+                yield return new WaitForSeconds(1f);
             }
             isOnFire = false;
 
