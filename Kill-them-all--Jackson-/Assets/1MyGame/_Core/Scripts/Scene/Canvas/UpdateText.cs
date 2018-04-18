@@ -15,6 +15,7 @@ public class UpdateText : MonoBehaviour {
     [SerializeField] GameObject healthPrefab;
     [SerializeField] GameObject ammoPrefab;
     [SerializeField] GameObject molotovPrefab;
+    [SerializeField] GameObject scarPrefab;
     Shop shop;
     [SerializeField] string texto;
      Item itemcost;
@@ -27,6 +28,7 @@ public class UpdateText : MonoBehaviour {
     [SerializeField] bool health;
     [SerializeField] bool ammo;
     [SerializeField] bool molotov;
+    [SerializeField] bool scar;
 
     void Start()
     {
@@ -75,6 +77,11 @@ public class UpdateText : MonoBehaviour {
         {
 
             itemcost = molotovPrefab.GetComponent<Item>();
+            value = itemcost.itemCost;
+        }
+        if (scar)
+        {
+            itemcost = scarPrefab.GetComponent<Item>();
             value = itemcost.itemCost;
         }
 

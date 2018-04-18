@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
     // public Inventory inv;
 
     // WEAPON VARIABLES
+    [SerializeField] int weaponID;
 
     public Transform[] startPos;
 
@@ -54,6 +55,12 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         damageInicial = damage;
+
+
+        if (currentAmmo <= 0)
+        {
+            currentAmmo = maxAmmoInHand;
+        }
     }
     private void OnDisable()
     {
@@ -69,10 +76,6 @@ public class Weapon : MonoBehaviour
         damage = damage + experience.damageBonus;
 
 
-        if (currentAmmo <= 0)
-        {
-            currentAmmo = maxAmmoInHand;
-        }
 
     }
     void Update()

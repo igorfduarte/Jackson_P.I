@@ -10,6 +10,7 @@ public class ShopButton : MonoBehaviour {
     [SerializeField] bool isHealth;
     [SerializeField] bool isAmmo;
     [SerializeField] bool isMolotov;
+    [SerializeField] bool isScarL;
     Shop shop;
     GameObject shopObject;
     GameObject player;
@@ -18,6 +19,7 @@ public class ShopButton : MonoBehaviour {
     ScoreManager scoreClass;
     bool hasBoots;
     bool hasShield;
+    bool hasScar;
 
 	// Use this for initialization
 	void Start () {
@@ -76,6 +78,7 @@ public class ShopButton : MonoBehaviour {
         {
             shop.BuyMolotov();
         }
+       
 
 
     }

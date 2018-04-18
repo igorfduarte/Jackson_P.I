@@ -4,16 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour {
     public int itemCost;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    public GameObject weaponPrefab;
 
-		
-	}
 
-    
 }

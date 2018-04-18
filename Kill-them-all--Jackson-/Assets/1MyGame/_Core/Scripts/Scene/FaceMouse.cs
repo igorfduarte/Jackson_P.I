@@ -6,7 +6,7 @@ public class FaceMouse : MonoBehaviour {
     Animator anim;
     Vector3 pos;
     public Vector2 direction;
-
+    PlayerMovement playerMovement;
     
     SpriteRenderer weaponSprite;
     SpriteRenderer armSprite;
@@ -24,6 +24,7 @@ public class FaceMouse : MonoBehaviour {
     bool toFace;
 	
 	void Start () {
+        playerMovement = GetComponentInParent<PlayerMovement>();
         //anim = GetComponent<Animator>();
        
         armSprite = arm.GetComponent<SpriteRenderer>();
@@ -72,19 +73,28 @@ public class FaceMouse : MonoBehaviour {
 	void faceMouse(){
 		Vector3 mousePosition = Input.mousePosition;
 		mousePosition = Camera.main.ScreenToWorldPoint (mousePosition);
+
+    
+
+
+
         directionX = (mousePosition.x - transform.position.x);
 
         direction = new Vector2 (directionX, mousePosition.y - transform.position.y);
 
 		transform.up = direction;
+        
 
-        if (directionX < -4f )
+
+        if (directionX < -4f  && !playerMovement.isIdle)
         {
+            
             playerSprite.flipX = true;
             
         }
-        else if( directionX > 4f)
+        else if( directionX > 4f && !playerMovement.isIdle)
         {
+            
             playerSprite.flipX = false;
         }
 

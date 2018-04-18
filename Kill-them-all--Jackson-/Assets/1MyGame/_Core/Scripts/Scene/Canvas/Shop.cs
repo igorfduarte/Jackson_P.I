@@ -11,6 +11,11 @@ public class Shop : MonoBehaviour {
     public GameObject buyMolotov;
     public GameObject buyHealth;
     public GameObject buyAmmo;
+    public GameObject scarL;
+    public GameObject vector;
+    public GameObject shotgun;
+    public GameObject raygun;
+
 
     public bool hasSteelBoots; // sem uso
     public bool hasCameraIncrease;
@@ -27,13 +32,16 @@ public class Shop : MonoBehaviour {
     GameObject weaponObject;
     Weapon weapon;
 
-
+    ChangeWeapon swapWeapon;
+    GameObject weaponHolder;
 
 
 
 
     // Use this for initialization
     void Start () {
+        weaponHolder = GameObject.FindGameObjectWithTag("WeaponHolder");
+        swapWeapon = weaponHolder.GetComponent<ChangeWeapon>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealth>();
         weaponObject = GameObject.FindGameObjectWithTag("Weapon");
@@ -108,6 +116,50 @@ public class Shop : MonoBehaviour {
         if (goldAtual >= item.itemCost)
         {
              weapon.maxAmmo += 30;
+            goldAtual = goldAtual - item.itemCost;
+        }
+    }
+
+    public void BuyScar()
+    {
+        item = scarL.GetComponent<Item>();
+
+        if (goldAtual >= item.itemCost)
+        {
+            swapWeapon.armas.Add(item.weaponPrefab);
+            goldAtual = goldAtual - item.itemCost;
+        }
+    }
+
+    public void BuyVector()
+    {
+        item = vector.GetComponent<Item>();
+
+        if (goldAtual >= item.itemCost)
+        {
+            swapWeapon.armas.Add(item.weaponPrefab);
+            goldAtual = goldAtual - item.itemCost;
+        }
+    }
+
+    public void BuyShotgun()
+    {
+        item = shotgun.GetComponent<Item>();
+
+        if (goldAtual >= item.itemCost)
+        {
+            swapWeapon.armas.Add(item.weaponPrefab);
+            goldAtual = goldAtual - item.itemCost;
+        }
+    }
+
+    public void BuyRayGun()
+    {
+        item = raygun.GetComponent<Item>();
+
+        if (goldAtual >= item.itemCost)
+        {
+            swapWeapon.armas.Add(item.weaponPrefab);
             goldAtual = goldAtual - item.itemCost;
         }
     }

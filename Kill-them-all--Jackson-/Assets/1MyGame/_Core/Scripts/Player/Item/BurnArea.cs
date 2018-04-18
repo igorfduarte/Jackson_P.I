@@ -45,7 +45,8 @@ public class BurnArea : MonoBehaviour {
 
             if (nearbyObject.transform.tag == "EnemyChase" && !slimeHealth.isOnFire)
             {
-                
+                print("ColorChangeToRed");
+
                 slimeHealth.StartCoroutine("FireDamage");
 
                 

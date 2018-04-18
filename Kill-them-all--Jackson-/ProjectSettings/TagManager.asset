@@ -30,6 +30,11 @@ TagManager:
   - ShopTeleport
   - WallParticle
   - CameraAudio
+  - Description
+  - WeaponImage
+  - WeaponButton
+  - WeaponPrices
+  - WeaponShop
   layers:
   - Default
   - TransparentFX

@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class WeaponSpawnManager : MonoBehaviour {
 
-   
+    
+
     [SerializeField] int index;
+    [SerializeField] GameObject weaponPrefab;
     HudWeapon hudWeapon;
     GameObject weapon;
+    GameObject weaponHolder;
+    ChangeWeapon swapWeapon;
 
 
 	// Use this for initialization
 	void Start () {
         weapon = GameObject.FindGameObjectWithTag("HUDWeapon");
         hudWeapon = weapon.GetComponent<HudWeapon>();
+        weaponHolder = GameObject.FindGameObjectWithTag("WeaponHolder");
+        swapWeapon = weaponHolder.GetComponent<ChangeWeapon>();
+
     }
 	
 	// Update is called once per frame
@@ -25,6 +32,8 @@ public class WeaponSpawnManager : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
+            swapWeapon.armas.Add(weaponPrefab);
+
             Condition();
 
             this.gameObject.SetActive(false);

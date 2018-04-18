@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 212572672535862392}
   - component: {fileID: 114645149662567758}
   m_Layer: 16
-  m_Name: akSprite
+  m_Name: scarSprite
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -341,11 +341,11 @@ GameObject:
   - component: {fileID: 114121102937198510}
   - component: {fileID: 114491976108226922}
   - component: {fileID: 114638988681205908}
+  - component: {fileID: 114465058221495396}
   - component: {fileID: 61141292969860276}
   - component: {fileID: 82294490685253050}
   - component: {fileID: 212772897128004244}
   - component: {fileID: 95842155648908046}
-  - component: {fileID: 114465058221495396}
   - component: {fileID: 81383832823024466}
   m_Layer: 16
   m_Name: Player
@@ -1014,8 +1014,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1034929031728778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.243, y: -0.59, z: 0}
-  m_LocalScale: {x: 0.3536304, y: 0.2968991, z: 1}
+  m_LocalPosition: {x: 0.54, y: 1.02, z: 0}
+  m_LocalScale: {x: 0.5616803, y: 0.47157258, z: 1.588326}
   m_Children: []
   m_Father: {fileID: 4247438879113222}
   m_RootOrder: 0
@@ -1316,8 +1316,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1353202883787314}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: -0.55, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.37, y: -0.47, z: 0}
   m_LocalScale: {x: 1.0772196, y: 1.0772196, z: 1.0772196}
   m_Children:
   - {fileID: 4237323920950748}
@@ -1475,7 +1475,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.18, y: 4.12}
+    oldSize: {x: 3.0800002, y: 4.15}
     newSize: {x: 2.54, y: 2.56}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1912,60 +1912,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd674eddd2322d4e88fa387cffb661d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  balaPrefab: {fileID: 1464577824911342, guid: 1ad38b6ccbe359043be3386c18bb3391, type: 2}
   timeBetweenAttacks: 0.125
   reloadClip: {fileID: 8300000, guid: e5198250a6a57408bb36e14bc4a322c4, type: 3}
   poolAk: {fileID: 0}
   poolShotgun: {fileID: 0}
   poolVector: {fileID: 0}
   poolPistol: {fileID: 0}
-  cooldown: 0.5
-  ammoRaygun: 100
-  ammoAK: 600
   arm: {fileID: 1353202883787314}
-  rayShoot: {fileID: 1983681134549488, guid: 11873acf72788e44bb7efa006eab9380, type: 2}
-  bulletPistol: {fileID: 1695678563546530, guid: fadd888164b7d084eb4069aee7e3dfd3,
-    type: 2}
-  bulletAK: {fileID: 1464577824911342, guid: 1ad38b6ccbe359043be3386c18bb3391, type: 2}
-  bulletGL: {fileID: 1321259213104718, guid: 16ece328acc179740af08ad565b13f53, type: 2}
-  shotgunBulletPrefab: {fileID: 1321259213104718, guid: b8d456da7cff33a49901de0514722159,
-    type: 2}
-  ultimateBomb: {fileID: 1637498477782864, guid: b8ac12768de605741b841adf9703ef51,
-    type: 2}
   slowSpell: {fileID: 1446877265249410, guid: 3fe5a069f3840a248b39a2518cc3832f, type: 2}
   molotov: {fileID: 1466452954558542, guid: f7080dbba1b7c114f833641bf169c36e, type: 2}
-  startPos: {fileID: 1560731325234956}
   ultPos: {fileID: 1292001624782354}
   audioSource: {fileID: 0}
   cameraShake: {fileID: 0}
-  shotgunStartPos:
-  - {fileID: 4097250297005524}
-  - {fileID: 4342466891807238}
-  - {fileID: 4953372568237898}
-  - {fileID: 4157163390427762}
-  - {fileID: 4759825632817640}
-  vectorStartPos:
-  - {fileID: 4205279027709318}
-  - {fileID: 4459276951658696}
-  - {fileID: 4203334705703858}
-  - {fileID: 4635404479070014}
-  - {fileID: 4685440569894364}
-  - {fileID: 4979286413231276}
-  spawnPoints:
-  - {fileID: 4266268636343804}
-  - {fileID: 4531357253952676}
   emptyClip: {fileID: 8300000, guid: 6b585c5de99e8994ca390fc9b813555a, type: 3}
   throwClip: {fileID: 8300000, guid: cbe6883212ea0e84e97996b6b42f5438, type: 3}
   ultimateFlashColor: {r: 0, g: 0.7931037, b: 1, a: 0.272}
   iceSlowFlashColor: {r: 0, g: 0.42068958, b: 1, a: 0.322}
   damageImage: {fileID: 0}
-  isParticle: 0
-  playAk: 0
-  playIce: 0
   molotovActive: 0
   icePotionActive: 0
-  flashSpeed: 3
-  spellSpeed: 75
   isReloading: 0
 --- !u!114 &114157117158831132
 MonoBehaviour:
@@ -2039,6 +2004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de412c1f9ab9ef448bb96a530ed2becd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponID: 0
   startPos:
   - {fileID: 4097250297005524}
   - {fileID: 4342466891807238}
@@ -2066,6 +2032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de412c1f9ab9ef448bb96a530ed2becd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponID: 0
   startPos:
   - {fileID: 4205279027709318}
   - {fileID: 4459276951658696}
@@ -2176,6 +2143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de412c1f9ab9ef448bb96a530ed2becd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponID: 0
   startPos:
   - {fileID: 4531357253952676}
   damage: 2.5
@@ -2226,6 +2194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de412c1f9ab9ef448bb96a530ed2becd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponID: 0
   startPos:
   - {fileID: 4774946936361254}
   damage: 1.75
@@ -2249,6 +2218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de412c1f9ab9ef448bb96a530ed2becd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponID: 0
   startPos:
   - {fileID: 4531357253952676}
   damage: 1.5
@@ -2291,6 +2261,10 @@ MonoBehaviour:
   staminaSlider: {fileID: 0}
   damageImage: {fileID: 0}
   isSlow: 0
+  isIdle: 0
+  isInShopTeleport: 0
+  moveX: 0
+  moveY: 0
 --- !u!114 &114779148987049626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2337,6 +2311,8 @@ MonoBehaviour:
   hasRaygun: 0
   hasPistol: 1
   damageControl: 0
+  armas:
+  - {fileID: 1444154164935898}
 --- !u!114 &114835236195975986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -39448,7 +39424,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300002, guid: 39bba86c62c93574fb2882161ab35212, type: 3}
+  m_Sprite: {fileID: 21300012, guid: 049a9d24b43a78842b415459bb3d6333, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

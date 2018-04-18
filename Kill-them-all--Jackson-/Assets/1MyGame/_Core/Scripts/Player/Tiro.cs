@@ -36,7 +36,7 @@ public class Tiro : MonoBehaviour {
     Shop shopClass;
     PlayerHealth playerHealth;
     Player player;
-
+    
     Transform trans;
     AudioSource gunAudio;
     ParticleSystem gunParticles;
@@ -96,6 +96,7 @@ public class Tiro : MonoBehaviour {
     }
  
     void Start () {
+        
         icePotionActive = true;
         shop = GameObject.FindGameObjectWithTag("Shop");
         shopClass = shop.GetComponent<Shop>();
@@ -122,13 +123,14 @@ public class Tiro : MonoBehaviour {
        
         if (timer >= weapon.fireRate && Input.GetMouseButton(0) && weapon.currentAmmo > 0  && weapon.fixPos && !isReloading)
         {
-
+           
             AtirarNormalWeapon();
             UpdateAmmoCanvas();
         }
 
         if (timer >= weapon.fireRate && Input.GetMouseButton(0) && weapon.currentAmmo > 0  && weapon.randomPos && !isReloading)
         {
+           
 
             AtirarRandomWeapon();
             UpdateAmmoCanvas();
@@ -159,6 +161,8 @@ public class Tiro : MonoBehaviour {
 
         if (timer >= 0.25 && Input.GetKeyDown(KeyCode.E) && shopClass.iceCount > 0)
         {
+            
+
             if (icePotionActive && shopClass.iceCount > 0)
             {
                 gunAudio.PlayOneShot(throwClip, 0.13f);

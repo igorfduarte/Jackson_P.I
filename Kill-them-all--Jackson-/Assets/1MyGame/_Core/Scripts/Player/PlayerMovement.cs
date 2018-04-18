@@ -12,8 +12,10 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] float velocidadeDash;
     [SerializeField] GameObject teleportToWave;
     [SerializeField] GameObject teleportToShop;
+    
 
     Rigidbody2D rigid;
+    
     Animator anim;
     AudioSource playerAudio;
     Teleport teleport;
@@ -29,21 +31,28 @@ public class PlayerMovement : MonoBehaviour {
     public Slider staminaSlider;
     public Image damageImage;
     Color originalColor;
+    Color armColor;
+    Color weaponColor;
+    GameObject weapon;
 
     public bool isSlow;
-
+    public bool isIdle;
     public bool isInShopTeleport;
+    public float moveX;
+    public float moveY;
     bool isInWaveTeleport;
-    bool canDash = true;
+    bool canDash = true;   
     float currentStamina;
     float velocidadeOriginal;
     float velocidadeAtual;
     float tempoDash = 0.2f;
     bool estaDandoDash;
-	float moveX;
-	float moveY;
+    bool hasShot;
+    float idleTime;
 
     void Start () {
+        
+        
         playerSprite = GetComponent<SpriteRenderer>();
         facemouse = arm.GetComponent<FaceMouse>();
         experience = GetComponent<Experience>();
@@ -110,13 +119,8 @@ public class PlayerMovement : MonoBehaviour {
 
             }
 
-
         }
         
-
-
-
-
         staminaSlider.value = Mathf.Lerp(staminaSlider.value, currentStamina, Time.deltaTime * 3);
         Dash();
 
@@ -126,26 +130,81 @@ public class PlayerMovement : MonoBehaviour {
 
         rigid.velocity = new Vector2(moveX * velocidadeAtual, moveY * velocidadeAtual);
         rigid.velocity.Normalize();
+
+        if (Input.GetMouseButton(0) && !isIdle)
+        {
+            idleTime = 0;
+        }
+
+        if (Input.GetMouseButton(0) && isIdle)
+        {
+            idleTime = 0;
+            DesactivateIdle();
+            
+ 
+
+        }
         
         if (moveX != 0 || moveY !=0)
         {
-            anim.SetBool("Run", true);
+            DesactivateIdle();
+            idleTime = 0;
         }
-        if (moveX == 0 && moveY == 0)
+        if (moveX == 0 && moveY == 0  )
         {
+            
             anim.SetBool("Run", false);
+            idleTime += Time.deltaTime;
+
+            if (idleTime >=10 )
+            {
+                
+                ActivateIdle();
+
+                
+            }
+
         }
         
-        if (moveX < 0 && facemouse.directionX < 0)
+        if (moveX < 0 && facemouse.directionX < 0 && !isIdle)
         {
             playerSprite.flipX = true;
         }
-        if (moveX > 0 && facemouse.directionX > 0)
+        if (moveX > 0 && facemouse.directionX > 0 && !isIdle)
         {
             playerSprite.flipX = false;
         }
 
        
+    }
+
+    public void ActivateIdle()
+    {
+        isIdle = true;
+        weapon = GameObject.FindGameObjectWithTag("Weapon");
+        weaponColor = weapon.GetComponent<SpriteRenderer>().color;
+        weaponColor.a = 0;
+        weapon.GetComponent<SpriteRenderer>().color = weaponColor;
+
+        armColor = arm.GetComponent<SpriteRenderer>().color;
+        armColor.a = 0;
+        arm.GetComponent<SpriteRenderer>().color = armColor;
+        anim.SetBool("hasShot", false);
+        anim.SetBool("Idle", true);
+    }
+
+    public void DesactivateIdle()
+    {
+        isIdle = false;
+        weapon = GameObject.FindGameObjectWithTag("Weapon");
+        weaponColor = weapon.GetComponent<SpriteRenderer>().color;
+        weaponColor.a = 1;
+        weapon.GetComponent<SpriteRenderer>().color = weaponColor;
+        armColor.a = 1;
+        arm.GetComponent<SpriteRenderer>().color = armColor;
+        anim.SetBool("Run", true);
+        anim.SetBool("Idle", false);
+        anim.SetBool("hasShot", true);
     }
 
     private void TeleportToWave()
