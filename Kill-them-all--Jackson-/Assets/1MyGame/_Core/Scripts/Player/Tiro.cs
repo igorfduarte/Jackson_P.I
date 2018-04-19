@@ -10,7 +10,9 @@ public class Tiro : MonoBehaviour {
 
     
     [SerializeField] float timeBetweenAttacks;
-    [SerializeField] AudioClip reloadClip;   
+    [SerializeField] AudioClip reloadClip;
+    [SerializeField] GameObject pauseObject;
+
     
     //float timerPool;
     public Pooling poolAk;
@@ -31,7 +33,7 @@ public class Tiro : MonoBehaviour {
     public Color ultimateFlashColor;
     public Color iceSlowFlashColor;
     public Image damageImage;
-
+    PauseMenu pauseMenu;
     Weapon weapon;
     Shop shopClass;
     PlayerHealth playerHealth;
@@ -96,7 +98,7 @@ public class Tiro : MonoBehaviour {
     }
  
     void Start () {
-        
+        pauseMenu = pauseObject.GetComponent<PauseMenu>();
         icePotionActive = true;
         shop = GameObject.FindGameObjectWithTag("Shop");
         shopClass = shop.GetComponent<Shop>();
@@ -115,6 +117,14 @@ public class Tiro : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        if (pauseMenu.isInPanel || pauseMenu.GameIsPaused)
+        {
+            gunAudio.mute = true;
+        }
+        else
+        {
+            gunAudio.mute = false;
+        }
         playerVida = GameObject.FindGameObjectWithTag("Player");
         playerHealth = playerVida.GetComponent<PlayerHealth>();
         timer += Time.deltaTime;

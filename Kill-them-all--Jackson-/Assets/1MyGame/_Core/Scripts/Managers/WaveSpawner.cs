@@ -130,7 +130,7 @@ public class WaveSpawner : MonoBehaviour {
         {
             if (akCount == 1)
             {
-                Instantiate(akPrefab, weaponStartPos.transform.position, weaponStartPos.transform.rotation);
+                //Instantiate(akPrefab, weaponStartPos.transform.position, weaponStartPos.transform.rotation);
                 akCount++;
             }
         }
@@ -148,7 +148,7 @@ public class WaveSpawner : MonoBehaviour {
         {
             if (shotgunCount == 1)
             {
-                Instantiate(shotgunPrefab, weaponStartPos.transform.position, weaponStartPos.transform.rotation);
+                //Instantiate(shotgunPrefab, weaponStartPos.transform.position, weaponStartPos.transform.rotation);
                 shotgunCount++;
             }
         }
@@ -157,7 +157,7 @@ public class WaveSpawner : MonoBehaviour {
         {
             if (rayCount == 1)
             {
-                Instantiate(rayGunPrefab, weaponStartPos.transform.position, weaponStartPos.transform.rotation);
+                //Instantiate(rayGunPrefab, weaponStartPos.transform.position, weaponStartPos.transform.rotation);
                 rayCount++;
             }
             

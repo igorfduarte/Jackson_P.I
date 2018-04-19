@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
-
-    public static bool GameIsPaused = false;
+    
+    public  bool GameIsPaused = false;
     public GameObject pauseMenuUI;
     public GameObject restartUI;
     public GameObject inGameOptionsUI;
@@ -35,6 +35,7 @@ public class PauseMenu : MonoBehaviour {
 
     void Start()
     {
+        
         player = GameObject.FindGameObjectWithTag("Player");
         audioSource = player.GetComponent<AudioSource>();
 
