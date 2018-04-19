@@ -151,7 +151,7 @@ public class Tiro : MonoBehaviour {
         }      
 
        
-        if ( Input.GetKeyDown(KeyCode.Q))
+        if ( Input.GetKeyDown(KeyCode.E))
         {
             molotovActive = !molotovActive;
             icePotionActive = !icePotionActive;
@@ -159,7 +159,7 @@ public class Tiro : MonoBehaviour {
 
         }
 
-        if (timer >= 0.25 && Input.GetKeyDown(KeyCode.E) && shopClass.iceCount > 0)
+        if (timer >= 0.25 && Input.GetMouseButtonDown(1) && shopClass.iceCount > 0)
         {
             
 

@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour {
     bool canDash = true;   
     float currentStamina;
     float velocidadeOriginal;
-    float velocidadeAtual;
+    public float velocidadeAtual;
     float tempoDash = 0.2f;
     bool estaDandoDash;
     bool hasShot;
@@ -131,25 +131,39 @@ public class PlayerMovement : MonoBehaviour {
         rigid.velocity = new Vector2(moveX * velocidadeAtual, moveY * velocidadeAtual);
         rigid.velocity.Normalize();
 
-        if (Input.GetMouseButton(0) && !isIdle)
+        if (Input.GetMouseButton(0))
         {
-            idleTime = 0;
-        }
-
-        if (Input.GetMouseButton(0) && isIdle)
-        {
-            idleTime = 0;
-            DesactivateIdle();
+            if (isIdle)
+            {
+                idleTime = 0;
+                DesactivateIdle();
+            }
+            else
+            {
+                idleTime = 0;
+            }
             
- 
-
         }
+
+       
         
         if (moveX != 0 || moveY !=0)
         {
-            DesactivateIdle();
-            idleTime = 0;
+            if (isIdle)
+            {
+                DesactivateIdle();
+                idleTime = 0;
+            }
+            else
+            {
+                anim.SetBool("Run", true);
+                anim.SetBool("Idle", false);
+            }
+            
         }
+        
+
+
         if (moveX == 0 && moveY == 0  )
         {
             

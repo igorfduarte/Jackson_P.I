@@ -25,6 +25,6 @@ public class Atributo : MonoBehaviour
     void Update()
     {
         atributo = experience.experiencePoints;
-        text.text = "Pontos de atributo: " + atributo;
+        text.text = "Pontos disponiveis: " + atributo;
     }
 }

@@ -7,11 +7,7 @@ public class ChangeWeapon : MonoBehaviour
     HudWeapon hudWeapon;
     GameObject weapon;
 
-    [SerializeField] GameObject ak;
-    [SerializeField] GameObject vector;
-    [SerializeField] GameObject shotgun;
-    [SerializeField] GameObject raygun;
-    [SerializeField] GameObject pistol;
+
 
 
 
@@ -29,8 +25,7 @@ public class ChangeWeapon : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        weapon = GameObject.FindGameObjectWithTag("HUDWeapon");
-        hudWeapon = weapon.GetComponent<HudWeapon>();
+
     }
     /*
     public void AddArma(int weaponId)
@@ -45,7 +40,7 @@ public class ChangeWeapon : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Alpha9))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             for (int i = 0; i < armas.Count; i++)
             {
@@ -73,82 +68,7 @@ public class ChangeWeapon : MonoBehaviour
 
 
 
-        if (Input.GetKey(KeyCode.Alpha1))
-        {
-            pistol.SetActive(true);
-            ak.SetActive(false);
-            vector.SetActive(false);
-            shotgun.SetActive(false);
-            raygun.SetActive(false);
-
-            hasPistol = true;
-            hasAk = false;
-            hasVector = false;
-            hasShotgun = false;
-            hasRaygun = false;
-
-
-
-
-        }
-        if (Input.GetKey(KeyCode.Alpha2) && hudWeapon.hasAk == true)
-        {
-            pistol.SetActive(false);
-            ak.SetActive(true);
-            vector.SetActive(false);
-            shotgun.SetActive(false);
-            raygun.SetActive(false);
-
-            hasPistol = false;
-            hasAk = true;
-            hasVector = false;
-            hasShotgun = false;
-            hasRaygun = false;
-        }
-        if (Input.GetKey(KeyCode.Alpha3) && hudWeapon.hasVector == true)
-        {
-            pistol.SetActive(false);
-            ak.SetActive(false);
-            vector.SetActive(true);
-            shotgun.SetActive(false);
-            raygun.SetActive(false);
-
-            hasPistol = false;
-            hasAk = false;
-            hasVector = true;
-            hasShotgun = false;
-            hasRaygun = false;
-        }
-        if (Input.GetKey(KeyCode.Alpha4) && hudWeapon.hasShotgun == true)
-        {
-            pistol.SetActive(false);
-            ak.SetActive(false);
-            vector.SetActive(false);
-            shotgun.SetActive(true);
-            raygun.SetActive(false);
-
-            hasPistol = false;
-            hasAk = false;
-            hasVector = false;
-            hasShotgun = true;
-            hasRaygun = false;
-
-        }
-        if (Input.GetKey(KeyCode.Alpha5) && hudWeapon.hasRaygun == true)
-        {
-            pistol.SetActive(false);
-            ak.SetActive(false);
-            vector.SetActive(false);
-            shotgun.SetActive(false);
-            raygun.SetActive(true);
-
-            hasPistol = false;
-            hasAk = false;
-            hasVector = false;
-            hasShotgun = false;
-            hasRaygun = true;
-
-        }
+        
 
     }
 }

@@ -65,12 +65,12 @@ public class ScoreManager : MonoBehaviour
         if (weapon.maxAmmo >= 100000)
         {
             score = weapon.currentAmmo;
-            text.text = "Ammo: " + score + "/Infinito";
+            text.text = " " + score + "/Infinito";
         }
         else
         {
             score = weapon.currentAmmo;
-            text.text = "Ammo: " + score + "/" + weapon.maxAmmo;
+            text.text = " " + score + "/" + weapon.maxAmmo;
         }
     }
 }

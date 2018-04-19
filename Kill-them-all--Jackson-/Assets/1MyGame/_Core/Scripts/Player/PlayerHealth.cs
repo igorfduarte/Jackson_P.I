@@ -190,8 +190,9 @@ public class PlayerHealth : MonoBehaviour
         playerAudio.Play();
         
         anim.SetBool("IsDead", true);
+        playerMovement.velocidadeAtual = 0;
+        //playerMovement.enabled = false;
 
-        playerMovement.enabled = false;
         //playerShooting.enabled = false;
     }
 
