@@ -123,7 +123,7 @@ public class PauseMenu : MonoBehaviour {
         }
         if (playerHealth.currentHealth <= 0)
         {
-            Time.timeScale = 0.25f;
+            Time.timeScale = 0.5f;
             Invoke("ShowRestartUI", 1.5f);
 
         }

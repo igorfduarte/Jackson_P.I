@@ -140,7 +140,7 @@ public class WaveSpawner : MonoBehaviour {
             if (vectorCount == 1)
             {
                 rangeCountMultiplier = 2;
-                Instantiate(vectorPrefab, weaponStartPos.transform.position, weaponStartPos.transform.rotation);
+                //Instantiate(vectorPrefab, weaponStartPos.transform.position, weaponStartPos.transform.rotation);
                 vectorCount++;
             }
         }
