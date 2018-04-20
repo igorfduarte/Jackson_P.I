@@ -123,8 +123,8 @@ public class PauseMenu : MonoBehaviour {
         }
         if (playerHealth.currentHealth <= 0)
         {
-            Time.timeScale = 0.5f;
-            Invoke("ShowRestartUI", 1.5f);
+            
+            //Invoke("ShowRestartUI", 1.5f);
 
         }
 
@@ -250,7 +250,7 @@ public class PauseMenu : MonoBehaviour {
         }
     }
 
-    void ShowRestartUI()
+    public void ShowRestartUI()
     {
         restartUI.SetActive(true);
 

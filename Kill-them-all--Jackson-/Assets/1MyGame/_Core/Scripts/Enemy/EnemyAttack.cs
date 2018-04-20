@@ -79,8 +79,9 @@ public class EnemyAttack : MonoBehaviour
             playerAudio2.clip = deathClip;
             playerAudio2.Play();
             anim.SetTrigger("IsDead");
-
-            Destroy(player, 2f);
+            this.GetComponent<EnemyMovement>().enabled = false;
+            this.GetComponent<EnemyAttack>().enabled = false;
+            //Destroy(player, 2f);
             print("player morto");
           //  anim.SetTrigger ("PlayerDead");
         }

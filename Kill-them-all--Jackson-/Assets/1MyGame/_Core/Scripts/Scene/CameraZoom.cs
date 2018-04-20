@@ -19,7 +19,7 @@ public class CameraZoom : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (playerHealth.isDead)
+        if (playerHealth.currentHealth<=0)
         {
             anim.SetBool("dead", true);
         }

@@ -6,7 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public GameObject arm;
+    [SerializeField] GameObject playerHUD;
+    [SerializeField] GameObject restartHUD;
+
     public bool hasSteelBoots;
+    [SerializeField] float forceSpeed;
 
     public float currentEnergy = 0;
     float timer;
@@ -30,17 +35,22 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] GameObject fireParticle;
     public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
-
+    PauseMenu pause;
     Tiro tiro;
     Animator anim;
     AudioSource playerAudio;
     PlayerMovement playerMovement;
-
+    Color colorArm;
+    SpriteRenderer spriteArm;
+    Transform transArm;
+    Rigidbody2D rigidArm;
+    Rigidbody2D rigidPlayer;
     Collider2D playerCollider;
     SlimeExplode slime;
     GameObject slimeEnemy;
     Weapon weapon;
     GameObject player;
+    
     Experience experience;
     GameObject shopObject;
     Shop shop;
@@ -53,12 +63,15 @@ public class PlayerHealth : MonoBehaviour
     bool damaged;
     public bool hasShield;
     public int burnTime;
+    bool testeRotate;
     public bool isOnFire;
     
 
     public bool damageable;
     void Awake ()
     {
+        pause = restartHUD.GetComponent<PauseMenu>();
+        rigidPlayer = GetComponent<Rigidbody2D>();
         shopObject = GameObject.FindGameObjectWithTag("Shop");
         shop = shopObject.GetComponent<Shop>();
         experience = GetComponent<Experience>();
@@ -163,7 +176,7 @@ public class PlayerHealth : MonoBehaviour
     }
     public IEnumerator FireDamage()
     {
-        if (!isOnFire)
+        if (!isOnFire && !isDead)
         {
             playerMovement.StartCoroutine("ColorChangeToRed");
             isOnFire = true;
@@ -178,22 +191,80 @@ public class PlayerHealth : MonoBehaviour
         }
 
     }
+    IEnumerator DeathCondition()
+    {
+        damageable = false;
+        Vector2 testeVelo = new Vector2(0, 0);
+        rigidPlayer.velocity = testeVelo;
+        anim.SetBool("Run", false);
+        this.GetComponent<PlayerMovement>().enabled = false;
+        playerHUD.SetActive(false);
+        isDead = true;
+        yield return new WaitForSeconds(1f);
+        Time.timeScale = 0.25f;
+        damageImage.color = Color.white;
+        damageImage.color = Color.Lerp(damageImage.color, Color.clear,60*Time.deltaTime);
+        // screen shake
+        
+        //playerAudio.Stop();
+        //playerAudio.clip = deathClip;
+        //playerAudio.Play();
+        
+        transArm = arm.GetComponent<Transform>();
+        transArm.parent = null;
+        rigidArm = arm.GetComponent<Rigidbody2D>();
+        rigidArm.isKinematic = false;
+        arm.GetComponent<FaceMouse>().enabled = false;
+        this.GetComponent<Tiro>().enabled = false;
+        colorArm = arm.GetComponent<SpriteRenderer>().color;
+        colorArm.a = 0;
+        arm.GetComponent<SpriteRenderer>().color = colorArm;
+        
 
+        if (playerMovement.playerSprite.flipX == true)
+        {
+           
+            anim.SetBool("IsDeadLeft", true);
+            rigidPlayer.mass = 1;
+            rigidPlayer.angularDrag = 0.1f;
+            rigidPlayer.gravityScale = 1;
+            Vector2 testePLayer = new Vector2(forceSpeed, forceSpeed * 2);
+            rigidPlayer.AddForce(testePLayer);
+            Vector2 teste = new Vector2(-forceSpeed, forceSpeed * 2);
+            rigidArm.AddForce(teste);
+            
+        }
+        else
+        {
+            
+            anim.SetBool("IsDeadRight", true);
+            rigidPlayer.mass = 1;
+            rigidPlayer.angularDrag = 0.1f;
+            rigidPlayer.gravityScale = 1;
+            Vector2 testePLayer = new Vector2(-forceSpeed, forceSpeed * 2);
+            Vector2 teste = new Vector2(forceSpeed, forceSpeed * 2);
+            rigidPlayer.AddForce(testePLayer);
+            rigidArm.AddForce(teste);
+            
+            
+        }
+
+        yield return new WaitForSeconds(1.31f);
+        Vector2 testeVelo1 = new Vector2(0, 0);
+        rigidPlayer.velocity = testeVelo1;
+        rigidPlayer.isKinematic = true;
+        rigidArm.velocity = testeVelo;
+        rigidArm.isKinematic = true;
+        yield return new WaitForSeconds(0.25f);
+        pause.ShowRestartUI();
+        Time.timeScale = 0;
+
+    }
 
     void Death ()
     {
-        damageImage.color = Color.Lerp(Color.clear,flashColour , 0.5f * Time.deltaTime);
-        isDead = true;
-        playerCollider.enabled = false;
-        playerAudio.Stop();
-        playerAudio.clip = deathClip;
-        playerAudio.Play();
+        StartCoroutine("DeathCondition");
         
-        anim.SetBool("IsDead", true);
-        playerMovement.velocidadeAtual = 0;
-        //playerMovement.enabled = false;
-
-        //playerShooting.enabled = false;
     }
 
     void OnTriggerEnter2D(Collider2D other)

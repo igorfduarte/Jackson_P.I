@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour {
     PlayerHealth playerHealth;
     Experience experience;
     FaceMouse facemouse;
-    SpriteRenderer playerSprite;
+    public SpriteRenderer playerSprite;
     public AudioClip dashClip;
     public AudioClip portalClip;
     public GameObject arm;
