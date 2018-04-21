@@ -255,6 +255,7 @@ public class PlayerHealth : MonoBehaviour
         rigidPlayer.isKinematic = true;
         rigidArm.velocity = testeVelo;
         rigidArm.isKinematic = true;
+        damageImage.enabled = false;
         yield return new WaitForSeconds(0.25f);
         pause.ShowRestartUI();
         Time.timeScale = 0;

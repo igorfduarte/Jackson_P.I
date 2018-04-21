@@ -12,7 +12,7 @@ public class Tiro : MonoBehaviour {
     [SerializeField] float timeBetweenAttacks;
     [SerializeField] AudioClip reloadClip;
     [SerializeField] GameObject pauseObject;
-
+    
     
     //float timerPool;
     public Pooling poolAk;
