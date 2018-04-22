@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
-    
-    public  bool GameIsPaused = false;
+
+
+    // VARIAVEIS
+    #region 
+    public bool GameIsPaused = false;
     public GameObject pauseMenuUI;
     public GameObject restartUI;
     public GameObject inGameOptionsUI;
@@ -17,11 +20,14 @@ public class PauseMenu : MonoBehaviour {
     public GameObject shopWeaponCanvas;
 
     public bool isInPanel;
-    bool isInShop = false;
+    bool shopPanel;
+    public bool isInShop;
     GameObject player;
     GameObject playerWeapon;
+    GameObject waveTeleport;
     PlayerHealth playerHealth;
     bool inOptions;
+    Teleport tp;
     Weapon weapon;
     Experience experience;
     PlayerMovement playerMovement;
@@ -31,11 +37,11 @@ public class PauseMenu : MonoBehaviour {
     AudioSource audioSource;
 
     bool clickButton;
-   
+    #endregion
 
     void Start()
-    {
-        
+    {       
+
         player = GameObject.FindGameObjectWithTag("Player");
         audioSource = player.GetComponent<AudioSource>();
 
@@ -43,7 +49,6 @@ public class PauseMenu : MonoBehaviour {
         experience = player.GetComponent<Experience>();
         playerMovement = player.GetComponent<PlayerMovement>();
        
-
     }
 
     public void Onclick()
@@ -51,9 +56,7 @@ public class PauseMenu : MonoBehaviour {
         clickButton = true;
     }
 
-
-    
-
+  
 
     void Update()
     {
@@ -61,24 +64,9 @@ public class PauseMenu : MonoBehaviour {
 
         if ((Input.GetKeyDown(KeyCode.K) && !inOptions) || (clickButton && !inOptions))
         {
-            if (GameIsPaused || skillPanel.activeInHierarchy)
+            if (GameIsPaused && skillPanel.activeInHierarchy && !isInShop)
             {
-                clickButton = false;
-                hudCanvas.SetActive(true);
-                skillPanel.SetActive(false);
-                audioSource.mute = false;
-                Time.timeScale = 1f;
-                GameIsPaused = false;
-                playerWeapon = GameObject.FindGameObjectWithTag("Weapon");
-                weapon = playerWeapon.GetComponent<Weapon>();
-                experience.UpdateBonus();
-                weapon.MultiplicarDamage();
-                playerMovement.Velocidade();
-
-
-
-
-
+                Resume();
             }
             else
             {
@@ -86,48 +74,31 @@ public class PauseMenu : MonoBehaviour {
                 clickButton = false;
                 hudCanvas.SetActive(false);
                 skillPanel.SetActive(true);
-                audioSource.mute = true;
-                Time.timeScale = 0f;
-                GameIsPaused = true;
+                Pause();
 
             }
         }
         if ((Input.GetKeyDown(KeyCode.K) && !isInPanel) )
         {
+            Pause();
             clickButton = false;
             skillPanel.SetActive(true);
-            Debug.Log("painel de skill");
-            isInPanel = true;
-            audioSource.mute = true;
-            Time.timeScale = 0f;
+            isInPanel = true;       
         }
-        /*
-    if (Input.GetKeyDown(KeyCode.K) && isInPanel == true)
-    {
-        isInPanel = false;
-        skillPanel.SetActive(false);
-        Time.timeScale = 1f;
-    }
-    */
+
         if (Input.GetKeyDown(KeyCode.Escape) && !inOptions)
         {
             if (GameIsPaused)
             {
-                Resume();
 
+                Resume();
             }
             else
             {
+                pauseMenuUI.SetActive(true);
                 Pause();
             }
         }
-        if (playerHealth.currentHealth <= 0)
-        {
-            
-            //Invoke("ShowRestartUI", 1.5f);
-
-        }
-
         if (Input.GetKeyDown(KeyCode.Escape) && inOptions)
         {
             inGameOptionsUI.SetActive(false);
@@ -135,150 +106,71 @@ public class PauseMenu : MonoBehaviour {
             inOptions = false;
         }
 
-
     }
 
     private void ShopCanvas()
     {
-        if (Input.GetKeyDown(KeyCode.F) && !isInShop && shopWeapon)
+
+        if (Input.GetKeyDown(KeyCode.F) && !inOptions && isInShop)
         {
-            audioSource.mute = true;
-            shopWeaponCanvas.SetActive(true);
-            isInShop = true;
-            Time.timeScale = 0f;
-        }
 
-        if (Input.GetKeyDown(KeyCode.F) && !inOptions && shopWeapon)
-        {
-            if (GameIsPaused)
-            {
-                hudCanvas.SetActive(true);
-
-                shopWeaponCanvas.SetActive(false);
-                Time.timeScale = 1f;
-                audioSource.mute = false;
-                GameIsPaused = false;
-
-
-
-
-
-
-            }
-            else
-            {
-                hudCanvas.SetActive(false);
-                shopWeaponCanvas.SetActive(true);
-                Time.timeScale = 0f;
-                audioSource.mute = true;
-                GameIsPaused = true;
-
-            }
-        }
-
-
-        if (Input.GetKeyDown(KeyCode.F) && !isInShop && shopConsu)
-        {
-            audioSource.mute = true;
-            shopConsuCanvas.SetActive(true);
-            isInShop = true;
-            Time.timeScale = 0f;
-        }
-
-
-        if (Input.GetKeyDown(KeyCode.F) && !inOptions && shopConsu)
-        {
-            if (GameIsPaused)
-            {
-                hudCanvas.SetActive(true);
-
-                shopConsuCanvas.SetActive(false);
-                Time.timeScale = 1f;
-                audioSource.mute = false;
-                GameIsPaused = false;
-
-
-
-
-
-
-            }
-            else
-            {
-                hudCanvas.SetActive(false);
-                shopConsuCanvas.SetActive(true);
-                Time.timeScale = 0f;
-                audioSource.mute = true;
-                GameIsPaused = true;
-
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.F) && !isInShop && shopEquip)
-        {
-            shopCanvas.SetActive(true);
-            isInShop = true;
-            audioSource.mute = true;
-            Time.timeScale = 0f;
-        }
-
-        if (Input.GetKeyDown(KeyCode.F) && !inOptions && shopEquip)
-        {
-            if (GameIsPaused)
-            {
-                hudCanvas.SetActive(true);
-
-                shopCanvas.SetActive(false);
-                audioSource.mute = false;
-                Time.timeScale = 1f;
-                GameIsPaused = false;
-
-
-
-
-
-
-            }
-            else
-            {
-                hudCanvas.SetActive(false);
-                shopCanvas.SetActive(true);
-                audioSource.mute = false;
-                Time.timeScale = 0f;
-                GameIsPaused = true;
-
-            }
+                Pause();
+                if (shopEquip)
+                {
+                    shopCanvas.SetActive(true);
+                }
+                if (shopConsu)
+                {
+                    shopConsuCanvas.SetActive(true);
+                }
+                if (shopWeapon)
+                {
+                    shopWeaponCanvas.SetActive(true);
+                }
+            
         }
     }
 
     public void ShowRestartUI()
     {
         restartUI.SetActive(true);
-
-
     }
 
    public void Resume()
     {
-        
+        skillPanel.SetActive(false);
         pauseMenuUI.SetActive(false);
+        shopWeaponCanvas.SetActive(false);
+        shopConsuCanvas.SetActive(false);
+        shopCanvas.SetActive(true);
+        hudCanvas.SetActive(true);
+        audioSource.volume = 1;
         Time.timeScale = 1f;
         GameIsPaused = false;
-        
+        clickButton = false;
+        shopCanvas.SetActive(false);
+        playerWeapon = GameObject.FindGameObjectWithTag("Weapon");
+        weapon = playerWeapon.GetComponent<Weapon>();
+        experience.UpdateBonus();
+        weapon.MultiplicarDamage();
+        playerMovement.Velocidade();
+
     }
 
-    void Pause()
+   void Pause()
     {
-        pauseMenuUI.SetActive(true);
+
+        hudCanvas.SetActive(false);
+        audioSource.volume = 0;
         Time.timeScale = 0f;
-        GameIsPaused = true;   
-        
+        GameIsPaused = true;  
+              
     }
 
     public void LoadMenu()
     {
         SceneManager.LoadScene("Menu");
-        Time.timeScale = 1f;
-        
+        Time.timeScale = 1f;      
     }
 
     public void QuitGame()
@@ -300,8 +192,5 @@ public class PauseMenu : MonoBehaviour {
         SceneManager.LoadScene("Jogo");
         Time.timeScale = 1f;
     }
-
-
-
    
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Shop : MonoBehaviour {
+    [SerializeField] AudioClip coinClip;
 
     public GameObject steelBoots;
     public GameObject cameraIncrease;
@@ -20,6 +21,11 @@ public class Shop : MonoBehaviour {
     public bool hasSteelBoots; // sem uso
     public bool hasCameraIncrease;
     public bool hasShield;
+    public bool hasScar;
+    public bool hasVector;
+    public bool hasShotgun;
+    public bool hasRaygun;
+    public bool hasGlasses;
 
     public int goldAtual;
     public int iceCount;
@@ -34,12 +40,15 @@ public class Shop : MonoBehaviour {
 
     ChangeWeapon swapWeapon;
     GameObject weaponHolder;
+    AudioSource shopAudio;
+
 
 
 
 
     // Use this for initialization
     void Start () {
+        shopAudio = GetComponent<AudioSource>();
         weaponHolder = GameObject.FindGameObjectWithTag("WeaponHolder");
         swapWeapon = weaponHolder.GetComponent<ChangeWeapon>();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -50,7 +59,7 @@ public class Shop : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        
 
 	}
     public void BuyMolotov()
@@ -59,6 +68,7 @@ public class Shop : MonoBehaviour {
 
         if (goldAtual >= item.itemCost)
         {
+            shopAudio.PlayOneShot(coinClip, 0.5f);
             molotovCount++;
             goldAtual = goldAtual - item.itemCost;
         }
@@ -67,11 +77,13 @@ public class Shop : MonoBehaviour {
     public void BuyShield()
     {
         item = shield.GetComponent<Item>();
-        if (goldAtual >= item.itemCost && !hasShield)
+        if (goldAtual >= item.itemCost)
         {
+            shopAudio.PlayOneShot(coinClip, 0.5f);
             print("era pra ter ativado escudo");
             playerHealth.ActivateShield();
             goldAtual = goldAtual - item.itemCost;
+            hasShield = true;
             
             
         }
@@ -80,8 +92,9 @@ public class Shop : MonoBehaviour {
     public void BuyBootsOFSteel()
     {
         item = steelBoots.GetComponent<Item>();
-        if (goldAtual >= item.itemCost && !hasSteelBoots)
+        if (goldAtual >= item.itemCost)
         {
+            shopAudio.PlayOneShot(coinClip, 0.5f);
             hasSteelBoots = true;
             playerHealth.hasSteelBoots = true;
             goldAtual = goldAtual - item.itemCost;
@@ -94,6 +107,7 @@ public class Shop : MonoBehaviour {
         
         if (goldAtual >= item.itemCost )
         {
+            shopAudio.PlayOneShot(coinClip, 0.5f);
             iceCount++;
             goldAtual = goldAtual - item.itemCost;
         }
@@ -103,6 +117,7 @@ public class Shop : MonoBehaviour {
         item = buyHealth.GetComponent<Item>();
         if (goldAtual >= item.itemCost)
         {
+            shopAudio.PlayOneShot(coinClip, 0.5f);
             playerHealth.currentHealth += 10;
             goldAtual = goldAtual - item.itemCost;
         }
@@ -115,7 +130,8 @@ public class Shop : MonoBehaviour {
         item = buyAmmo.GetComponent<Item>();
         if (goldAtual >= item.itemCost)
         {
-             weapon.maxAmmo += 30;
+            shopAudio.PlayOneShot(coinClip, 0.5f);
+            weapon.maxAmmo += 30;
             goldAtual = goldAtual - item.itemCost;
         }
     }
@@ -126,8 +142,10 @@ public class Shop : MonoBehaviour {
 
         if (goldAtual >= item.itemCost)
         {
+            shopAudio.PlayOneShot(coinClip, 0.5f);
             swapWeapon.armas.Add(item.weaponPrefab);
             goldAtual = goldAtual - item.itemCost;
+            hasScar = true;
         }
     }
 
@@ -137,6 +155,8 @@ public class Shop : MonoBehaviour {
 
         if (goldAtual >= item.itemCost)
         {
+            hasVector = true;
+            shopAudio.PlayOneShot(coinClip, 0.5f);
             swapWeapon.armas.Add(item.weaponPrefab);
             goldAtual = goldAtual - item.itemCost;
         }
@@ -148,6 +168,8 @@ public class Shop : MonoBehaviour {
 
         if (goldAtual >= item.itemCost)
         {
+            hasShotgun = true;
+            shopAudio.PlayOneShot(coinClip, 0.5f);
             swapWeapon.armas.Add(item.weaponPrefab);
             goldAtual = goldAtual - item.itemCost;
         }
@@ -159,6 +181,8 @@ public class Shop : MonoBehaviour {
 
         if (goldAtual >= item.itemCost)
         {
+            hasRaygun = true;
+            shopAudio.PlayOneShot(coinClip, 0.5f);
             swapWeapon.armas.Add(item.weaponPrefab);
             goldAtual = goldAtual - item.itemCost;
         }

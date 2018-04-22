@@ -29,6 +29,7 @@ public class Seller : MonoBehaviour {
              pauseMenu.shopEquip = true;
              pauseMenu.shopConsu = false;
             pauseMenu.shopWeapon = false;
+            pauseMenu.isInShop = true;
         }
 
         if (other.gameObject.tag == "Player" && consuShop)
@@ -37,6 +38,7 @@ public class Seller : MonoBehaviour {
             pauseMenu.shopEquip = false;
             pauseMenu.shopConsu = true;
             pauseMenu.shopWeapon = false;
+            pauseMenu.isInShop = true;
         }
 
         if (other.gameObject.tag == "Player" && weaponShop)
@@ -45,6 +47,8 @@ public class Seller : MonoBehaviour {
             pauseMenu.shopEquip = false;
             pauseMenu.shopConsu = false;
             pauseMenu.shopWeapon = true;
+            pauseMenu.isInShop = true;
+
         }
     }
 
@@ -58,6 +62,7 @@ public class Seller : MonoBehaviour {
             pauseMenu.shopEquip = false;
             pauseMenu.shopConsu = false;
             pauseMenu.shopWeapon = false;
+            pauseMenu.isInShop = false;
         }
 
         if (other.gameObject.tag == "Player" && consuShop)
@@ -66,6 +71,7 @@ public class Seller : MonoBehaviour {
             pauseMenu.shopConsu = false;
             pauseMenu.shopEquip = false;
             pauseMenu.shopWeapon = false;
+            pauseMenu.isInShop = false;
         }
 
         if (other.gameObject.tag == "Player" && weaponShop)
@@ -74,6 +80,7 @@ public class Seller : MonoBehaviour {
             pauseMenu.shopConsu = false;
             pauseMenu.shopEquip = false;
             pauseMenu.shopWeapon = false;
+            pauseMenu.isInShop = false;
         }
 
     }

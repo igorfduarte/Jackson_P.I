@@ -8,18 +8,14 @@ public class WeaponShopButton : MonoBehaviour {
     Shop shop;
     GameObject shopObject;
     GameObject player;
+    AudioSource shopSource;
     PlayerHealth health;
    
     ScoreManager scoreClass;
     [SerializeField] GameObject score;
 
-    bool hasScar;
-    bool hasVector;
-    bool hasShotgun;
-    bool hasRaygun;
-    bool hasBoots;
-    bool hasShield;
-    bool hasGlasses;
+
+
 
 
     WeaponShopButton weaponShop;
@@ -27,6 +23,7 @@ public class WeaponShopButton : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        
         shopObject = GameObject.FindGameObjectWithTag("Shop");
         shop = shopObject.GetComponent<Shop>();
     }
@@ -35,66 +32,77 @@ public class WeaponShopButton : MonoBehaviour {
 	
     public void OnClick()
     {
-        if (index == 1 && !hasVector)
+        if (index == 1 && !shop.hasVector)
         {
+            
             shop.BuyVector();
-            hasVector = true;
+            
         }
 
-        if (index == 2 && !hasScar)
+        if (index == 2 && !shop.hasScar)
         {
+           
             shop.BuyScar();
-            hasScar = true;
+            
         }
 
-        if (index == 3 && !hasShotgun)
+        if (index == 3 && !shop.hasShotgun)
         {
+         
             shop.BuyShotgun();
-            hasShotgun = true;
+            
         }
 
-        if (index == 4 && !hasRaygun)
+        if (index == 4 && !shop.hasRaygun)
         {
+           
             shop.BuyRayGun();
-            hasRaygun = true;
+            
         }
         if (index == 5 )
         {
+           
             shop.BuyIce();
             
         }
         if (index == 6)
         {
+           
             shop.BuyMolotov();
 
 
         }
         if (index == 7 )
         {
+          
             shop.BuyHealth();
             
         }
         if (index == 8)
         {
+           
             shop.BuyAmmo();
             scoreClass = score.GetComponent<ScoreManager>();
             scoreClass.UpdateAmmoHUD();
         }
-        if (index == 9 && !hasBoots)
+        if (index == 9 && !shop.hasSteelBoots)
         {
-            hasBoots = true;
+          
+            
             shop.BuyBootsOFSteel();
 
         }
-        if (index == 10 && !hasShield)
+        if (index == 10 && !shop.hasShield)
         {
-            hasShield = true;
+           
+            
             shop.BuyShield();
 
         }
-        if (index == 11 && !hasGlasses)
+        if (index == 11 && !shop.hasGlasses)
         {
-            hasGlasses = true;
+            
+            
             print("glasses");
 
         }
