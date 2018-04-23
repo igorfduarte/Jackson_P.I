@@ -66,6 +66,7 @@ public class PauseMenu : MonoBehaviour {
         {
             if (GameIsPaused && skillPanel.activeInHierarchy && !isInShop)
             {
+                
                 Resume();
             }
             else

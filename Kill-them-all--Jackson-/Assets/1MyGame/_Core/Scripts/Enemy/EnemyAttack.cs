@@ -76,8 +76,7 @@ public class EnemyAttack : MonoBehaviour
         if (playerHealth.currentHealth <= 0)
         {
             playerAudio2.Stop();
-            playerAudio2.clip = deathClip;
-            playerAudio2.Play();
+            
             anim.SetTrigger("IsDead");
             this.GetComponent<EnemyMovement>().enabled = false;
             this.GetComponent<EnemyAttack>().enabled = false;

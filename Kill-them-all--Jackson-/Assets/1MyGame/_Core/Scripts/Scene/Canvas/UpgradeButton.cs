@@ -51,6 +51,7 @@ public class UpgradeButton : MonoBehaviour {
             {
                 experience.lifePoints++;
                 experience.experiencePoints--;
+                experience.UpdateBonus();
                 playerHealth.UpgradeLife();
                 
             }

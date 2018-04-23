@@ -19,7 +19,7 @@ public class PlayerHealth : MonoBehaviour
     public int shieldCooldown;
     public GameObject shield;
 
-    public float startingHealth = 100;
+    public float startingHealth;
     public float currentHealth;
     public Slider healthSlider;
     public Slider energySlider;
@@ -28,6 +28,9 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip energyClip;
     public AudioClip[] hurtClip;
     public AudioClip deathClip;
+    [SerializeField] AudioClip shieldHit;
+    [SerializeField] AudioClip shieldEquip;
+
 
 
     public AudioClip ammoClip;
@@ -98,7 +101,8 @@ public class PlayerHealth : MonoBehaviour
     }
     public void UpgradeLife()
     {
-        maxHealth = maxHealth + experience.lifeBonus;
+        experience = GetComponent<Experience>();
+        maxHealth = startingHealth + experience.lifeBonus;
         currentHealth += experience.lifeBonus;
     }
 
@@ -130,6 +134,10 @@ public class PlayerHealth : MonoBehaviour
         shield.SetActive(true);
         hasShield = true;
         
+        
+        playerAudio.PlayOneShot(shieldEquip, 0.3f);
+
+
 
     }
 
@@ -150,28 +158,39 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage (float amount)
     {
+        if (hasShield)
+        {
+            playerAudio.PlayOneShot(shieldHit, 0.3f);
+            shield.GetComponentInChildren<ParticleSystem>().Play();
+            DisableShield();
+            return;
+        }
+        else
+        {
+            if (damageable == true)
+            {
+                damaged = true;
+
+                currentHealth -= amount;
+
+                // healthSlider.value = currentHealth;
+
+                int spawnPointIndex = Random.Range(0, hurtClip.Length);
+
+                playerAudio.clip = hurtClip[spawnPointIndex];
+                playerAudio.Play();
+            }
+            if (currentHealth <= 0 && !isDead)
+            {
+                Death();
+            }
+            if (currentHealth > 0)
+            {
+                playerCollider.enabled = true;
+                anim.SetBool("IsDead", false);
+            }
+        }
         
-        if (damageable == true && !hasShield) {
-            damaged = true;
-
-            currentHealth -= amount;
-
-           // healthSlider.value = currentHealth;
-            
-            int spawnPointIndex = Random.Range(0, hurtClip.Length);
-
-            playerAudio.clip = hurtClip[spawnPointIndex];
-            playerAudio.Play();
-        }
-        if (currentHealth <= 0 && !isDead)
-        {
-            Death ();
-        }
-        if (currentHealth > 0)
-        {
-            playerCollider.enabled = true;
-            anim.SetBool("IsDead", false);
-        }
         
     }
     public IEnumerator FireDamage()
@@ -301,7 +320,7 @@ public class PlayerHealth : MonoBehaviour
 
     void MaxHealth()
     {
-        if (currentHealth > maxHealth) { currentHealth = maxHealth; }
+        if (maxHealth < currentHealth) { currentHealth = maxHealth; }
     }
 
   

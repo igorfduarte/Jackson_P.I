@@ -101,9 +101,9 @@ public class WeaponShopButton : MonoBehaviour {
         }
         if (index == 11 && !shop.hasGlasses)
         {
+
+            shop.BuyGlasses();
             
-            
-            print("glasses");
 
         }
 

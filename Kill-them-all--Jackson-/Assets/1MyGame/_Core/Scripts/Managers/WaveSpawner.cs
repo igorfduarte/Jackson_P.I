@@ -11,20 +11,20 @@ public class WaveSpawner : MonoBehaviour {
     //[System.Serializable]
     /* public class Wave
      {
-
+         
          public string name;  // nome da wave
          [SerializeField] public Transform enemy;
          [SerializeField] public Transform fatEnemy;
          [SerializeField] public Transform slimeEnemy;
 
-
+         
          public int count = 5;
          public int fatEnemyCount = 0;
          public int slimeEnemyCount = 0;
          [SerializeField] public float rate;   // spawn rate
          int countMultiplier;
 
-
+         
      }
      */
     Wave wave;
@@ -55,7 +55,8 @@ public class WaveSpawner : MonoBehaviour {
     public GameObject cuidado;
     public GameObject kill;
     public GameObject bossPrefab;
-
+  
+    
     public Wave[] waves;
     private int nextWave = 0;
     public Transform[] SpawnPosition;
@@ -93,7 +94,7 @@ public class WaveSpawner : MonoBehaviour {
     {
         kill.SetActive(true);
         
-        Invoke("StopDisplayKill", 1.5f);
+        Invoke("StopDisplayKill", 1.15f);
     }
     void StopDisplayKill()
     {
@@ -105,6 +106,7 @@ public class WaveSpawner : MonoBehaviour {
 
     void Start()
     {
+        
         wave = GetComponent<Wave>();
         bossCount = 1;
         rock = this.gameObject.GetComponent<rock_free_master>();
@@ -160,11 +162,6 @@ public class WaveSpawner : MonoBehaviour {
                 //Instantiate(rayGunPrefab, weaponStartPos.transform.position, weaponStartPos.transform.rotation);
                 rayCount++;
             }
-            
-           
-            
-
-
 
             rock.soft = false;
             rock.med = false;
@@ -176,15 +173,9 @@ public class WaveSpawner : MonoBehaviour {
         {
             if (!EnemyIsAlive() )
             {
-
                 
              WaveCompleted();
-                    
 
-               
-               
-                
-              
             }
             else
             {
@@ -208,6 +199,10 @@ public class WaveSpawner : MonoBehaviour {
         {
             teleport.SetActive(true);
             waveCountDown -= Time.deltaTime;
+            if (waveCountDown <0)
+            {
+                waveCountDown = 0;
+            }
             waveCount.text = "Next Wave in   " + Mathf.Floor(waveCountDown)+  "seg  or press N to continue ";
 
         }
@@ -230,17 +225,9 @@ public class WaveSpawner : MonoBehaviour {
         timeCount = 0;
         waveCountDown = timeBetweenWaves;
 
-        if (nextWave + 1 > waves.Length - 1)
-        {
-            SceneManager.LoadScene("Win");
-            nextWave = 0;
-            Debug.Log("completed all waves. Looping...");
-        }
-        else
-        {
+       
             nextWave++;
-        }
-
+        
         
     }
 
@@ -252,8 +239,6 @@ public class WaveSpawner : MonoBehaviour {
         nextWave++;
     }
 
-
-
     bool EnemyIsAlive()
     {
         SearchCountDown -= Time.deltaTime;
@@ -264,12 +249,9 @@ public class WaveSpawner : MonoBehaviour {
             {
                 
                 return false;
-            }
-           
-        }
-        
+            }          
+        }       
         return true;
-
     }
 
    IEnumerator SpawnWave2()
@@ -319,8 +301,6 @@ public class WaveSpawner : MonoBehaviour {
         Debug.Log("Spawining wave");
         state = SpawnState.SPAWNING;
 
-        
-
         for (int i = 0; i < _wave.count; i++)
         {
             SpawnEnemy(_wave.enemy);
@@ -368,7 +348,6 @@ public class WaveSpawner : MonoBehaviour {
     {
         Transform _spawnPos = SpawnPosition[Random.Range(0,SpawnPosition.Length) ];
         Instantiate(_enemy, _spawnPos.position, _spawnPos.rotation);
-        
 
     }
 

@@ -77,8 +77,8 @@ public class Experience : MonoBehaviour {
     public void UpdateBonus()
     {           
             damageBonus = damagePoints * damageMultiplier;
-            speedBonus = 0.5f + (speedPoints * speedMultiplier);
-            lifeBonus = 1 + (lifePoints * lifeMultiplier);
+            speedBonus = speedPoints * speedMultiplier;
+            lifeBonus = lifePoints * lifeMultiplier;
         
 
     }

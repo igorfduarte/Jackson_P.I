@@ -43,9 +43,10 @@ public class Tiro : MonoBehaviour {
     AudioSource gunAudio;
     ParticleSystem gunParticles;
     Animator anim;
-    GameObject jogador;
+    GameObject weaponObject;
     GameObject playerVida;
     GameObject shop;
+    Transform weaponRotation;
    
     public bool molotovActive;
     public bool icePotionActive;
@@ -98,6 +99,7 @@ public class Tiro : MonoBehaviour {
     }
  
     void Start () {
+        weaponObject = GameObject.FindGameObjectWithTag("Weapon");
         pauseMenu = pauseObject.GetComponent<PauseMenu>();
         icePotionActive = true;
         shop = GameObject.FindGameObjectWithTag("Shop");
@@ -109,6 +111,7 @@ public class Tiro : MonoBehaviour {
         
         anim = GetComponent<Animator>();
         gunParticles = GetComponent<ParticleSystem>();
+        weaponRotation = weaponObject.GetComponent<Transform>();
 
 
     }
@@ -128,8 +131,8 @@ public class Tiro : MonoBehaviour {
         playerVida = GameObject.FindGameObjectWithTag("Player");
         playerHealth = playerVida.GetComponent<PlayerHealth>();
         timer += Time.deltaTime;
-        jogador = GameObject.FindGameObjectWithTag("Weapon");
-        weapon = jogador.GetComponent<Weapon>();
+        weaponObject = GameObject.FindGameObjectWithTag("Weapon");
+        weapon = weaponObject.GetComponent<Weapon>();
        
         if (timer >= weapon.fireRate && Input.GetMouseButton(0) && weapon.currentAmmo > 0  && weapon.fixPos && !isReloading)
         {
@@ -416,8 +419,10 @@ public class Tiro : MonoBehaviour {
 
     IEnumerator Reload()
     {
+
         gunAudio.PlayOneShot(reloadClip, 0.3f);
         yield return new WaitForSeconds(weapon.reloadTime);
+        weaponObject.transform.rotation = weaponRotation.rotation;
         ammoLimit = weapon.maxAmmoInHand - weapon.currentAmmo;
 
 

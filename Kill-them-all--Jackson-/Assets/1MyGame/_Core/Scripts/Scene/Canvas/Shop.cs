@@ -16,6 +16,9 @@ public class Shop : MonoBehaviour {
     public GameObject vector;
     public GameObject shotgun;
     public GameObject raygun;
+    public GameObject glasses;
+
+    [SerializeField] GameObject glassesPrefab;
 
 
     public bool hasSteelBoots; // sem uso
@@ -62,6 +65,20 @@ public class Shop : MonoBehaviour {
         
 
 	}
+    public void BuyGlasses()
+    {
+        item = glasses.GetComponent<Item>();
+
+        if (goldAtual >= item.itemCost)
+        {
+            glassesPrefab.SetActive(true);
+            hasGlasses = true;
+            shopAudio.PlayOneShot(coinClip, 0.5f);
+            
+            goldAtual = goldAtual - item.itemCost;
+        }
+    }
+
     public void BuyMolotov()
     {
         item = buyMolotov.GetComponent<Item>();

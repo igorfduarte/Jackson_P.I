@@ -2,9 +2,9 @@
 using System.Collections;
 
 public class EnemyMovement : MonoBehaviour {
-    
+    SpriteRenderer enemySprite;
 	GameObject player;
-    
+    [SerializeField] bool newSprite;
     EnemyHealth enemyHealth;
     [SerializeField]
     float attackRadius = 0.6f;
@@ -24,15 +24,19 @@ public class EnemyMovement : MonoBehaviour {
     bool isSlow;
     Color originalColor;
     [SerializeField] bool isSlime;
+
+    Transform target;
+    Vector2 direction;
+
     // Update is called once per frame
     void Start(){
-
+        enemySprite = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
         enemyHealth = GetComponent<EnemyHealth>();
         speed = GetComponent<Rigidbody2D>();
         
-            originalColor = this.gameObject.GetComponent<SpriteRenderer>().color;
+            originalColor = enemySprite.color;
         
        
         
@@ -69,24 +73,44 @@ public class EnemyMovement : MonoBehaviour {
             maxSpeed = originalSpeed;
                
         }
-        
 
-       /* if (enemyHealth.healthPoints <= 0)
-        {
-            originalSpeed = 0;
-        }
-        */
+
+        /* if (enemyHealth.healthPoints <= 0)
+         {
+             originalSpeed = 0;
+         }
+         */
         // TODO apenas o clone para de andar quando morre.
+        if (newSprite)
+        {
+            target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+            direction = target.transform.position - transform.position;
+            dis = Vector3.Distance(target.transform.position, transform.position);
+            direction.Normalize();
+            transform.Translate(direction * maxSpeed * Time.deltaTime);
+            if (target.position.x > transform.position.x)
+            {
+                enemySprite.flipX = false;
+            }
+            else
+            {
+                enemySprite.flipX = true;
+            }
+        }
+        if (!newSprite)
+        {
+            Vector3 velocity = new Vector3(0, maxSpeed * Time.deltaTime, 0);
+            anim.SetFloat("Horizontal", speed.velocity.x);
+            anim.SetFloat("Vertical", speed.velocity.y);
 
-		Vector3 velocity = new Vector3(0, maxSpeed * Time.deltaTime, 0);
-        anim.SetFloat("Horizontal", speed.velocity.x);
-        anim.SetFloat("Vertical", speed.velocity.y);
-        
 
 
-		pos += transform.rotation * velocity;
+            pos += transform.rotation * velocity;
 
-		transform.position = pos;
+            transform.position = pos;
+        }
+
+
         
 	}
 
@@ -131,8 +155,8 @@ public class EnemyMovement : MonoBehaviour {
     }
     public void ColorChangeToBlue()
     {
-       
-            this.gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+        CancelInvoke("ColorChangeBack");
+        this.gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
         
         
 
@@ -140,6 +164,7 @@ public class EnemyMovement : MonoBehaviour {
     }
     public IEnumerator ColorChangeToRed()
     {
+        CancelInvoke("ColorChangeBack");
         this.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(enemyHealth.burnTime);
         this.gameObject.GetComponent<SpriteRenderer>().color = originalColor;
