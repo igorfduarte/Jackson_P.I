@@ -45,7 +45,7 @@ public class EnemyHealth : MonoBehaviour
 
  
     bool isSinking;    
-    int goldMax;
+    public int goldMax;
     float timer;
     int spawnHealBox;
     int generateAllNumber;
@@ -57,14 +57,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Awake ()
     {
-        if (fatEnemy)
-        {
-            goldMax = 30;
-        }
-        if (normalEnemy)
-        {
-            goldMax = 20;
-        }
+        
         goldAmount = Random.Range(0, goldMax);
         GenerateGold();
         scoreObject = GameObject.FindGameObjectWithTag("Score");

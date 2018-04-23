@@ -10,7 +10,7 @@ public class ChasePlayer : MonoBehaviour {
     Color originalColor;
     public bool isSlow;
     float dis;
-    
+    GameObject player;
 
 
     Vector2 direction;
@@ -30,7 +30,7 @@ public class ChasePlayer : MonoBehaviour {
         isSlow = false;
     }
     void Start () {
-        
+        player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
         originalColor = this.gameObject.GetComponent<SpriteRenderer>().color;
     
@@ -52,7 +52,7 @@ public class ChasePlayer : MonoBehaviour {
 
 
 
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        target = player.GetComponent<Transform>();
         direction = target.transform.position - transform.position;
         dis = Vector3.Distance(target.transform.position, transform.position);
         direction.Normalize();
@@ -61,7 +61,14 @@ public class ChasePlayer : MonoBehaviour {
             Move();
             AnimateMoviment(direction);
         }
-        
+        if (target.position.x < transform.position.x)
+        {
+            this.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            this.GetComponent<SpriteRenderer>().flipX = false;
+        }
 
         
 

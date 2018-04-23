@@ -326,6 +326,7 @@ MonoBehaviour:
   isDead: 0
   isOnFire: 0
   burnTime: 5
+  goldMax: 25
 --- !u!114 &114508062972007758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -337,6 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c2fb840b453194c92ee4a1be928c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newSprite: 0
   attackRadius: 0.6
   chaseRadius: 95
   originalSpeed: 4

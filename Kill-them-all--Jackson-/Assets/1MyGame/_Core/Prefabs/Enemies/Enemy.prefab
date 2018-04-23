@@ -375,6 +375,7 @@ MonoBehaviour:
   isDead: 0
   isOnFire: 0
   burnTime: 5
+  goldMax: 15
 --- !u!198 &198710395413029486
 ParticleSystem:
   m_ObjectHideFlags: 1
