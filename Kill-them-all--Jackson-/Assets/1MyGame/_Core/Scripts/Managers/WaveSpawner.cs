@@ -52,6 +52,7 @@ public class WaveSpawner : MonoBehaviour {
     int timeCount;
     public Text waveCount;
     public Text currentWave;
+    public GameObject teleportAvailable;
     public GameObject cuidado;
     public GameObject kill;
     public GameObject bossPrefab;
@@ -185,7 +186,7 @@ public class WaveSpawner : MonoBehaviour {
 
         if (waveCountDown <= 0)
         {
-            
+            teleportAvailable.SetActive(false);
             waveCount.text = "";
             DisplayKill();
             
@@ -204,6 +205,7 @@ public class WaveSpawner : MonoBehaviour {
                 waveCountDown = 0;
             }
             waveCount.text = "Next Wave in   " + Mathf.Floor(waveCountDown)+  "seg  or press N to continue ";
+            teleportAvailable.SetActive(true);
 
         }
     }

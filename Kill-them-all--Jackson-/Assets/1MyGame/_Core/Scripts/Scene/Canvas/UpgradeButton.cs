@@ -12,6 +12,7 @@ public class UpgradeButton : MonoBehaviour {
     [SerializeField] bool isDamage;
     [SerializeField] bool isSpeed;
     [SerializeField] bool isLife;
+    [SerializeField] bool isDash;
     // Use this for initialization
     void Start () {
         weaponHolder = GameObject.FindGameObjectWithTag("Weapon");
@@ -55,7 +56,15 @@ public class UpgradeButton : MonoBehaviour {
                 playerHealth.UpgradeLife();
                 
             }
-            
+            if (isDash)
+            {
+                experience.dashPoints++;
+                experience.experiencePoints--;
+                experience.UpdateBonus();
+
+
+            }
+
 
         }
     }

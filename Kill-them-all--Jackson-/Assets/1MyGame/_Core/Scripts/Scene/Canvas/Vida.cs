@@ -7,10 +7,12 @@ public class Vida : MonoBehaviour
 {
 
     public float vida;
+    public float dash;
     Text text;
 
     GameObject player;
     Experience experience;
+    [SerializeField] bool isDash;
 
 
     void Start()
@@ -24,7 +26,16 @@ public class Vida : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        vida = experience.lifePoints;
-        text.text = "Vida: " + vida;
+        if (isDash)
+        {
+            dash = experience.dashPoints;
+            text.text = "DASH: " + dash;
+        }
+        else
+        {
+            vida = experience.lifePoints;
+            text.text = "Vida: " + vida;
+        }
+
     }
 }

@@ -57,6 +57,7 @@ public class Tiro : MonoBehaviour {
     float timer; 
     int shakePercent;
     float timeBetweenAttacksUlt = 3.4f;
+    [SerializeField]float rotationZ;
 
     #endregion
 
@@ -421,8 +422,10 @@ public class Tiro : MonoBehaviour {
     {
 
         gunAudio.PlayOneShot(reloadClip, 0.3f);
+
         yield return new WaitForSeconds(weapon.reloadTime);
-        weaponObject.transform.rotation = weaponRotation.rotation;
+  
+
         ammoLimit = weapon.maxAmmoInHand - weapon.currentAmmo;
 
 

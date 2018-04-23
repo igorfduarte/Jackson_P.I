@@ -45,13 +45,16 @@ public class PlayerMovement : MonoBehaviour {
     float currentStamina;
     float velocidadeOriginal;
     public float velocidadeAtual;
-    float tempoDash = 0.2f;
+    public float dashReloadTime;
+    float tempoDash = 0.15f;
     bool estaDandoDash;
     bool hasShot;
     float idleTime;
+    bool canFill;
+    public float dashTime;
 
     void Start () {
-        
+
         
         playerSprite = GetComponent<SpriteRenderer>();
         facemouse = arm.GetComponent<FaceMouse>();
@@ -65,6 +68,7 @@ public class PlayerMovement : MonoBehaviour {
         playerHealth = GetComponent<PlayerHealth>();
         Velocidade();
         originalColor = this.gameObject.GetComponent<SpriteRenderer>().color;
+        dashTime = dashReloadTime + experience.dashBonus;
 
 
 
@@ -76,19 +80,27 @@ public class PlayerMovement : MonoBehaviour {
         Velocidade();
         //colli.enabled = true;
         playerHealth.damageable = true;
-        Invoke("FillStamina", timeToFullStamina);
+        
         this.gameObject.layer = 16;
+        canFill = true;
 
     }
     void FillStamina()
     {
-        currentStamina = 100;
+        dashTime = dashReloadTime + experience.dashBonus;
+        currentStamina += (dashTime) * Time.deltaTime;
+        if (currentStamina >= 100)
+        {
+            currentStamina = 100;
+
+        }
     }
 
     void Dash()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift) && !estaDandoDash && canDash && currentStamina == 100)
         {
+            canFill = false;
             playerHealth.damageable = false;
             //colli.enabled = false;
             anim.SetTrigger("EstaDandoDash");
@@ -98,13 +110,18 @@ public class PlayerMovement : MonoBehaviour {
             playerAudio.PlayOneShot(dashClip,0.5f);
             //playerAudio.Play();
             currentStamina = 0;
+            staminaSlider.value = Mathf.Lerp(staminaSlider.value, currentStamina, 20*Time.deltaTime);
             this.gameObject.layer = 15;
             
         }
     }
-	void Update ()
+	void FixedUpdate ()
     {
-
+        if (canFill)
+        {
+            FillStamina();
+        }
+        
         if (Input.GetKeyDown(KeyCode.T) )
         {
             
@@ -121,7 +138,7 @@ public class PlayerMovement : MonoBehaviour {
 
         }
         
-        staminaSlider.value = Mathf.Lerp(staminaSlider.value, currentStamina, Time.deltaTime * 3);
+        staminaSlider.value = Mathf.Lerp(staminaSlider.value, currentStamina, Time.deltaTime);
         Dash();
 
         moveX = Input.GetAxisRaw("Horizontal");
@@ -182,10 +199,13 @@ public class PlayerMovement : MonoBehaviour {
         
         if (moveX < 0 && facemouse.directionX < 0 && !isIdle)
         {
+           
             playerSprite.flipX = true;
+           
         }
         if (moveX > 0 && facemouse.directionX > 0 && !isIdle)
         {
+
             playerSprite.flipX = false;
         }
 

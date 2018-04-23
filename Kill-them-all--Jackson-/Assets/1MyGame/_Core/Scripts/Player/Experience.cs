@@ -14,14 +14,17 @@ public class Experience : MonoBehaviour {
     public int damagePoints=1;
     public float speedPoints=1;
     public float lifePoints=1;
+    public float dashPoints = 1;
 
     public float damageBonus;
     public float speedBonus =1;
     public float lifeBonus= 1;
+    public float dashBonus = 1;
 
     [SerializeField] float damageMultiplier;
     [SerializeField] float speedMultiplier;
     [SerializeField] float lifeMultiplier;
+    [SerializeField] float dashMultiplier;
 
     AudioSource audioSource;
     [SerializeField] AudioClip lvlupClip;
@@ -79,7 +82,8 @@ public class Experience : MonoBehaviour {
             damageBonus = damagePoints * damageMultiplier;
             speedBonus = speedPoints * speedMultiplier;
             lifeBonus = lifePoints * lifeMultiplier;
-        
+            dashBonus = dashPoints * dashMultiplier;    
+
 
     }
 

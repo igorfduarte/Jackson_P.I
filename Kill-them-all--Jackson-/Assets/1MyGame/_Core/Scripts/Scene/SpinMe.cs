@@ -5,19 +5,40 @@ using UnityEngine;
 public class SpinMe : MonoBehaviour
 {
 
-    [SerializeField] float xRotationsPerMinute = 1f;
-    [SerializeField] float yRotationsPerMinute = 1f;
-    [SerializeField] float zRotationsPerMinute = 1f;
+
+    [SerializeField] float zRotationsPerMinute = 20f;
+
+    Tiro tiro;
+    GameObject player;
+    [SerializeField] Transform controle;
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     void Update()
     {
-        float xDegreesPerFrame = Time.deltaTime / 60 * 360 * xRotationsPerMinute;
-        transform.RotateAround(transform.position, transform.right, xDegreesPerFrame);
+        
+        tiro = player.GetComponent<Tiro>();
 
-        float yDegreesPerFrame = Time.deltaTime / 60 * 360 * yRotationsPerMinute;
-        transform.RotateAround(transform.position, transform.up, yDegreesPerFrame);
-
-        float zDegreesPerFrame = Time.deltaTime / 60 * 360 * zRotationsPerMinute;
-        transform.RotateAround(transform.position, transform.forward, zDegreesPerFrame);
+        if (tiro.isReloading)
+        {
+            if (player.GetComponent<SpriteRenderer>().flipX)
+            {
+                float zDegreesPerFrame = Time.deltaTime / 60 * 360 * -zRotationsPerMinute;
+                transform.RotateAround(transform.position, transform.forward, zDegreesPerFrame);
+            }
+            else
+            {
+                float zDegreesPerFrame = Time.deltaTime / 60 * 360 * zRotationsPerMinute;
+                transform.RotateAround(transform.position, transform.forward, zDegreesPerFrame);
+            }
+            
+        }
+        else
+        {
+            this.transform.rotation = controle.rotation;
+        }
+       
     }
 }
