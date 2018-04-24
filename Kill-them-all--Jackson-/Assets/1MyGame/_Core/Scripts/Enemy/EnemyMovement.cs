@@ -22,6 +22,7 @@ public class EnemyMovement : MonoBehaviour {
     float moveX;
     float moveY;
     bool isSlow;
+    public bool isBossAttack;
     Color originalColor;
     [SerializeField] bool isSlime;
 
@@ -67,7 +68,7 @@ public class EnemyMovement : MonoBehaviour {
 		} else if(dis > chaseRadius || enemyHealth.healthPoints <=0) {
             anim.SetBool("Move", false);
             maxSpeed = 0;
-		}else if(!isSlow)
+		}else if(!isSlow && !isBossAttack)
         {
             anim.SetBool("Move", true);
             maxSpeed = originalSpeed;

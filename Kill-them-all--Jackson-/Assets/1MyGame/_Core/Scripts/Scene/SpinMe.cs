@@ -7,10 +7,13 @@ public class SpinMe : MonoBehaviour
 
 
     [SerializeField] float zRotationsPerMinute = 20f;
-
+    float zRotation;
     Tiro tiro;
     GameObject player;
     [SerializeField] Transform controle;
+    [SerializeField] bool onlySpin;
+    [SerializeField] bool spitter;
+    public int spinOrientation;
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -18,27 +21,46 @@ public class SpinMe : MonoBehaviour
 
     void Update()
     {
-        
-        tiro = player.GetComponent<Tiro>();
-
-        if (tiro.isReloading)
+        if (onlySpin)
         {
-            if (player.GetComponent<SpriteRenderer>().flipX)
+            if (spitter)
             {
-                float zDegreesPerFrame = Time.deltaTime / 60 * 360 * -zRotationsPerMinute;
-                transform.RotateAround(transform.position, transform.forward, zDegreesPerFrame);
+                zRotation = Time.deltaTime / 60 * 360 * (zRotationsPerMinute * spinOrientation);
+                transform.RotateAround(transform.position, transform.forward, zRotation);
             }
             else
             {
-                float zDegreesPerFrame = Time.deltaTime / 60 * 360 * zRotationsPerMinute;
-                transform.RotateAround(transform.position, transform.forward, zDegreesPerFrame);
+                zRotation = Time.deltaTime / 60 * 360 * zRotationsPerMinute;
+                transform.RotateAround(transform.position, transform.forward, zRotation);
             }
-            
+
         }
         else
         {
-            this.transform.rotation = controle.rotation;
+            tiro = player.GetComponent<Tiro>();
+
+            if (tiro.isReloading)
+            {
+                if (player.GetComponent<SpriteRenderer>().flipX)
+                {
+                    float zDegreesPerFrame = Time.deltaTime / 60 * 360 * -zRotationsPerMinute;
+                    transform.RotateAround(transform.position, transform.forward, zDegreesPerFrame);
+                }
+                else
+                {
+                    float zDegreesPerFrame = Time.deltaTime / 60 * 360 * zRotationsPerMinute;
+                    transform.RotateAround(transform.position, transform.forward, zDegreesPerFrame);
+                }
+
+            }
+            else
+            {
+                this.transform.rotation = controle.rotation;
+            }
         }
+        
+
+       
        
     }
 }

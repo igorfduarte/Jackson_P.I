@@ -36,6 +36,7 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip ammoClip;
     public AudioClip healthClip;
     [SerializeField] GameObject fireParticle;
+    [SerializeField] GameObject acidParticle;
     public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
     PauseMenu pause;
@@ -68,7 +69,9 @@ public class PlayerHealth : MonoBehaviour
     public int burnTime;
     bool testeRotate;
     public bool isOnFire;
-    
+    public bool isOnAcid;
+
+
 
     public bool damageable;
     void Awake ()
@@ -206,6 +209,24 @@ public class PlayerHealth : MonoBehaviour
                 yield return new WaitForSeconds(1f);
             }
             isOnFire = false;
+
+        }
+
+    }
+
+    public IEnumerator AcidDamage()
+    {
+        if (!isOnAcid && !isDead)
+        {
+            playerMovement.StartCoroutine("ColorChangeToGreen");
+            isOnAcid = true;
+            for (int i = 0; i < burnTime; i++)
+            {
+                acidParticle.GetComponent<ParticleSystem>().Play();
+                TakeDamage(2.5f);
+                yield return new WaitForSeconds(1f);
+            }
+            isOnAcid = false;
 
         }
 

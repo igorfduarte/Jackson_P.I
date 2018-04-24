@@ -284,6 +284,13 @@ public class PlayerMovement : MonoBehaviour {
         this.gameObject.GetComponent<SpriteRenderer>().color = originalColor;
     }
 
+    public IEnumerator ColorChangeToGreen()
+    {
+        this.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+        yield return new WaitForSeconds(playerHealth.burnTime);
+        this.gameObject.GetComponent<SpriteRenderer>().color = originalColor;
+    }
+
     void ReturnToNormal()
     {
         canDash = true;

@@ -63,7 +63,7 @@ public class SlimeExplode : MonoBehaviour {
         }
         Destroy(this.gameObject);
         GameObject slimeFloor = (GameObject)Instantiate(slimeFloorPrefab, endPos.transform.position, transform.rotation);
-        Destroy(slimeFloor, 5f);
+        Destroy(slimeFloor, 3.5f);
     }
 
    public void GoingToExplode()

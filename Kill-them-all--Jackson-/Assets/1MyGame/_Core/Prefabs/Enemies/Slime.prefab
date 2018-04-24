@@ -141,7 +141,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1328895392120776}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.3, y: 3.67, z: 0.01953125}
+  m_LocalPosition: {x: -19.755856, y: -2.1013513, z: 0.01953125}
   m_LocalScale: {x: 0.6189194, y: 0.6623215, z: 0.05847656}
   m_Children:
   - {fileID: 4992253755916486}
@@ -421,7 +421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 30
-  slimeFloorPrefab: {fileID: 1888490537387932, guid: 23895234370d5de4dbd7352b84529fb9,
+  slimeFloorPrefab: {fileID: 1044204385176246, guid: 0a68fb973f7442e47877e9e5f7ab5c2b,
     type: 2}
   endPos: {fileID: 1856767428923594}
 --- !u!114 &114292429278421542
