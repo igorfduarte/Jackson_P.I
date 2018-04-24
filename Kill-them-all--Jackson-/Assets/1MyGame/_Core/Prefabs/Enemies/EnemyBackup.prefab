@@ -276,7 +276,7 @@ Animator:
   m_GameObject: {fileID: 1305365489703918}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: eb003b2b962c6804daf0e2afb8ceaaae, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2d94cca0888755f4c8235a8574fe67aa, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -302,6 +302,7 @@ MonoBehaviour:
   damageCaused: 0
   maxSpeed: 0
   enemiesInRange: []
+  isBossAttack: 0
   isSlime: 0
 --- !u!114 &114219960722644398
 MonoBehaviour:
@@ -349,6 +350,7 @@ MonoBehaviour:
   isDead: 0
   isOnFire: 0
   burnTime: 5
+  goldMax: 0
 --- !u!114 &114934365020720324
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -360,6 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57424e59f47f50847b854860b030c980, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spitter: 0
 --- !u!198 &198159644269709590
 ParticleSystem:
   m_ObjectHideFlags: 1

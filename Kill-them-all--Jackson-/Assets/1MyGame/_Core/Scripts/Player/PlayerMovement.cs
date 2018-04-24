@@ -166,6 +166,7 @@ public class PlayerMovement : MonoBehaviour {
         
         if (moveX != 0 || moveY !=0)
         {
+            idleTime = 0;
             if (isIdle)
             {
                 DesactivateIdle();
