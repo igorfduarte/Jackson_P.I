@@ -8,12 +8,14 @@ public class Wave : MonoBehaviour {
      public Transform fatEnemy;
      public Transform slimeEnemy;
     public Transform rangeEnemy;
+    public Transform boss;
 
 
     public int count = 5;
     public int fatEnemyCount = 0;
     public int slimeEnemyCount = 0;
     public int rangeCount = 0;
+    public int bossCount = 1;
     public float rate;   // spawn rate
     int countMultiplier;
     // Use this for initialization

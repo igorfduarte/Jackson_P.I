@@ -43,7 +43,8 @@ public class EnemyHealth : MonoBehaviour
     SpriteRenderer sprite;
 
 
- 
+    [SerializeField] bool spitter;
+    public bool spitterDead;
     bool isSinking;    
     public int goldMax;
     float timer;
@@ -51,13 +52,14 @@ public class EnemyHealth : MonoBehaviour
     int generateAllNumber;
     int spawnAmmoBox;
     int spawnEnergyBox;
-    int goldAmount;
+    public int goldAmount;
+    BossDrop drop;
 
 
 
     void Awake ()
     {
-        
+        drop = GetComponent<BossDrop>();
         goldAmount = Random.Range(0, goldMax);
         GenerateGold();
         scoreObject = GameObject.FindGameObjectWithTag("Score");
@@ -89,17 +91,33 @@ public class EnemyHealth : MonoBehaviour
 
        if (healthPoints <= 0 && !isDead )
         {
-            
-        //playerHealth.currentEnergy += 5;
-        Death();
+          
 
-        Destroy(this.gameObject, 1.25f);
-        deathPos = transform.position;
-                
-                           
-        //TODO Fix DeathSound Click Bug
+            if (spitter)
+            {
+                spitterDead = true;
+                if (drop.finishSpawn)
+                {
+                    Death();
+                    Destroy(this.gameObject, 1.25f);
+                }
+            }
+            else
+            {
+                //playerHealth.currentEnergy += 5;
+                Death();
+
+                Destroy(this.gameObject, 1.25f);
+                deathPos = transform.position;
+
+
+                //TODO Fix DeathSound Click Bug
+            }
+
+
         }
     }
+    
 
     
 
@@ -143,7 +161,7 @@ public class EnemyHealth : MonoBehaviour
         //enemyAudio.clip = deathClip;
         //enemyAudio.Play ();
 
-        if (goldAmount >0)
+        if (goldAmount >0 && !spitter)
         {
             SpawnGold();            
         }            

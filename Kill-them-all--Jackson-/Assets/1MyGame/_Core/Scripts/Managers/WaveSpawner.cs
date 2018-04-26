@@ -74,6 +74,7 @@ public class WaveSpawner : MonoBehaviour {
 
     int bossCount;
     bool activeWave;
+    bool bossIsAlive;
 
 
     public CameraFollow cameraFollow;
@@ -174,7 +175,7 @@ public class WaveSpawner : MonoBehaviour {
         {
             if (!EnemyIsAlive() )
             {
-                
+      
              WaveCompleted();
 
             }
@@ -243,13 +244,20 @@ public class WaveSpawner : MonoBehaviour {
 
     bool EnemyIsAlive()
     {
+        
+
         SearchCountDown -= Time.deltaTime;
         if (SearchCountDown <= 0f)
         {
             SearchCountDown = 1f;
             if (GameObject.FindGameObjectWithTag("Enemy") == null && GameObject.FindGameObjectWithTag("EnemyChase") == null)
             {
-                
+                if ((nextWave + 1) % 3 == 0 &&  !bossIsAlive)
+                {
+                    bossIsAlive = true;
+                    SpawnEnemy(wave.boss, 1);
+                    return true;
+                }
                 return false;
             }          
         }       
@@ -258,28 +266,28 @@ public class WaveSpawner : MonoBehaviour {
 
    IEnumerator SpawnWave2()
     {
-        
+        bossIsAlive = false;
         teleport.SetActive(false);
         Debug.Log("Spawining wave");
         state = SpawnState.SPAWNING;
 
         for (int i = 0; i < wave.count; i++)
         {
-            SpawnEnemy(wave.enemy);
+            SpawnEnemy(wave.enemy, Random.Range(0, SpawnPosition.Length));
 
             yield return new WaitForSeconds(1f / wave.rate);
 
         }
         for (int i = 0; i < wave.rangeCount; i++)
         {
-            SpawnEnemy(wave.rangeEnemy);
+            SpawnEnemy(wave.rangeEnemy, Random.Range(0, SpawnPosition.Length));
 
             yield return new WaitForSeconds(1f / wave.rate);
 
         }
         for (int i = 0; i < wave.fatEnemyCount; i++)
         {
-            SpawnEnemy(wave.fatEnemy);
+            SpawnEnemy(wave.fatEnemy, Random.Range(0, SpawnPosition.Length));
 
             yield return new WaitForSeconds(1f / wave.rate);
 
@@ -287,16 +295,24 @@ public class WaveSpawner : MonoBehaviour {
 
         for (int i = 0; i < wave.slimeEnemyCount; i++)
         {
-            SpawnEnemy(wave.slimeEnemy);
+            SpawnEnemy(wave.slimeEnemy, Random.Range(0, SpawnPosition.Length));
 
             yield return new WaitForSeconds(1f / wave.rate);
 
         }
+        
+        /*
+        if ((nextWave +1) % 3 ==0)
+        {
+            
+        }
+        */
+
         MultiplieCount();
         state = SpawnState.WAITING;
 
     }
-
+    /*
     IEnumerator SpawnWave(Wave _wave)
     {
         teleport.SetActive(false);
@@ -337,7 +353,7 @@ public class WaveSpawner : MonoBehaviour {
 
         yield break;
     }
-
+    */
     private void MultiplieCount()
     {
         wave.count += (countMultiplier * 2);
@@ -346,12 +362,14 @@ public class WaveSpawner : MonoBehaviour {
         wave.rangeCount += rangeCountMultiplier;
     }
 
-    void SpawnEnemy(Transform _enemy)
+    void SpawnEnemy(Transform _enemy, int _boss)
     {
-        Transform _spawnPos = SpawnPosition[Random.Range(0,SpawnPosition.Length) ];
+        Transform _spawnPos = SpawnPosition[_boss];
         Instantiate(_enemy, _spawnPos.position, _spawnPos.rotation);
 
     }
+
+
 
     
 }
